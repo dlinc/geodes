@@ -1,0 +1,7 @@
+{
+  "name": "geodes",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
