@@ -1,5 +1,6 @@
 {
   "name": "geodes",
+  "version" : "0.0.1",
   "integrations": {
     "capacitor": {}
   },
