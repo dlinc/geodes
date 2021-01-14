@@ -2,15 +2,15 @@
   <ion-page>
     <ion-tabs @ionTabsWillChange="beforeTabChange" @ionTabsDidChange="afterTabChange">
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="schedule" href="/tabs/schedule">
+        <ion-tab-button tab="schedule" href="/schedule">
           <ion-icon :icon="calendar"></ion-icon>
-          <ion-label>Schedule</ion-label>
+          <ion-label>Scheduley</ion-label>
           <ion-badge>6</ion-badge>
         </ion-tab-button>
 
-        <ion-tab-button tab="speakers" href="/tabs/speakers">
+        <ion-tab-button tab="speakers" href="/speakers">
           <ion-icon :icon="personCircle"></ion-icon>
-          <ion-label>Speakers</ion-label>
+          <ion-label>Speakersy</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
