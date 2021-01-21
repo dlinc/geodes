@@ -33,3 +33,4 @@ npm-debug.log*
 # DRL added:
 /X
 package-lock.json
+.env

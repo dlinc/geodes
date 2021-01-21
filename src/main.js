@@ -22,11 +22,14 @@ import '@ionic/vue/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { publicPath, outputDir } from '../vue.config';
 
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
   
 router.isReady().then(() => {
+  console.log("All vars =",process.env)
+  console.log("All options =", publicPath, outputDir)
   app.mount('#app');
 });
