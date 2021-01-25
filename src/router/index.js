@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 //import { RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue'
 import Tabs from '../views/Tabs.vue'
-import Speakers from '../views/speakers.vue'
-import Schedule from '../views/schedule.vue'
+import ListView from '../views/listView.vue'
+import AddGeode from '../views/add.vue'
 
 const routes = [
   {
@@ -21,14 +21,14 @@ const routes = [
     component: Tabs
   },
   {
-    path: '/speakers',
-    name: 'Speakers',
-    component: Speakers
+    path: '/add',
+    name: 'Add',
+    component: AddGeode
   },
   {
-    path: '/schedule',
-    name: 'Schedule',
-    component: Schedule
+    path: '/listView',
+    name: 'ListView',
+    component: ListView
   }
 ]
 

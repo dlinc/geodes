@@ -2,11 +2,11 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Schedule</ion-title>
+        <ion-title>Add Geode</ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding">Schedule Tab</ion-content>
+    <ion-content class="ion-padding">Add Tab</ion-content>
   </ion-page>
 </template>
 

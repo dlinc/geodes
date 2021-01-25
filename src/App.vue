@@ -3,53 +3,53 @@
     <ion-router-outlet />
     <ion-tabs>
 
-      <ion-tab tab="music">
+      <ion-tab tab="add">
         <ion-header translucent>
           <ion-toolbar>
-            <ion-title>Music</ion-title>
+            <ion-title>Add</ion-title>
           </ion-toolbar>
         </ion-header>
 
         <ion-content fullscreen class="ion-padding">
-          <h1>Music</h1>
+          <h1>Add</h1>
         </ion-content>
       </ion-tab>
 
-      <ion-tab tab="movies">
+      <ion-tab tab="listView">
         <ion-header translucent>
           <ion-toolbar>
-            <ion-title>Movies</ion-title>
+            <ion-title>List View</ion-title>
           </ion-toolbar>
         </ion-header>
 
         <ion-content fullscreen class="ion-padding">
-          <h1>Movies</h1>
+          <h1>List View</h1>
         </ion-content>
       </ion-tab>
 
-      <ion-tab tab="games">
+      <ion-tab tab="refresh">
         <ion-header translucent>
           <ion-toolbar>
-            <ion-title>Games</ion-title>
+            <ion-title>Refresh</ion-title>
           </ion-toolbar>
         </ion-header>
 
         <ion-content fullscreen class="ion-padding">
-          <h1>Games</h1>
+          <h1>Refresh</h1>
         </ion-content>
       </ion-tab>
 
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="music">
-          <ion-label>Music</ion-label>
+        <ion-tab-button tab="add">
+          <ion-label>Add</ion-label>
           <ion-icon name="musical-note"></ion-icon>
         </ion-tab-button>
-        <ion-tab-button tab="movies">
-          <ion-label>Movies</ion-label>
+        <ion-tab-button tab="listView">
+          <ion-label>List View</ion-label>
           <ion-icon name="videocam"></ion-icon>
         </ion-tab-button>
-        <ion-tab-button tab="games">
-          <ion-label>Games</ion-label>
+        <ion-tab-button tab="refresh">
+          <ion-label>Refresh</ion-label>
           <ion-icon name="game-controller"></ion-icon>
         </ion-tab-button>
       </ion-tab-bar>

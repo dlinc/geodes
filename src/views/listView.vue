@@ -2,11 +2,11 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Speakers</ion-title>
+        <ion-title>List View</ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding">Speakers Tab</ion-content>
+    <ion-content class="ion-padding">listView Tab</ion-content>
   </ion-page>
 </template>
 
