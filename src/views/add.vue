@@ -21,6 +21,11 @@ import {
 } from '@ionic/vue';
 
 export default defineComponent({
-  components: { IonContent, IonHeader, IonPage, IonTitle, IonToolbar }
+  components: { IonContent, IonHeader, IonPage, IonTitle, IonToolbar },
+  data () {
+    return {
+      publicPath: process.env.BASE_URL
+    }
+  }
 });
 </script>

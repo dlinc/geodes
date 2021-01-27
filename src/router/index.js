@@ -1,34 +1,30 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 //import { RouteRecordRaw } from 'vue-router';
-import Home from '../views/Home.vue'
-import Tabs from '../views/Tabs.vue'
-import ListView from '../views/listView.vue'
-import AddGeode from '../views/add.vue'
+import Map from '../views/map.vue'
+//import Tabs from '../views/tabs.vue'
+import List from '../views/list.vue'
+import Add from '../views/add.vue'
 
 const routes = [
   {
     path: '/',
-    redirect: '/home'
+    name: 'Mao',
+    component: Map
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/tabs',
-    name: 'Tabs',
-    component: Tabs
+    path: '/refresh',
+    redirect: '/',
+    comment: 'for legacy only?'
   },
   {
     path: '/add',
     name: 'Add',
-    component: AddGeode
+    component: Add
   },
   {
-    path: '/listView',
-    name: 'ListView',
-    component: ListView
+    path: '/list',
+    name: 'List',
+    component: List
   }
 ]
 

@@ -15,7 +15,7 @@
     
       <div id="container">
         <h2>Yo World out there!</h2>
-        <strong>Ready to create an app?</strong>
+        <strong>Ready to Map?</strong>
         <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
       </div>
     </ion-content>
@@ -27,7 +27,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'Home',
+  name: 'Map',
   components: {
     IonContent,
     IonHeader,

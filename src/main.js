@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
+import { publicPath, outputDir } from '../vue.config';
 
 import { IonicVue } from '@ionic/vue';
 
@@ -22,7 +23,6 @@ import '@ionic/vue/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import { publicPath, outputDir } from '../vue.config';
 
 const app = createApp(App)
   .use(IonicVue)
