@@ -31,8 +31,7 @@ import {
 } from '@ionic/vue';
 import { calendar, personCircle } from 'ionicons/icons';
 
-console.log("ENV ", process.env)
-
+//console.log("ENV ", process.env)
 
 export default defineComponent({
   components: { IonIcon, IonLabel, IonPage, IonTabBar, IonTabButton, IonTabs },

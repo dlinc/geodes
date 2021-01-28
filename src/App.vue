@@ -1,6 +1,7 @@
 <template>
   <ion-app>
     <ion-router-outlet />
+    <Header />
     <Tabs />
   </ion-app>
 </template>
@@ -9,6 +10,7 @@
 import { IonApp, IonRouterOutlet } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import Tabs from './views/tabs.vue';
+import Header from './views/header.vue';
 // import { publicPath } from  'vue.config';
 //console.log("Public Path =", publicPath)
 
@@ -17,7 +19,8 @@ export default defineComponent({
   components: {
     IonApp,
     IonRouterOutlet,
-    Tabs
+    Tabs,
+    Header
   }
 });
 </script>
