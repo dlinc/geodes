@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
-import { publicPath, outputDir } from '../vue.config';
+//import { publicPath, outputDir } from '../vue.config';
 
 import { IonicVue } from '@ionic/vue';
 
@@ -24,12 +24,15 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+/* Site variables & styling */
+import './theme/site.css';
+
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
   
 router.isReady().then(() => {
-  console.log("All vars =",process.env)
-  console.log("All options =", publicPath, outputDir)
+  //console.log("All vars =",process.env)
+  //console.log("All options =", publicPath, outputDir)
   app.mount('#app');
 });
