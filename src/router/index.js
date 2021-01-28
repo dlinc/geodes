@@ -8,8 +8,7 @@ import Add from '../views/add.vue'
 const routes = [
   {
     path: '/',
-    name: 'Mao',
-    component: Map
+    redirect: '/map'
   },
   {
     path: '/refresh',
@@ -25,7 +24,12 @@ const routes = [
     path: '/list',
     name: 'List',
     component: List
-  }
+  },
+  {
+    path: '/map',
+    name: 'Map',
+    component: Map
+  },
 ]
 
 const router = createRouter({

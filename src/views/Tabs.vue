@@ -2,7 +2,7 @@
   <ion-page>
     <ion-tabs @ionTabsWillChange="beforeTabChange" @ionTabsDidChange="afterTabChange">
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="refresh" href="/refresh">
+        <ion-tab-button tab="refresh" href="/map">
           <ion-icon :src="`${publicPath}assets/icon/refresh-outline.svg`"></ion-icon>
           <ion-label>Map</ion-label>
         </ion-tab-button>
