@@ -4,11 +4,12 @@ import Map from '../views/map.vue'
 //import Tabs from '../views/tabs.vue'
 import List from '../views/list.vue'
 import Add from '../views/add.vue'
+import Geode from "../views/geode.vue"
 
 const routes = [
   {
     path: '/',
-    redirect: '/map'
+    component: Map
   },
   {
     path: '/refresh',
@@ -29,6 +30,11 @@ const routes = [
     path: '/map',
     name: 'Map',
     component: Map
+  },
+  {
+    path: '/:id',
+    name: 'Geode',
+    component: Geode
   },
 ]
 
