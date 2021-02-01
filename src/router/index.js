@@ -5,11 +5,18 @@ import Map from '../views/map.vue'
 import List from '../views/list.vue'
 import Add from '../views/add.vue'
 import Geode from "../views/geode.vue"
+import Zone from "../views/zone.vue"
 
 const routes = [
   {
     path: '/',
-    component: Map
+    component: Zone,
+    props: route => ({ 
+      lat1: route.query.x1,
+      lat2: route.query.x2,
+      lon1: route.query.y1,
+      lon2: route.query.y2
+     })
   },
   {
     path: '/refresh',
@@ -35,7 +42,7 @@ const routes = [
     path: '/:id',
     name: 'Geode',
     component: Geode
-  },
+  }
 ]
 
 const router = createRouter({
