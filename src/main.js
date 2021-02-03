@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
-//import { publicPath, outputDir } from '../vue.config';
+//import { config } from '../vue.config';
 
 import { IonicVue } from '@ionic/vue';
 
@@ -24,13 +24,29 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-/* Site variables & styling */
+/* Site styling */
 import './theme/site.css';
 
+/* start up */
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
-  
+
+app.config.globalProperties.dbug = (process.env.VUE_APP_DEBUG ? Boolean(process.env.VUE_APP_DEBUG) : false);
+app.config.globalProperties.stack = [];
+
+// global error handler
+app.config.errorHandler = (err, vm, info) => {
+  // handle error
+  // `info` is a Vue-specific error info, e.g. which lifecycle hook
+  // the error was found in
+  console.log("ERROR Occurred (err, vm, info) -",err, vm, info)
+}
+
+if (app.config.globalProperties.dbug===true){
+  console.log("APP Config - ", app.config, process.env)
+}
+
 router.isReady().then(() => {
   //console.log("All vars =",process.env)
   //console.log("All options =", publicPath, outputDir)
