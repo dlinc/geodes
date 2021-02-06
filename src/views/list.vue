@@ -10,6 +10,7 @@
           <h3>5</h3>
            <h3>6</h3>
             <h3>7</h3>
+            <loaders/> 
     </ion-content>
   </ion-page>
 </template>
@@ -20,8 +21,9 @@ import {
   IonContent,
   IonPage
 } from '@ionic/vue';
+import Loaders from './components/loader.vue';
 
 export default defineComponent({
-  components: { IonContent, IonPage }
+  components: { IonContent, IonPage, Loaders }
 });
 </script>

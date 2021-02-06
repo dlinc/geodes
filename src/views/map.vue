@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { IonContent, IonPage } from '@ionic/vue';
+import { IonContent, IonPage, loadingController } from '@ionic/vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -19,7 +19,42 @@ export default defineComponent({
   components: {
     IonContent,
     IonPage
+  },
+  props: {
+    
+  },
+  beforeRouteEnter () {
+      console.log("MAP create event")
+      //this.stopPropagation()
+
+      async function showLoading() {
+          const timeout = { type: Number, default: 50000 }
+          const loading = await loadingController
+              .create({
+                cssClass: 'loader',
+                message: 'Please wait...',
+                duration: timeout,
+              });
+
+           await loading.present();
+
+           setTimeout(function() {
+              loading.dismiss()
+              console.log("Dismiss loading...")
+            }, timeout);
+      }
+      showLoading();
+      //this.loader.presentLoading();
+      //loadingController.presentLoading();
+      //this.fetchData()
+      //this.loader.present();
+    //this.fetchData()
+  },
+  updated () {
+    console.log("MAP rendered event")
+    //this.loading.dismiss()
   }
+
 });
 </script>
 

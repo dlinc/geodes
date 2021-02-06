@@ -1,6 +1,6 @@
 <template>
   <ion-app>
-        <Header />
+     <Header />
     <ion-router-outlet />
 
     <Tabs />
