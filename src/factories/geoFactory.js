@@ -42,6 +42,31 @@ function getTimeStamp(){
     return new Date().getTime();
 }
 
+function backupGeo(timestamp){
+ if (geo.browser.localStorage === true) { 
+        //localStorage["here"]=JSON.parse(geo.here.latitude);
+        localStorage.setItem("here", JSON.stringify(geo.here));
+        localStorage.setItem("geoTimestamp",timestamp);
+ }
+}
+
+function restoreGeo(){
+    if (geo.browser.localStorage) {
+        console.log("resetpre Geo is ",localStorage.here)
+        geo.here = JSON.parse(localStorage.getItem("here"));
+        //geo.here = JSON.parse(JSON.stringify(localStorage.here))
+        geo.timings.located = JSON.parse(localStorage.getItem("geoTimestamp"))
+        alert("Position restored from last locate."); //Restored coordinates from localstorage!");
+        /*$.each( localStorage, function( key, value ) {
+            if (key.indexOf("place_")==0) {
+                    geo.here[key.substr(6)]=scripter.nVal(value); 
+                }
+        });*/
+        return true;
+    }
+    return false
+}
+
 function initGeo() {
 
     // show map and get location
@@ -65,16 +90,14 @@ function onLocateSuccess(position) {
     //alert("success!");
     // set coordinate values
     console.log("onLocationSuccess -", position)
-    geo.here = position.coords;
+    geo.here =  JSON.parse(position.coords) ;
     geo.timings.located=position.timestamp;
 
     // set position holders
     geo.here.latitude0=geo.here.latitude;
     geo.here.longitude0=geo.here.longitude;
     geo.status = "found"
-    //if (session.env.localStorage) { 
-    //        localStorage["place_timestamp"]=position.timestamp;
-    //    }
+    backupGeo(position.timestamp);
     console.log('locate success. Final Geo -', geo);
 
     // init location info
@@ -88,20 +111,17 @@ function onLocateSuccess(position) {
 }
 
 function onLocateFailed(position) {
-    if (geo.browser.localStorage) {
-    alert("Could not Locate — keep trying!");
-    /*$.each( localStorage, function( key, value ) {
-        if (key.indexOf("place_")==0) {
-                geo.here[key.substr(6)]=scripter.nVal(value); 
-            }
-    });*/
+
+    console.log("Geolocated failed, trying localstorage");
+
+    if (restoreGeo()===true) {
+        geo.status = "local copy"
+    } else {
+        geo.status = "fail";
+        console.log("Local copy not available")
     }
-    else {
-    alert("Could not Locate. Please try again later...");
-    }
-    //console.log(session.env.here);
-    geo.status = "no location"
-    console.log("Geoloation failed! Final Geo -", geo,position)
+
+    console.log("Geoloation fail final Geo -", geo, position)
 }
 /*
 function initLocationReferences() {
