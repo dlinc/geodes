@@ -13,6 +13,7 @@
 <script>
 import { IonContent, IonPage, loadingController } from '@ionic/vue';
 import { defineComponent } from 'vue';
+import Geo from "../factories/geoFactory";
 
 export default defineComponent({
   name: 'Map',
@@ -28,6 +29,7 @@ export default defineComponent({
       console.log("MAP create event")
       //this.stopPropagation()
      // AsyncComp
+      Geo.helloGeo("inputsFromMap");
 
       async function showLoading() {
           const timeout = { type: Number, default: 50000 }
