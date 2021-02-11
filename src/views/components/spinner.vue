@@ -4,9 +4,28 @@
 
 <script>
 import { IonSpinner } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import { defineComponent, toRef } from 'vue';
 
 export default defineComponent({
-  components: { IonSpinner }
+components: { IonSpinner },
+  
+  setup (props) {
+    const { duration } = toRef(props)
+
+    console.log("Setup duration of spinner ",duration)
+
+    return {
+      duration,
+    }
+  },
+
+  methods: {
+    showSpinner () {
+      console.log("Show Spinner")
+     },
+     hideSpinner (){
+       console.log("Hide Spinner")
+     }
+  }
 });
 </script>

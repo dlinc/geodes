@@ -24,8 +24,10 @@ export default defineComponent({
     
   },
   beforeRouteEnter () {
+      
       console.log("MAP create event")
       //this.stopPropagation()
+     // AsyncComp
 
       async function showLoading() {
           const timeout = { type: Number, default: 50000 }

@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp,defineAsyncComponent } from 'vue'
 import App from './App.vue'
 import router from './router';
 //import { config } from '../vue.config';
@@ -28,9 +28,15 @@ import './theme/variables.css';
 import './theme/site.css';
 
 /* start up */
+const AsyncComp = defineAsyncComponent(() =>
+   import('./views/components/spinner.vue')
+  )
+  
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
+
+app.component('async-component', AsyncComp); 
 
 app.config.globalProperties.dbug = (process.env.VUE_APP_DEBUG ? Boolean(process.env.VUE_APP_DEBUG) : false);
 app.config.globalProperties.stack = [];

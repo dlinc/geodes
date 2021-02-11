@@ -10,31 +10,31 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   setup () {
-    const loader = loadingController
-
+    console.log("SETUP Loader component")
+    const timeout = 2000
     return {
-      loader
+      timeout
     }
-  },
-  props: {
-    timeout: { type: Number, default: 10000 },
   },
   methods: {
     async presentLoading() {
-      const loading = await loadingController
+      console.log("Present Loader compoonet 1");
+      
+      const loader = await loadingController
         .create({
           cssClass: 'loader',
           message: 'Please wait...',
           duration: this.timeout,
         });
 
-      await loading.present();
+      await loader.present();
 
       setTimeout(function() {
-        loading.dismiss()
+        loader.dismiss()
       }, this.timeout);
     },
     async presentLoadingWithOptions() {
+      console.log("present loader component 2")
       const loading = await loadingController
         .create({
           spinner: null,
