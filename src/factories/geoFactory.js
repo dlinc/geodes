@@ -90,7 +90,8 @@ function onLocateSuccess(position) {
     //alert("success!");
     // set coordinate values
     console.log("onLocationSuccess -", position)
-    geo.here =  JSON.parse(position.coords) ;
+    //geo.here =  JSON.parse(position.coords);
+    geo.here =  position.coords;
     geo.timings.located=position.timestamp;
 
     // set position holders
@@ -149,9 +150,12 @@ initGeo()
 export default {
 
     helloGeo (invara) {
-
         console.log("Hello Geo", invara)
         return "Geo says hi!"
+    },
+
+    getGeo(){
+        return geo;
     },
 
 } // end

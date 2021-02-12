@@ -30,7 +30,8 @@ export default defineComponent({
       //this.stopPropagation()
      // AsyncComp
       Geo.helloGeo("inputsFromMap");
-
+      let geo = Geo.getGeo();
+      console.log("** Geo returns -",geo )
       async function showLoading() {
           const timeout = { type: Number, default: 50000 }
           const loading = await loadingController
