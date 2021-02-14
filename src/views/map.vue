@@ -14,7 +14,7 @@
 import { IonContent, IonPage, loadingController } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import Geo from "../factories/geoFactory";
-import Odes from "../factories/odesFactory";
+import Odes from "../factories/odeFactory";
 
 import app from "../App"
 export default defineComponent({

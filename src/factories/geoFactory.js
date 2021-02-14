@@ -3,7 +3,8 @@
 /* eslint-disable camelcase */
 
 
-// import utilities from "../../../client/lib/article/utilities"
+import utils from "./utilsFactory"
+import odes from "./odeFactory"
 
 //const logger = Logger("services:onecount")
 
@@ -12,7 +13,7 @@ let geo = {
     browser: { localStorage: false },
     options: null,
     here: null,
-    timings: { init: getTimeStamp() },
+    timings: { init: utils.getTimeStamp() },
     status: "init"
 }
 /*
@@ -38,9 +39,7 @@ function nVal (v){ // normalize numeric, and string values
     return v;
 }
 */
-function getTimeStamp(){
-    return new Date().getTime();
-}
+
 
 function backupGeo(timestamp){
  if (geo.browser.localStorage === true) { 
@@ -98,15 +97,16 @@ function onLocateSuccess(position) {
     geo.here.latitude0=geo.here.latitude;
     geo.here.longitude0=geo.here.longitude;
     geo.status = "found"
-    backupGeo(position.timestamp);
+
     console.log('locate success. Final Geo -', geo);
 
-    // init location info
+    // init hits
     //initLocationReferences();
+    odes.initOdes(geo.here);
 
     // render map
     //place.initMap();
-
+    backupGeo(position.timestamp);
     // find POIs
     //strokes.getStrokes();
 }
@@ -117,6 +117,8 @@ function onLocateFailed(position) {
 
     if (restoreGeo()===true) {
         geo.status = "local copy"
+        odes.initOdes(geo.here);
+        
     } else {
         geo.status = "fail";
         console.log("Local copy not available")

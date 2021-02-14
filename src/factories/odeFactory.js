@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 /* eslint-disable max-len */
 /* eslint-disable camelcase */
-
-import geo from "./geoFactory"
-
-//const logger = Logger("services:onecount")
+require('fetch-jsonp')
+import utils from "./utilsFactory"
+//import geo from "./geoFactory"
+import fetchJsonp from "fetch-jsonp"
 
 console.log("Mounting Odes Factory")
 
@@ -23,16 +23,13 @@ const url = {
 let odes = {
     options: null,
     stack: [],
-    timings: { init: getTimeStamp() },
+    timings: { init: utils.getTimeStamp() },
     status: 'init',
     apiKey: '<YOUR_RAPIDAPI_KEY>'
 }
 
-function getTimeStamp(){
-    return new Date().getTime();
-}
 
-function getOdes() {
+function getOdes(here) {
  
         /* prep scan form
         var fdt=scripter.getFDT();
@@ -51,36 +48,31 @@ function getOdes() {
 
         // run call
         const callUrl=url.base+url.scan;
-        let substr = '?location_lat=45.5595712&location_lon=-122.6573743'; //$("#strokeScanForm").serialize();
-        console.log("url+substr:"+callUrl+"?"+substr);
+        let substr = '?location_lat=45.5595478&location_lon=-122.65733010000001&location_lat1=45.5595478&location_lon1=-122.65733010000001&location_accuracy=43&location_altitude=&location_radius=43&token=&location_dt=2021-02-13+19%3A37%3A59&scant=&scanm=&scanr='
+        //$("#strokeScanForm").serialize();
+        console.log("url+substr:"+callUrl+"?"+substr,here);
+let atest='https://www.scripter.net/stroke/lib/pscan5.php?location_lat=45.5595478&location_lon=-122.65733010000001&location_lat1=45.5595478&location_lon1=-122.65733010000001&location_accuracy=43&location_altitude=&location_radius=43&token=&location_dt=2021-02-13+19%3A37%3A59&scant=&scanm=&scanr='
+        fetchJsonp(atest) //callUrl)
+        .then(function(response) {
+            if (response.ok){ // if HTTP-status is 200-299
+                // return response.json()  
+                console.log("first then - ok", response)  
+             } else{
+                 alert("ERROR: Server returned unexpected codes - " + response);
+             }  
+            return response.json()
+        }).then(function(json) {
+            console.log("2nd then", json)
+            //
+            //this.result = response.body; 
+            //this.responseAvailable = true;
+            odes.stack=json.items;
 
-        fetch(callUrl, {
-            "method": "GET",
-            /*"headers": {
-                "x-rapidapi-host": "jokes-database.p.rapidapi.com",
-                "x-rapidapi-key": odes.apiKey
-            }*/
-        })
-        .then(response => { 
-            if(response.ok){
-               // return response.json()  
-               console.log("first then - ok")  
-            } else{
-                alert("first then; Server returned " + response.status + " : " + response.msg);
-            }              
-           // renderStrokes(results.items);
-           // strokes.env.listDirty=true;
-
-        })
-        .then(response => {
-            console.log("2nd then")
-            this.result = response.body; 
-            this.responseAvailable = true;
-        })
-        .catch(err => {
+        }).catch(function(err) {
             console.log("response ERROR2 ************ ")
             console.log("Error in Feed!", err);
-        });
+        })
+
 
 
                             // Form data
@@ -92,37 +84,15 @@ function getOdes() {
 
 }
 
-/*
-function backupOdes(timestamp){
- if (geo.browser.localStorage === true) { 
-        //localStorage["here"]=JSON.parse(geo.here.latitude);
-        localStorage.setItem("here", JSON.stringify(geo.here));
-        localStorage.setItem("geoTimestamp",timestamp);
- }
-}
-
-function restoreOdes(){
-    if (geo.browser.localStorage) {
-        console.log("resetpre Geo is ",localStorage.here)
-        geo.here = JSON.parse(localStorage.getItem("here"));
-        //geo.here = JSON.parse(JSON.stringify(localStorage.here))
-        geo.timings.located = JSON.parse(localStorage.getItem("geoTimestamp"))
-
-        return true;
-    }
-    return false
-}
-*/
-
-async function initOdes() {
+async function initOdes(here) {
    
     console.log("INIT Odes Factory -", odes)
 
     // check conditions
     //if (!geo.here.latitude || !geo.here.longitude) { alert("Indistinct Location. Please retrieve Location ..."); return false;}
-    console.log("mking geo as ",geo)
+    //console.log("mking geo as ",geo)
 
-    await getOdes()
+    await getOdes(here)
 
     // show map and get location
     //place.viewMap();
@@ -139,11 +109,13 @@ export default {
         return "Odes says hi!"
     },
 
-    async getOdes(){
-        if (odes.stack.length<=0) {
-            await initOdes()
-            console.log("End init Odes call")
-        }
+   async initOdes(here){
+        await initOdes(here)
+        return odes
+    },
+
+    getOdes(){
+        console.log("ODES STACK IN FACtORY -", odes)
         return odes;
     },
 
