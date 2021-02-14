@@ -14,7 +14,9 @@
 import { IonContent, IonPage, loadingController } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import Geo from "../factories/geoFactory";
+import Odes from "../factories/odesFactory";
 
+import app from "../App"
 export default defineComponent({
   name: 'Map',
   components: {
@@ -24,14 +26,23 @@ export default defineComponent({
   props: {
     
   },
+  /*data: {
+        result: “ ”,
+        responseAvailable: false,
+        apiKey: '<YOUR_RAPIDAPI_KEY>'
+    },*/
   beforeRouteEnter () {
-      
-      console.log("MAP create event")
+      const stk = app.stack
+      console.log("MAP create event. Stack =", stk)
       //this.stopPropagation()
      // AsyncComp
       Geo.helloGeo("inputsFromMap");
       let geo = Geo.getGeo();
       console.log("** Geo returns -",geo )
+
+      let odes = Odes.getOdes();
+      console.log("** Odes returns -",odes )
+
       async function showLoading() {
           const timeout = { type: Number, default: 50000 }
           const loading = await loadingController

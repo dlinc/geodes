@@ -39,7 +39,7 @@ const app = createApp(App)
 app.component('async-component', AsyncComp); 
 
 app.config.globalProperties.dbug = (process.env.VUE_APP_DEBUG ? Boolean(process.env.VUE_APP_DEBUG) : false);
-app.config.globalProperties.stack = [];
+app.config.globalProperties.stack = ['a','b','c'];
 
 // global error handler
 app.config.errorHandler = (err, vm, info) => {
