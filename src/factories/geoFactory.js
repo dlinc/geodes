@@ -11,11 +11,21 @@ import odes from "./odeFactory"
 
 let geo = {
     browser: { localStorage: false },
-    options: null,
+    options: {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+        },
     here: null,
     timings: { init: utils.getTimeStamp() },
+    markers: {
+        center: "./here.jpg",
+        genericPerson: "./person.jpg"
+    },
     status: "init"
 }
+// eslint-disable-next-line no-unused-vars
+let map;
+
 /*
 
 function getDT (tm){ // date wi milliseconds
@@ -94,6 +104,10 @@ function onLocateSuccess(position) {
     geo.timings.located=position.timestamp;
 
     // set position holders
+    geo.options.center = {
+        lat:geo.here.latitude,
+        lng: geo.here.longitude,
+    }
     geo.here.latitude0=geo.here.latitude;
     geo.here.longitude0=geo.here.longitude;
     geo.status = "found"
@@ -147,6 +161,34 @@ function initLocationReferences() {
     //console.log('ulogin.state=', user.login.state);
 }*/
 
+/* function plotPoint (point){
+ 
+    // setup map and pos based on point.coordinates
+      session.env.here.latitude = point.item.lat;
+      session.env.here.latitude1 = point.item.lat;
+      session.env.here.longitude = point.item.lon;
+      session.env.here.longitude1 = point.item.lon;
+      //session.env.here.altitude=point.item.lon;
+      session.env.here.accuracy=(point.item.accuracy> 0 ? point.item.accuracy : null);
+      initLocationReferences();
+
+       // refresh POIs
+      place.deleteMarkers(); 							
+      place.initMap();			           
+      strokes.getStrokes(); 
+      scripter.setMode("map");
+
+      // show shared point on top
+     setTimeout(function () { 
+          var sstack = strokes.showStack();    
+          console.log("Stack is ",sstack);
+          strokes.prepStroke(0); //always the first in the stack?
+         }, 1000); // set small delay to permit map init to happen before placing markers
+
+    }*/
+
+
+
 initGeo()
 
 export default {
@@ -158,6 +200,29 @@ export default {
 
     getGeo(){
         return geo;
+    },
+
+
+    initMap() {
+
+        console.log("running Initmap...");
+
+
+       // map = new google.maps.Map(document.getElementById("map"), geo.);
+
+        // draw map object and set center
+        /* eslint-disable no-undef */
+       
+       // let cpoint=new google.maps.LatLng(where.here.latitude,where.here.longitude);
+        // eslint-disable-next-line no-unused-vars
+        map = new google.maps.Map(document.getElementById("mapDiv"),geo.options);
+        //map.setCenter(cpoint) 
+        // add self marker
+        //let hereicon=geo.markers.center;
+
+        //xplace.addMarker(session.env.here.latitude, session.env.here.longitude, "Here You Are", hereicon, -1);
+        
+        //google.maps.event.trigger(map, 'resize');
     },
 
 } // end

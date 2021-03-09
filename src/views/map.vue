@@ -5,6 +5,7 @@
         <h2>Yo World out there!</h2>
         <strong>Ready to Map?</strong>
         <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+            <p>Welcome to Geodes Please take a minute to read the <a target="_blank" rel="noopener noreferrer" href="">Terms Of Use</a>.</p>
       </div>
     </ion-content>
   </ion-page>
@@ -16,7 +17,6 @@ import { defineComponent } from 'vue';
 import Geo from "../factories/geoFactory";
 import Odes from "../factories/odeFactory";
 
-import app from "../App"
 export default defineComponent({
   name: 'Map',
   components: {
@@ -32,8 +32,7 @@ export default defineComponent({
         apiKey: '<YOUR_RAPIDAPI_KEY>'
     },*/
   beforeRouteEnter () {
-      const stk = app.stack
-      console.log("MAP create event. Stack =", stk)
+
       //this.stopPropagation()
      // AsyncComp
       Geo.helloGeo("inputsFromMap");
@@ -42,7 +41,7 @@ export default defineComponent({
 
       let odes = Odes.getOdes();
       console.log("** Odes returns -",odes )
-
+      Geo.initMap();
       async function showLoading() {
           const timeout = { type: Number, default: 50000 }
           const loading = await loadingController
@@ -75,5 +74,9 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+#mapDiv {
+  height: 400px;
+  width:400px;
+  position:absolute;
+}
 </style>

@@ -16,3 +16,13 @@ V 0.0.1 - The first test version. Non functional, only for R & A uses.
 #### Database
 
 ### setup ENV files
+
+### run
+
+start developing at the project root - 
+  ```ionic serve ```
+
+  to build deployment code run -
+
+  ```npm run build```
+  

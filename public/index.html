@@ -13,6 +13,11 @@
     />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="description" content="Ode your world.">
+	  <meta name="keywords" content="Geolocation, odes to here and now, scripter net">
 
     <link rel="shortcut icon" type="image/png" href="<%= BASE_URL %>assets/icon/favicon.png" />
 
@@ -28,10 +33,15 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   </head>
 
+
   <body>
     <div id="app"></div>
-    
-  </body>
 
+    <div id="mapDiv" style="height:400px;width:400px;position:absolute; top:20px;right:0px;"></div>
+  </body>
+  <script
+  src="https://maps.googleapis.com/maps/api/js?key=<%= VUE_APP_MAPS_API_KEY%>&libraries=&v=weekly"
+  async
+></script>
 </html>
 
