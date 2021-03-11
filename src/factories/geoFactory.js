@@ -13,7 +13,7 @@ let geo = {
     browser: { localStorage: false },
     options: {
         center: { lat: -34.397, lng: 150.644 },
-        zoom: 8,
+        zoom: 16,
         },
     here: null,
     timings: { init: utils.getTimeStamp() },
@@ -214,8 +214,12 @@ export default {
         /* eslint-disable no-undef */
        
        // let cpoint=new google.maps.LatLng(where.here.latitude,where.here.longitude);
+       //if (google!==null){
         // eslint-disable-next-line no-unused-vars
-        map = new google.maps.Map(document.getElementById("mapDiv"),geo.options);
+            map = new google.maps.Map(document.getElementById("mapDiv"),geo.options);
+       // } else {
+        //    console.log("Google is not yet defined! Try again...")
+       // }
         //map.setCenter(cpoint) 
         // add self marker
         //let hereicon=geo.markers.center;

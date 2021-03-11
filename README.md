@@ -16,7 +16,7 @@ V 0.0.1 - The first test version. Non functional, only for R & A uses.
 #### Database
 
 ### setup ENV files
-
+- add your Google 
 ### run
 
 start developing at the project root - 
@@ -25,4 +25,3 @@ start developing at the project root -
   to build deployment code run -
 
   ```npm run build```
-  
