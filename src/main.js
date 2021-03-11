@@ -4,6 +4,7 @@ import router from './router';
 //import { config } from '../vue.config';
 
 import { IonicVue } from '@ionic/vue';
+import VueGoogleMaps from '@fawmi/vue-google-maps'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';
@@ -34,7 +35,12 @@ const AsyncComp = defineAsyncComponent(() =>
   
 const app = createApp(App)
   .use(IonicVue)
-  .use(router);
+  .use(router)
+  .use(VueGoogleMaps, {
+    load: {
+        key: process.env.VUE_APP_MAPS_API_KEY,
+    },
+    });
 
 app.component('async-component', AsyncComp); 
 

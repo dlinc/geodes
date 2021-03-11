@@ -216,7 +216,7 @@ export default {
        // let cpoint=new google.maps.LatLng(where.here.latitude,where.here.longitude);
        //if (google!==null){
         // eslint-disable-next-line no-unused-vars
-            map = new google.maps.Map(document.getElementById("mapDiv"),geo.options);
+           // map = new google.maps.Map(document.getElementById("mapDiv"),geo.options);
        // } else {
         //    console.log("Google is not yet defined! Try again...")
        // }

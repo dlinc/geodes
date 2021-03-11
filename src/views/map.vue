@@ -1,12 +1,13 @@
 <template>
   <ion-page>
     <ion-content :fullscreen="true">
-      <div id="container">
-        <h2>Yo World out there!</h2>
-        <strong>Ready to Map?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-            <p>Welcome to Geodes Please take a minute to read the <a target="_blank" rel="noopener noreferrer" href="">Terms Of Use</a>.</p>
-      </div>
+        <GMapMap
+          :center="center"
+          :zoom="7"
+          map-type-id="terrain"
+          style="width: 100vh; height: 100vh"
+        >
+      </GMapMap>
     </ion-content>
   </ion-page>
 </template>
@@ -23,9 +24,32 @@ export default defineComponent({
     IonContent,
     IonPage
   },
-  props: {
-    
+  /*props: {
+    lat: 51.093048, lng: 6.842120
+  },*/
+  data() {
+   /// const route = useRoute();
+  let options =  { } 
+
+   const center = {lat: 1.093048, lng: 16.842120};
+   console.log("SETUP MAP run", center)
+    //const { x1,x2,y1,y2 } = route.query;
+    //console.log("Params in -", route.query );
+    return {center, options}; //{ x1,x2,y1,y2 };
   },
+  
+  /* wi custom icons:
+
+   <GMapMarker
+            :icon="'https://developers.google.com/maps/documentation/javascript/examples/full/images/info-i_maps.png'"
+            :key="marker.id"
+            :clickable="true"
+            @click="openInfoWindow(marker.id)"
+            v-for="marker in geoCoordinates"
+            :position="marker.position"
+        >
+
+  */
   /*data: {
         result: “ ”,
         responseAvailable: false,
@@ -41,7 +65,7 @@ export default defineComponent({
 
       let odes = Odes.getOdes();
       console.log("** Odes returns -",odes )
-      Geo.initMap();
+      //Geo.initMap();
       async function showLoading() {
           const timeout = { type: Number, default: 50000 }
           const loading = await loadingController
