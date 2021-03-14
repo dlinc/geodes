@@ -40,7 +40,9 @@ const app = createApp(App)
     load: {
         key: process.env.VUE_APP_MAPS_API_KEY,
     },
-    });
+    })
+  
+//app.mount('#basic-event');
 
 app.component('async-component', AsyncComp); 
 

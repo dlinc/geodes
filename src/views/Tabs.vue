@@ -3,15 +3,15 @@
     <ion-tabs @ionTabsWillChange="beforeTabChange" @ionTabsDidChange="afterTabChange">
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="refresh" href="/map">
-          <ion-icon :src="`${publicPath}assets/icon/refresh-outline.svg`"></ion-icon>
+          <ion-icon :src="`${publicPath}assets/icon/iconRefresh-outline.svg`"></ion-icon>
           <ion-label>Map</ion-label>
         </ion-tab-button>
         <ion-tab-button tab="list" href="/list">
-          <ion-icon :src="`${publicPath}assets/icon/list-outline.svg`"></ion-icon>
+          <ion-icon :src="`${publicPath}assets/icon/iconList-outline.svg`"></ion-icon>
           <ion-label>List</ion-label>
         </ion-tab-button>
         <ion-tab-button tab="add" href="/add">
-          <ion-icon :src="`${publicPath}assets/icon/add-circle-outline.svg`"></ion-icon>
+          <ion-icon :src="`${publicPath}assets/icon/iconAdd-circle-outline.svg`"></ion-icon>
           <ion-label>Add</ion-label>
         </ion-tab-button>
       </ion-tab-bar>

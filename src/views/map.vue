@@ -1,7 +1,8 @@
 <template>
   <ion-page>
     <ion-content :fullscreen="true">
-        <GMapMap
+        <GMapMap 
+          ref="myMarker"
           :center="geo.options.center"
           :zoom="geo.options.zoom"
           map-type-id="terrain"
@@ -12,23 +13,29 @@
             v-for="(m, index) in markers"
               :position="m.position"
               :clickable="true"
-              :icon="'https://developers.google.com/maps/documentation/javascript/examples/full/images/info-i_maps.png'"
-              @click="openInfoWindow(marker.id)"
+              :icon="`${publicPath}assets/icon/iconHere.png`"
+               @click="greet(1)" 
               :draggable="true"
+            >
+              <GMapInfoWindow
+                :opened="true"
+                :options=" {
+                      pixelOffset: {
+                        width: 10, height: 0
+                      },
+                      maxWidth: 320,
+                      maxHeight: 320,
+              }"
+              >
+                <div style="color:black;">I am in info window {{ counter }} </div>
+                <button @click="add(counter)">Add 1</button>
+              </GMapInfoWindow>
+          </GMapMarker>
+          <GMapCircle
+            :center="geo.options.center"
+            :radius="geo.here.accuracy"
+            :options="geo.options.zone"
           />
-          <GMapInfoWindow
-            :opened="true"
-            :options=" {
-                  pixelOffset: {
-                    width: 10, height: 0
-                  },
-                  maxWidth: 320,
-                  maxHeight: 320,
-          }"
-          >
-            <div>I am in info window
-            </div>
-          </GMapInfoWindow>
       </GMapMap>
     </ion-content>
   </ion-page>
@@ -60,11 +67,40 @@ export default defineComponent({
           },
         }
       ]
+    let counter = 0
     //const { x1,x2,y1,y2 } = route.query;
     //console.log("Params in -", route.query );
-    return {geo, markers}; //{ x1,x2,y1,y2 };
+    return {geo, markers, publicPath: process.env.BASE_URL,counter}; //{ x1,x2,y1,y2 };
   },
-  
+emits: {
+    // No validation
+   // click: null,
+  // Validate submit event
+    greet: ({ id, event }) => {
+      console.log("emit for ",id,event)
+      //if (email && password) {
+        return true
+      //} else {
+      //  console.warn('Invalid submit event payload!')
+      //  return false
+      //}
+    },
+    xadd: (counter) => {
+      console.log("emit ADD ",counter)
+      return counter += 1
+    }
+  },
+  methods: {
+    greet(id) {
+      this.$emit('greet', { id })
+    },
+    add(){
+      console.log("method ADD ", this.counter)
+      this.counter += 1 
+    }
+  },
+
+
   /* wi custom icons:
 
    <GMapMarker

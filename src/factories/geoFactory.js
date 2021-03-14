@@ -14,12 +14,19 @@ let geo = {
     options: {
         center: { lat: 0, lng: 0 },
         zoom: 16,
+        zone: {
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35,
+            },
         },
     here: null,
     timings: { init: utils.getTimeStamp() },
     markers: {
-        center: "./here.jpg",
-        genericPerson: "./person.jpg"
+        center: "./iconHere.jpg",
+        anybody: "./person.jpg"
     },
     status: "init"
 }
