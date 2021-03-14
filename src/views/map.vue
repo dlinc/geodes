@@ -2,18 +2,40 @@
   <ion-page>
     <ion-content :fullscreen="true">
         <GMapMap
-          :center="center"
-          :zoom="7"
+          :center="geo.options.center"
+          :zoom="geo.options.zoom"
           map-type-id="terrain"
-          style="width: 100vh; height: 100vh"
+          style="width: 100%; height: 100%"
         >
+         <GMapMarker
+            :key="index"
+            v-for="(m, index) in markers"
+              :position="m.position"
+              :clickable="true"
+              :icon="'https://developers.google.com/maps/documentation/javascript/examples/full/images/info-i_maps.png'"
+              @click="openInfoWindow(marker.id)"
+              :draggable="true"
+          />
+          <GMapInfoWindow
+            :opened="true"
+            :options=" {
+                  pixelOffset: {
+                    width: 10, height: 0
+                  },
+                  maxWidth: 320,
+                  maxHeight: 320,
+          }"
+          >
+            <div>I am in info window
+            </div>
+          </GMapInfoWindow>
       </GMapMap>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { IonContent, IonPage, loadingController } from '@ionic/vue';
+import { IonContent, IonPage} from '@ionic/vue'; //, loadingController } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import Geo from "../factories/geoFactory";
 import Odes from "../factories/odeFactory";
@@ -24,18 +46,23 @@ export default defineComponent({
     IonContent,
     IonPage
   },
-  /*props: {
-    lat: 51.093048, lng: 6.842120
-  },*/
   data() {
    /// const route = useRoute();
-  let options =  { } 
-
-   const center = {lat: 1.093048, lng: 16.842120};
-   console.log("SETUP MAP run", center)
+   let geo =  Geo.getGeo()
+  // let odes = Odes.getOdes()
+   //const center = {lat: geo.here.latitude, lng: geo.here.longitude};
+   console.log("SETUP MAP run", geo)
+   let markers = [
+        {
+          position: {
+            lat:geo.here.latitude,
+             lng: geo.here.longitude
+          },
+        }
+      ]
     //const { x1,x2,y1,y2 } = route.query;
     //console.log("Params in -", route.query );
-    return {center, options}; //{ x1,x2,y1,y2 };
+    return {geo, markers}; //{ x1,x2,y1,y2 };
   },
   
   /* wi custom icons:
@@ -59,14 +86,14 @@ export default defineComponent({
 
       //this.stopPropagation()
      // AsyncComp
-      Geo.helloGeo("inputsFromMap");
+     // Geo.helloGeo("inputsFromMap");
       let geo = Geo.getGeo();
-      console.log("** Geo returns -",geo )
+      console.log("** Geo set to -",geo )
 
       let odes = Odes.getOdes();
-      console.log("** Odes returns -",odes )
+      console.log("** Odes set to -",odes )
       //Geo.initMap();
-      async function showLoading() {
+     /* async function showLoading() {
           const timeout = { type: Number, default: 50000 }
           const loading = await loadingController
               .create({
@@ -82,7 +109,7 @@ export default defineComponent({
               console.log("Dismiss loading...")
             }, timeout);
       }
-      showLoading();
+      showLoading();*/
       //this.loader.presentLoading();
       //loadingController.presentLoading();
       //this.fetchData()
@@ -96,11 +123,3 @@ export default defineComponent({
 
 });
 </script>
-
-<style scoped>
-#mapDiv {
-  height: 400px;
-  width:400px;
-  position:absolute;
-}
-</style>

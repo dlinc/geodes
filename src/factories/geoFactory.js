@@ -12,7 +12,7 @@ import odes from "./odeFactory"
 let geo = {
     browser: { localStorage: false },
     options: {
-        center: { lat: -34.397, lng: 150.644 },
+        center: { lat: 0, lng: 0 },
         zoom: 16,
         },
     here: null,
@@ -202,6 +202,9 @@ export default {
         return geo;
     },
 
+    setHomeMarker(){
+      //  <ion-icon ios="ios-flash" md="md-flash"></ion-icon>
+    },
 
     initMap() {
 

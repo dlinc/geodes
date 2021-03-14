@@ -6,6 +6,7 @@ import List from '../views/list.vue'
 import Add from '../views/add.vue'
 import Geode from "../views/geode.vue"
 import Zone from "../views/zone.vue"
+import Geo from "../factories/geoFactory"
 
 const routes = [
   {
@@ -36,7 +37,17 @@ const routes = [
   {
     path: '/map',
     name: 'Map',
-    component: Map
+    component: Map,
+    beforeEnter: (to, from) => {
+      // check before navigating
+      let status=Geo.getGeo().status 
+      if (status!== "found"){
+        console.log("map not ready route: ",to,from)
+        //redirect: '/',
+        alert("Geo not ready. Try in a second")
+        return { path: '/' } //,false
+      }
+    },
   },
   {
     path: '/:id',
