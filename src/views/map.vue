@@ -1,22 +1,25 @@
 <template>
   <ion-page>
     <ion-content :fullscreen="true">
+      
         <GMapMap 
           ref="myMarker"
           :center="geo.options.center"
           :zoom="geo.options.zoom"
           map-type-id="terrain"
           style="width: 100%; height: 100%"
+          setTilt="45"
         >
          <GMapMarker
             :key="index"
             v-for="(m, index) in markers"
               :position="m.position"
-              :clickable="true"
-              :icon="`${publicPath}assets/icon/iconHere.png`"
-               @click="greet(1)" 
               :draggable="true"
+              :icon="`${publicPath}assets/icon/iconHere.png`"
+              @click="add(counter)" 
+              :clickable="true"
             >
+            
               <GMapInfoWindow
                 :opened="true"
                 :options=" {
@@ -74,10 +77,13 @@ export default defineComponent({
   },
 emits: {
     // No validation
-   // click: null,
+   click: () => {
+     console.log("emit CLICK")
+     return true
+   },
   // Validate submit event
     greet: ({ id, event }) => {
-      console.log("emit for ",id,event)
+      console.log("emit GREET ",id,event)
       //if (email && password) {
         return true
       //} else {
@@ -85,14 +91,15 @@ emits: {
       //  return false
       //}
     },
-    xadd: (counter) => {
+    add: (counter) => {
       console.log("emit ADD ",counter)
       return counter += 1
     }
   },
   methods: {
     greet(id) {
-      this.$emit('greet', { id })
+      console.log("method GREET ",id)
+      //this.$emit('greet', { id })
     },
     add(){
       console.log("method ADD ", this.counter)

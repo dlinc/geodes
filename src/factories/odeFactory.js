@@ -25,7 +25,6 @@ let odes = {
     stack: [],
     timings: { init: utils.getTimeStamp() },
     status: 'init',
-    apiKey: '<YOUR_RAPIDAPI_KEY>'
 }
 
 
