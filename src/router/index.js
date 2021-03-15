@@ -44,7 +44,7 @@ const routes = [
       if (status!== "found"){
         console.log("map not ready route: ",to,from)
         //redirect: '/',
-        alert("Geo not ready. Try in a second")
+        console.log("Geo not ready. Try in a second")
         return { path: '/' } //,false
       }
     },

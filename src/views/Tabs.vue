@@ -2,7 +2,7 @@
   <ion-page>
     <ion-tabs @ionTabsWillChange="beforeTabChange" @ionTabsDidChange="afterTabChange">
       <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="refresh" href="/map">
+        <ion-tab-button tab="map" href="/map">
           <ion-icon :src="`${publicPath}assets/icon/iconRefresh-outline.svg`"></ion-icon>
           <ion-label>Map</ion-label>
         </ion-tab-button>
@@ -52,6 +52,7 @@ export default defineComponent({
     }
   },
   data () {
+    console.log("TAB Setup")
     return {
       publicPath: process.env.BASE_URL
     }
