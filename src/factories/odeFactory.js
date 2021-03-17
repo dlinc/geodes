@@ -114,7 +114,7 @@ export default {
     },
 
     getOdes(){
-        console.log("ODES STACK IN FACtORY -", odes)
+        //console.log("ODES STACK IN FACtORY -", odes)
         return odes;
     },
 

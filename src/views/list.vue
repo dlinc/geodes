@@ -1,29 +1,64 @@
 <template>
   <ion-page>
     <ion-content class="ion-padding" :fullscreen="true">
-      <h1>first</h1>
-      <h2>List Tab</h2>
-            <h3>1</h3>
-       <h3>2</h3>
-        <h3>3</h3>
-         <h3>4</h3>
-          <h3>5</h3>
-           <h3>6</h3>
-            <h3>7</h3>
+          <ion-list-header class="offset-top">
+            <ion-label>{{ hitCount }} Proximate Hits</ion-label>
+        </ion-list-header>
+        <ion-list>
+            <ion-item 
+              v-for="ode in odes" 
+              v-bind:key="ode.sid"
+              @click.stop="clickView(`${ode.sid}`)"
+              >
+              <ion-item-divider>
+                <ion-label>{{ ode.title }}</ion-label>
+              </ion-item-divider>   
+            </ion-item> 
+        </ion-list>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent} from 'vue';
+import Odes from "../factories/odeFactory"
 import {
   IonContent,
-  IonPage
+  IonPage,
+  IonList,
+  IonLabel,
+  IonItem,
+  IonListHeader,
+  IonItemDivider,
 } from '@ionic/vue';
-//import Loaders from './components/loader.vue';
 
 export default defineComponent({
-  components: { IonContent, IonPage } 
+  components: { IonContent, IonPage, IonList, IonLabel, IonItem, IonListHeader,IonItemDivider,} ,
+  data () {
+    let odes=Odes.getOdes().stack
+    console.log("roll LIST view ",odes)
+    return {
+      odes, hitCount:odes.length
+    }
+  },
+  methods: {
+      clickView: function (id) {
+        alert("clicked test "+id)
+      }
+  },
+  beforeMount(){
+    console.log("LIST before mount",this.odes)
+  },
+  beforeUpdate(){
+    this.odes==Odes.getOdes().stack
+    console.log("LIST before update",this.odes)
+    return this.odes
+  },
+  updated () {
+    console.log("LIST rendered event",this.odes)
+    //this.loading.dismiss()
+  }
   //, Loaders }
 });
+
 </script>

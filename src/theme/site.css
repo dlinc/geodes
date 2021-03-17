@@ -31,6 +31,9 @@
     text-decoration: none;
   }
 
+.offset-top {
+  margin-top:75px;
+}
 @media (prefers-color-scheme: dark) {
   /*
    * Dark Colors
