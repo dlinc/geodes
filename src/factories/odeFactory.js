@@ -21,7 +21,6 @@ const url = {
 };
 
 let odes = {
-    options: null,
     stack: [],
     timings: { init: utils.getTimeStamp() },
     status: 'init',
@@ -45,13 +44,11 @@ function getOdes(here) {
         $('#scanFormRadius').val(session.settings.radius);
         $('#scanFormDT').val(scripter.getFDT(fdt));*/
 
-        // run call
-        const callUrl=url.base+url.scan;
-        let substr = '?location_lat=45.5595478&location_lon=-122.65733010000001&location_lat1=45.5595478&location_lon1=-122.65733010000001&location_accuracy=43&location_altitude=&location_radius=43&token=&location_dt=2021-02-13+19%3A37%3A59&scant=&scanm=&scanr='
-        //$("#strokeScanForm").serialize();
-        console.log("url+substr:"+callUrl+"?"+substr,here);
-let atest='https://www.scripter.net/stroke/lib/pscan5.php?location_lat=45.5595478&location_lon=-122.65733010000001&location_lat1=45.5595478&location_lon1=-122.65733010000001&location_accuracy=43&location_altitude=&location_radius=43&token=&location_dt=2021-02-13+19%3A37%3A59&scant=&scanm=&scanr='
-        fetchJsonp(atest) //callUrl)
+        odes.here = here
+        let substr = '?location_lat='+here.latitude+'&location_lon='+here.longitude+'&location_accuracy='+here.accuracy
+        const callUrl=url.base+url.scan+substr;
+        console.log("url+substr:"+callUrl,here);
+        fetchJsonp(callUrl)
         .then(function(response) {
             if (response.ok){ // if HTTP-status is 200-299
                 // return response.json()  
@@ -71,16 +68,7 @@ let atest='https://www.scripter.net/stroke/lib/pscan5.php?location_lat=45.559547
             console.log("response ERROR2 ************ ")
             console.log("Error in Feed!", err);
         })
-
-
-
-                            // Form data
-                            //data: substr, 
-                            //dataType:'jsonp',
-                            //cache: false
-
         return true;
-
 }
 
 async function initOdes(here) {
