@@ -3,6 +3,10 @@
     <ion-content class="ion-padding" :fullscreen="true">
           <ion-list-header class="offset-top">
             <ion-label>{{ hitCount }} Proximate Hits</ion-label>
+                <button @click="modalOpen = true">
+                    Open full screen modal! (With teleport!)
+                </button>
+                <modal-button></modal-button>
         </ion-list-header>
         <ion-list>
             <ion-item 
@@ -17,6 +21,17 @@
         </ion-list>
     </ion-content>
   </ion-page>
+  <teleport to="body">
+      <div v-if="modalOpen">
+        <div>
+          I'm a teleported modal! 
+          (My parent is "body")
+          <button @click="modalOpen = false">
+            Close
+          </button>
+        </div>
+      </div>
+  </teleport>
 </template>
 
 <script>
@@ -38,7 +53,9 @@ export default defineComponent({
     let odes=Odes.getOdes().stack
     console.log("roll LIST view ",odes)
     return {
-      odes, hitCount:odes.length
+      odes, 
+      hitCount:odes.length,
+      modalOpen: false
     }
   },
   methods: {
