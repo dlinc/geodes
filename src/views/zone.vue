@@ -3,7 +3,7 @@
     <ion-content :fullscreen="true">
       <div id="container">
         <h2>Welcome to Geodes</h2>
-        <div class="plainText">You may be seeing this because your location is not available. Check the location indicator on the top left &mdash; enable geolocation for this site if necessary and refresh.</div>
+        <div class="plainText">You may be seeing this because your location is not available. Check the location indicator on the top left &mdash; and enable geolocation, if necessary, and refresh.</div>
         
         <div class="plainText">
             Otherwise, proceed to the <router-link :to="{name: 'Map'}">Map</router-link>
