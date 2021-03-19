@@ -1,7 +1,13 @@
 <template>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Geodes</ion-title>
+        <ion-label class="ion-padding">GEODES</ion-label>
+        <ion-chip class="ion-float-right">
+          <ion-avatar border-radius="15">
+            <ion-img :src="`${user.icon}`"></ion-img>
+          </ion-avatar>
+          <ion-label>{{ user.name }}</ion-label>
+        </ion-chip>
       </ion-toolbar>
     </ion-header>
 </template>
@@ -10,15 +16,24 @@
 import { defineComponent } from 'vue';
 import { 
   IonToolbar, 
-  IonTitle,
-  IonHeader
+  IonHeader,
+  IonChip,
+  IonAvatar,
+  IonImg,
 } from '@ionic/vue';
+import User from "../factories/userFactory"
 //import { calendar, personCircle } from 'ionicons/icons';
 
 //console.log("ENV ", process.env)
 //
 
 export default defineComponent({
-  components: { IonToolbar, IonTitle, IonHeader }
+  components: { IonToolbar, IonHeader, IonChip, IonAvatar, IonImg },
+  setup() { 
+    let user = User.getUser()
+    return {
+      user
+    }
+  },
 });
 </script>

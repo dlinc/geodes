@@ -5,6 +5,7 @@ require('fetch-jsonp')
 import utils from "./utilsFactory"
 //import geo from "./geoFactory"
 import fetchJsonp from "fetch-jsonp"
+import User from "./userFactory"
 
 console.log("Mounting Odes Factory")
 
@@ -16,13 +17,13 @@ const url = {
     scan: 'lib/pscan5.php',
     add: 'lib/ssave4.php',
     update: 'lib/upsave.php',
-    icon:'./img/icons/',
     lookup:'lib/slookup.php'
 };
 
 let odes = {
     stack: [],
     timings: { init: utils.getTimeStamp() },
+    iconDefault: process.env.BASE_URL+'assets/icon/user-default.jpg',
     status: 'init',
 }
 
@@ -64,8 +65,9 @@ function getOdes(here) {
             //this.responseAvailable = true;
             odes.stack=json.items;
             // add temp/work defaults
+            let user = User.getUser()
             odes.stack = odes.stack.map( (s) => {
-                s.img=process.env.BASE_URL+'assets/icon/user-default.jpg'
+                s.img=user.icon // odes.iconDefault
                 return s
             })
         }).catch(function(err) {
