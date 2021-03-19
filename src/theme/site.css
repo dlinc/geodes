@@ -39,7 +39,7 @@
   margin-top:75px;
 }
 
-.md .hydrated  {
+.xmd .xhydrated  {
   padding:0;
 }
 
@@ -53,6 +53,10 @@
   margin-top: 1em;
   background-color: rgb(112, 100, 88);
   xborder: 1px red solid;
+}
+
+.superSize {
+  font-size: large;
 }
 
 @media (prefers-color-scheme: dark) {

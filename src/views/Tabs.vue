@@ -29,33 +29,27 @@ import {
   IonTabButton, 
   IonTabs
 } from '@ionic/vue';
-import { calendar, personCircle } from 'ionicons/icons';
+//import { calendar, personCircle } from 'ionicons/icons';
 
 //console.log("ENV ", process.env)
 
 export default defineComponent({
   components: { IonIcon, IonLabel, IonPage, IonTabBar, IonTabButton, IonTabs },
-  setup() {
-    const beforeTabChange = (t) => {
+  methods: {
+     beforeTabChange (t) {
       // do something before tab change
       console.log("Change tab t =", t);
-    }
-    const afterTabChange = (t) => {
-      // do something after tab change
-      console.log("After change tab t =", t);
-    }
-    return {
-      calendar,
-      personCircle,
-      beforeTabChange,
-      afterTabChange
-    }
+    },
+    afterTabChange (t)  {
+        // do something after tab change
+        console.log("After change tab t =", t);
+      }
   },
   data () {
     console.log("TAB Setup")
     return {
       publicPath: process.env.BASE_URL
     }
-  }
+  },
 });
 </script>

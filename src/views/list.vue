@@ -3,10 +3,6 @@
     <ion-content class="ion-padding" :fullscreen="true">
           <ion-list-header class="offset-top">
             <ion-label>{{ hitCount }} Proximate Hits</ion-label>
-                <button @click="modalOpen = true">
-                    Open full screen modal! (With teleport!)
-                </button>
-                <modal-button></modal-button>
         </ion-list-header>
         <ion-list>
             <ion-item 
@@ -14,11 +10,11 @@
               v-bind:key="ode.sid"
               @click.stop="clickView(`${ode.sid}`)"
               >
-              <ion-item-divider>
+              <ion-item-divider class="ion-padding">
                       <ion-thumbnail slot="start">
                           <ion-img :src="ode.img"></ion-img>
                       </ion-thumbnail>
-                <ion-label>{{ ode.title }}</ion-label>
+                <ion-label class="ion-padding">{{ ode.title }}</ion-label>
               </ion-item-divider>   
             </ion-item> 
         </ion-list>
@@ -67,15 +63,15 @@ export default defineComponent({
       }
   },
   beforeMount(){
-    console.log("LIST before mount",this.odes)
+   // console.log("LIST before mount",this.odes)
   },
   beforeUpdate(){
-    this.odes==Odes.getOdes().stack
-    console.log("LIST before update",this.odes)
+    //this.odes==Odes.getOdes().stack
+    //console.log("LIST before update",this.odes)
     return this.odes
   },
   updated () {
-    console.log("LIST rendered event",this.odes)
+    //console.log("LIST rendered event",this.odes)
     //this.loading.dismiss()
   }
   //, Loaders }

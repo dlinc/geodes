@@ -11,6 +11,9 @@
           required="true"
           autofocus="true"
           color="primary"
+          type="text"
+          spellcheck="true"
+          inputmode="text"
           ></ion-input>
           </ion-label>
       </ion-item>
@@ -18,33 +21,78 @@
       <ion-item>
         <ion-label>Text
         <ion-textarea
-              position="floating" 
-              name="textInput" 
+              name="text" 
               value=""
               auto-grow="true"
-              color="secondary"
+              color="primary"
+              spellcheck="true"
+              inputmode="text"
         ></ion-textarea>
         </ion-label>
       </ion-item>
 
+      <ion-item>
+        <ion-label>Media
+          
+           <ion-item>
+              <ion-label>Photo</ion-label>
+              <ion-input
+                  name="photo" 
+                  value=""
+                  color="secondary"
+                  type="text"
+              ></ion-input>
+          </ion-item>
+
+          <ion-item>
+              <ion-label>Audio</ion-label>
+              <ion-input
+                  name="audio" 
+                  value=""
+                  color="secondary"
+                  type="text"
+              ></ion-input>
+          </ion-item>
+
+          <ion-item>
+              <ion-label>Video</ion-label>
+              <ion-input
+                  name="video" 
+                  value=""
+                  color="secondary"
+                  type="text"
+              ></ion-input>
+          </ion-item>
+
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
           <ion-label>Restrict
           <ion-item>
-            <ion-label>Private
+            <ion-label>Private</ion-label>
             <ion-checkbox 
                 name="private"
                 checked="false"
                 color="primary"
                 ></ion-checkbox>
-                </ion-label>
           </ion-item>
+
           <ion-item>
             <ion-label>Radius</ion-label>
-            <ion-range min="0" max="1000" color="secondary">
+            <ion-range 
+              min="0" 
+              max="1000"
+              value="1000"
+              pin="true"
+              color="secondary"
+            >
             <ion-label slot="start">0</ion-label>
-              <ion-label slot="end">1000</ion-label>
+              <ion-label slot="end"><span class="superSize">&#8734;</span> m</ion-label>
             </ion-range>
           </ion-item>
         </ion-label>
+      </ion-item>
     </ion-content>
   </ion-page>
 </template>
