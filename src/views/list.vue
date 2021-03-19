@@ -15,6 +15,9 @@
               @click.stop="clickView(`${ode.sid}`)"
               >
               <ion-item-divider>
+                      <ion-thumbnail slot="start">
+                          <ion-img :src="ode.img"></ion-img>
+                      </ion-thumbnail>
                 <ion-label>{{ ode.title }}</ion-label>
               </ion-item-divider>   
             </ion-item> 
@@ -33,10 +36,22 @@ import {
   IonItem,
   IonListHeader,
   IonItemDivider,
+  IonThumbnail,
+  IonImg,
 } from '@ionic/vue';
 
 export default defineComponent({
-  components: { IonContent, IonPage, IonList, IonLabel, IonItem, IonListHeader,IonItemDivider,} ,
+  components: { 
+    IonContent, 
+  IonPage, 
+  IonList, 
+  IonLabel, 
+  IonItem, 
+  IonListHeader,
+  IonItemDivider,
+  IonThumbnail,
+  IonImg,
+  } ,
   data () {
     let odes=Odes.getOdes().stack
     console.log("roll LIST view ",odes)

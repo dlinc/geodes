@@ -63,7 +63,11 @@ function getOdes(here) {
             //this.result = response.body; 
             //this.responseAvailable = true;
             odes.stack=json.items;
-
+            // add temp/work defaults
+            odes.stack = odes.stack.map( (s) => {
+                s.img=process.env.BASE_URL+'assets/icon/user-default.jpg'
+                return s
+            })
         }).catch(function(err) {
             console.log("response ERROR2 ************ ")
             console.log("Error in Feed!", err);
