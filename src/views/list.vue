@@ -21,19 +21,7 @@
         </ion-list>
     </ion-content>
   </ion-page>
-  <teleport to="body">
-      <div v-if="modalOpen">
-        <div>
-          I'm a teleported modal! 
-          (My parent is "body")
-          <button @click="modalOpen = false">
-            Close
-          </button>
-        </div>
-      </div>
-  </teleport>
 </template>
-
 <script>
 import { defineComponent} from 'vue';
 import Odes from "../factories/odeFactory"

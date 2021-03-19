@@ -2,15 +2,12 @@
   <ion-page>
     <ion-content :fullscreen="true">
       <div id="container">
-        <h2>Yo Zone !</h2>
-        <strong>Ready to Zone?</strong>
-        <h2>lat1 {{ x1 }}</h2>
-        <h2>lat2 {{ x2 }}</h2>
-        <h2>long1 {{ y1 }}</h2>
-        <h2>long2 {{ y2 }}</h2>
-        <p>
-            Proceed to <router-link :to="{name: 'Map'}">Map</router-link>
-        </p>
+        <h2>Welcome to Geodes</h2>
+        <div class="plainText">You may be seeing this because your location is not available. Check the location indicator on the top left &mdash; enable geolocation for this site if necessary and refresh.</div>
+        
+        <div class="plainText">
+            Otherwise, proceed to the <router-link :to="{name: 'Map'}">Map</router-link>
+        </div>
       </div>
     </ion-content>
   </ion-page>
