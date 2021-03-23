@@ -50,6 +50,11 @@ const routes = [
     },
   },
   {
+    path: '/zone',
+    name: 'Zone',
+    component: Zone
+  },
+  {
     path: '/:id',
     name: 'Geode',
     component: Geode

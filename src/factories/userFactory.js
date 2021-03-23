@@ -25,6 +25,7 @@ let user = {
     iconUrl: process.env.BASE_URL+'assets/icon/',
     icon: 'user-default.jpg',
     status: 'init',
+    loggedIn: false,
 }
 
 
@@ -62,6 +63,7 @@ function initUser() {
         */
        user.name= 'Dlinc' 
        user.icon= user.iconUrl+'user-1.png'
+       user.loggedIn = true
        console.log("Init User ", user)
        return
 }

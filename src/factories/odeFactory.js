@@ -27,7 +27,25 @@ let odes = {
     status: 'init',
 }
 
-
+function normalizeOde(list){
+    let user = User.getUser()
+    let num = null
+    list = list.map( (s) => {
+        s.img=user.icon // odes.iconDefault
+        num = Number(s.distance)
+        if (num > 999) {
+              s.lDistance= (num/1000).toFixed(1) + " km"
+        } else if (num > 0) {
+              // code block
+              s.lDistance= num.toFixed(1) + " m"
+        } else {
+              s.lDistance= null
+          }
+        
+        return s
+    })
+    return list
+}
 function getOdes(here) {
  
         /* prep scan form
@@ -63,13 +81,8 @@ function getOdes(here) {
             //
             //this.result = response.body; 
             //this.responseAvailable = true;
-            odes.stack=json.items;
+            odes.stack=normalizeOde(json.items);
             // add temp/work defaults
-            let user = User.getUser()
-            odes.stack = odes.stack.map( (s) => {
-                s.img=user.icon // odes.iconDefault
-                return s
-            })
         }).catch(function(err) {
             console.log("response ERROR2 ************ ")
             console.log("Error in Feed!", err);

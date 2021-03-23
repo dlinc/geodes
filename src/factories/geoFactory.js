@@ -147,26 +147,7 @@ function onLocateFailed(position) {
 
     console.log("Geoloation fail final Geo -", geo, position)
 }
-/*
-function initLocationReferences() {
-    let dt = getDT();
-    let lstr='Latitude: '           + geo.here.latitude              + '<br/>'+
-                        'Longitude: '          + geo.here.longitude             + '<br/>' +
-                        'Altitude: '           + geo.here.altitude              + '<br/>' +
-                        'Accuracy: '           + geo.here.accuracy              + '<br/>' +
-                        'Altitude Accuracy: '  + geo.here.altitudeAccuracy      + '<br/>' +
-                        'Heading: '            + geo.here.heading               + '<br/>'+
-                        'Speed: '              + geo.here.speed                + '<br/>' +
-                        'Compass: '            + geo.here.compass                + '<br/>' +
-                        'Alt X: '              + geo.here.altx               + '<br/>' +
-                        'Alt Y: '              + geo.here.alty                + '<br/>' +
-                        'Alt Z: '              + geo.here.altz                + '<br/>' +
-                        'Date Time: '          + dt  + '<br/>' +
-                            'Logged in: '          + (user.login.state ===true ? true : false );
-    
-    return lstr;
-    //console.log('ulogin.state=', user.login.state);
-}*/
+
 
 /* function plotPoint (point){
  

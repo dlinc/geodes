@@ -15,6 +15,7 @@
                           <ion-img :src="ode.img"></ion-img>
                       </ion-thumbnail>
                 <ion-label class="ion-padding">{{ ode.title }}</ion-label>
+                <ion-label class="ion-padding">{{ ode.lDistance }}</ion-label>
               </ion-item-divider>   
             </ion-item> 
         </ion-list>

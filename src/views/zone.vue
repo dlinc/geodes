@@ -2,11 +2,31 @@
   <ion-page>
     <ion-content :fullscreen="true">
       <div id="container">
-        <h2>Welcome to Geodes</h2>
-        <div class="plainText">You may be seeing this because your location is not available. Check the location indicator on the top left &mdash; and enable geolocation, if necessary, and refresh.</div>
-        
-        <div class="plainText">
-            Otherwise, proceed to the <router-link :to="{name: 'Map'}">Map</router-link>
+          <h2>Welcome to Geodes</h2>
+          <div v-if = !ready >
+            <div class="plainText">You may be seeing this because your location is not available. Check the location indicator on the top left &mdash; and enable geolocation, if necessary, and refresh.</div>
+            
+            <div class="plainText">
+                Otherwise, proceed to the <router-link :to="{name: 'Map'}">Map</router-link>
+            </div>
+        </div>
+        <div v-if = ready >
+            <h2> Your location </h2>
+            <div class="plainText">
+                <span class = "locationDetails">Latitude: {{ geo.here.latitude }} </span>
+                <span class = "locationDetails">Longitude: {{ geo.here.longitude }}</span>
+                <span class = "locationDetails">Altitude: {{ geo.here.altitude }}</span>
+                <span class = "locationDetails">Accuracy: {{ geo.here.accuracy }}</span>
+                <span class = "locationDetails">Alt Accuracy: {{ geo.here.altitudeAccuracy }} </span>
+                <span class = "locationDetails">Heading: {{ geo.here.heading }}</span>
+                <span class = "locationDetails">Speed: {{ geo.here.speed }}</span>
+                <span class = "locationDetails">Compass: {{ geo.here.compass }} </span>
+                  <span class = "locationDetails">Logged in: {{ loggedIn }} </span>
+          </div>
+            
+            <div class="plainText">
+                Proceed to the <router-link :to="{name: 'Map'}">Map</router-link>
+            </div>
         </div>
       </div>
     </ion-content>
@@ -17,6 +37,8 @@
 import { IonContent, IonPage } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
+import Geo from "../factories/geoFactory";
+import User from "../factories/userFactory";
 
 export default defineComponent({
   name: 'Zone',
@@ -26,12 +48,19 @@ export default defineComponent({
   },
   setup() {
     const route = useRoute();
-    
-    const { x1,x2,y1,y2 } = route.query;
+    let geo = Geo.getGeo();
+    //const { x1,x2,y1,y2 } = route.query; - pass this in for coordinates in url case
     console.log("Params in -", route.query );
-    return { x1,x2,y1,y2 };
-  }
-});
+    console.log("Geo status 1", geo.status)
+    if (geo.status === "found") {
+        geo.ready= true
+      } else {
+      geo.ready = false
+    }
+    let user = User.getUser()
+    return { geo, ready: geo.ready, loggedIn: user.loggedIn }
+}
+})
 </script>
 
 <style scoped>

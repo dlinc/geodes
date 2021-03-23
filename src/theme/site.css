@@ -46,7 +46,10 @@
 .xtoolbar-title-default {
   padding-left: 5em;
 }
-
+.locationDetails {
+  display:block;
+  text-align: left;
+}
 /* form elements */
 .item-input,
 .item-textarea {
