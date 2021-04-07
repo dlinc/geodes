@@ -19,6 +19,7 @@ import {
   IonToolbar, 
   IonHeader,
   IonChip,
+  IonLabel,
   IonAvatar,
   IonImg,
 } from '@ionic/vue';
@@ -29,7 +30,7 @@ import User from "../factories/userFactory"
 //
 
 export default defineComponent({
-  components: { IonToolbar, IonHeader, IonChip, IonAvatar, IonImg },
+  components: { IonToolbar, IonHeader, IonChip, IonLabel, IonAvatar, IonImg },
   setup() { 
     let user = User.getUser()
     return {

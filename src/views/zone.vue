@@ -1,10 +1,12 @@
 <template>
   <ion-page>
-    <ion-content :fullscreen="true">
-      <div id="container">
-          <h2>Welcome to Geodes</h2>
+    <ion-content class="ion-padding" :fullscreen="true">
+ 
+           <div id="container">
+          <h2>Welcome to Geodes {{ ready }} </h2>
           <div v-if = !ready >
-            <div class="plainText">You may be seeing this because your location is not available. Check the location indicator on the top left &mdash; and enable geolocation, if necessary, and refresh.</div>
+            <div class="plainText">You may be seeing this because your location is not available. Check the location indicator on the top left &mdash; and enable geolocation, if necessary, and refresh.
+            </div>
             
             <div class="plainText">
                 Otherwise, proceed to the <router-link :to="{name: 'Map'}">Map</router-link>
@@ -21,7 +23,7 @@
                 <span class = "locationDetails">Heading: {{ geo.here.heading }}</span>
                 <span class = "locationDetails">Speed: {{ geo.here.speed }}</span>
                 <span class = "locationDetails">Compass: {{ geo.here.compass }} </span>
-                  <span class = "locationDetails">Logged in: {{ loggedIn }} </span>
+                <span class = "locationDetails">Logged in: {{ loggedIn }} </span>
           </div>
             
             <div class="plainText">
@@ -29,29 +31,37 @@
             </div>
         </div>
       </div>
+
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { IonContent, IonPage } from '@ionic/vue';
+import { IonContent, IonPage, onIonViewWillEnter } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
 import Geo from "../factories/geoFactory";
 import User from "../factories/userFactory";
 
-export default defineComponent({
-  name: 'Zone',
-  components: {
-    IonContent,
-    IonPage
-  },
-  setup() {
-    const route = useRoute();
-    let geo = Geo.getGeo();
+let allLocation = {}
+function getLocData(){
+  /*const defaultGeo = {
+            accuracy: -1,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            latitude: null,
+            latitude0: 35.6411562,
+            longitude: null,
+            longitude0: -105.9715909
+          }*/
+   let geo = Geo.getGeo()
+   //let (geo.status!=="found" ? defaultGeo : geo.here )
+
+
     //const { x1,x2,y1,y2 } = route.query; - pass this in for coordinates in url case
-    console.log("Params in -", route.query );
-    console.log("Geo status 1", geo.status)
+    //console.log("Params in -", route.query );
+    //console.log("Geo status 1", geo.status)
     if (geo.status === "found") {
         geo.ready= true
       } else {
@@ -59,6 +69,30 @@ export default defineComponent({
     }
     let user = User.getUser()
     return { geo, ready: geo.ready, loggedIn: user.loggedIn }
+}
+
+export default defineComponent({
+  name: 'Zone',
+  components: {
+    IonContent,
+    IonPage,
+  },
+  setup() {
+
+     onIonViewWillEnter(() => {
+      allLocation = getLocData()
+      console.log('page did enter', allLocation);
+      return allLocation
+    });
+
+    const route = useRoute();
+    console.log("Params in -", route.query );
+    allLocation = getLocData()
+    //let geo = Geo.getGeo();
+},
+data(){
+
+  return allLocation
 }
 })
 </script>

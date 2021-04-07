@@ -5,16 +5,16 @@
 
       <ion-item>
         <ion-label>Title
-        <ion-input 
-          placeholder="required" 
-          name="title"
-          required="true"
-          autofocus="true"
-          color="primary"
-          type="text"
-          spellcheck="true"
-          inputmode="text"
-          ></ion-input>
+            <ion-input 
+              placeholder="required" 
+              name="title"
+              required="true"
+              autofocus="true"
+              color="primary"
+              type="text"
+              spellcheck="true"
+              inputmode="text"
+              ></ion-input>
           </ion-label>
       </ion-item>
 
@@ -105,13 +105,14 @@ import {
   IonInput,
   IonLabel,
   IonItem,
+  IonRange,
   IonTextarea,
   IonCheckbox,
 
 } from '@ionic/vue';
 
 export default defineComponent({
-  components: { IonContent,  IonPage, IonInput,  IonLabel, IonItem,IonTextarea, IonCheckbox},
+  components: { IonContent,  IonPage, IonInput,  IonLabel, IonItem, IonRange, IonTextarea, IonCheckbox},
   data () {
     return {
       publicPath: process.env.BASE_URL

@@ -1,4 +1,4 @@
-import { createApp,defineAsyncComponent } from 'vue'
+import { createApp} from 'vue' //,defineAsyncComponent } from 'vue'
 import App from './App.vue'
 import router from './router';
 //import { config } from '../vue.config';
@@ -29,10 +29,10 @@ import './theme/variables.css';
 import './theme/site.css';
 
 /* start up */
-const AsyncComp = defineAsyncComponent(() =>
+/*const AsyncComp = defineAsyncComponent(() =>
    import('./views/components/spinner.vue')
   )
-  
+*/
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
@@ -41,13 +41,12 @@ const app = createApp(App)
         key: process.env.VUE_APP_MAPS_API_KEY,
     },
     })
-  
-//app.mount('#basic-event');
 
-app.component('async-component', AsyncComp); 
+//app.component('async-component', AsyncComp); 
 
-app.config.globalProperties.dbug = (process.env.VUE_APP_DEBUG ? Boolean(process.env.VUE_APP_DEBUG) : false);
+app.config.globalProperties.dbug = (process.env.VUE_APP_DEBUG && process.env.NODE_ENV !=="production" ? Boolean(process.env.VUE_APP_DEBUG) : false);
 app.config.globalProperties.stack = ['a','b','c'];
+app.config.globalProperties.thisLocation = {};
 
 // global error handler
 app.config.errorHandler = (err, vm, info) => {
