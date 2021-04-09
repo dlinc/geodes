@@ -47,6 +47,7 @@ const app = createApp(App)
 app.config.globalProperties.dbug = (process.env.VUE_APP_DEBUG && process.env.NODE_ENV !=="production" ? Boolean(process.env.VUE_APP_DEBUG) : false);
 app.config.globalProperties.stack = ['a','b','c'];
 app.config.globalProperties.thisLocation = {};
+app.config.globalProperties.assetsDirectory = process.env.BASE_URL+"assets/"
 
 // global error handler
 app.config.errorHandler = (err, vm, info) => {

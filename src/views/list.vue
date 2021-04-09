@@ -12,19 +12,13 @@
               >
               <ion-item-divider class="ion-padding">
                       <ion-thumbnail slot="start">
-                          <ion-img :src="ode.img"></ion-img>
+                          <ion-img :src="ode.userIcon"></ion-img>
                       </ion-thumbnail>
                 <ion-label class="ion-padding">{{ ode.title }}</ion-label>
                 <ion-label class="ion-padding">{{ ode.lDistance }}</ion-label>
               </ion-item-divider>   
             </ion-item> 
         </ion-list>
-        <ion-modal
-            :data="data"
-            :is-open="isOpenRef"
-            css-class="my-custom-class"
-            @onDidDismiss="setOpen(false)"
-          >This is a test here {{ data }}</ion-modal>
     </ion-content>
   </ion-page>
 </template>
@@ -43,9 +37,11 @@ import {
   IonItemDivider,
   IonThumbnail,
   IonImg,
-  IonModal,
   modalController
 } from '@ionic/vue';
+
+// eslint-disable-next-line no-unused-vars
+const defaultGeodeImage = "/assets/master1.jpg";
 
 export default defineComponent({
   components: { 
@@ -57,9 +53,9 @@ export default defineComponent({
     IonListHeader,
     IonItemDivider,
     IonThumbnail,
-    IonImg,
-    IonModal
+    IonImg
     },
+//  inject:['assetsDirectory'],
   setup() {
     const isOpenRef = ref(false);
     const setOpen = (state) => isOpenRef.value = state;
@@ -68,18 +64,18 @@ export default defineComponent({
   },
   data () {
     let odes=Odes.getOdes().stack
-    console.log("roll LIST view ",odes)
+    
+    console.log("roll LIST view ",odes, defaultGeodeImage)
     return {
       odes, 
-      hitCount:odes.length,
-      modalOpen: false
+      hitCount:odes.length
     }
   },
   methods: {
       clickView: function (ode) {
         //this.setOpen(true)
         this.openModal(ode)
-        console.log("clicked test ",ode.title)
+        console.log("clicked test ",ode.title,defaultGeodeImage)
       },
       async openModal(ode) {
         const modal = await modalController
@@ -87,7 +83,14 @@ export default defineComponent({
             component: ShowCard,
             cssClass: 'my-custom-class',
             componentProps: {
-              title: ode.title
+              title: ode.title,
+              body: ode.stroke,
+              proximity: ode.lDistance,
+              timestamp: ode.dt,
+              byline: ode.byline,
+              icon: ode.userIcon,
+              image: (ode.image ? ode.image : null),
+              hasImage: (ode.image ? true : false)
             },
           })
         return modal.present();

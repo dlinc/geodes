@@ -24,6 +24,7 @@ let odes = {
     stack: [],
     timings: { init: utils.getTimeStamp() },
     iconDefault: process.env.BASE_URL+'assets/icon/user-default.jpg',
+    imageDefault: process.env.BASE_URL+'assets/master1.jpg',
     status: 'init',
 }
 
@@ -31,7 +32,8 @@ function normalizeOde(list){
     let user = User.getUser()
     let num = null
     list = list.map( (s) => {
-        s.img=user.icon // odes.iconDefault
+        s.userIcon=user.icon // odes.iconDefault
+        if (s.sid=="543") { s.image = odes.imageDefault;} // delete this line pre-prod! a test case!
         num = Number(s.distance)
         if (num > 999) {
               s.lDistance= (num/1000).toFixed(1) + " km"
