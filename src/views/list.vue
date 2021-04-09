@@ -41,7 +41,7 @@ import {
 } from '@ionic/vue';
 
 // eslint-disable-next-line no-unused-vars
-const defaultGeodeImage = "/assets/master1.jpg";
+//const defaultGeodeImage = "/assets/master1.jpg";
 
 export default defineComponent({
   components: { 
@@ -65,23 +65,24 @@ export default defineComponent({
   data () {
     let odes=Odes.getOdes().stack
     
-    console.log("roll LIST view ",odes, defaultGeodeImage)
+    console.log("roll LIST view ",odes); //, defaultGeodeImage)
     return {
       odes, 
       hitCount:odes.length
     }
   },
   methods: {
-      clickView: function (ode) {
+      clickView(ode) {
         //this.setOpen(true)
         this.openModal(ode)
-        console.log("clicked test ",ode.title,defaultGeodeImage)
+        console.log("clicked test ",ode.title); //,defaultGeodeImage)
       },
       async openModal(ode) {
         const modal = await modalController
           .create({
             component: ShowCard,
             cssClass: 'my-custom-class',
+            swipeToClose: true,
             componentProps: {
               title: ode.title,
               body: ode.stroke,
@@ -93,7 +94,7 @@ export default defineComponent({
               hasImage: (ode.image ? true : false)
             },
           })
-        return modal.present();
+        return modal.present(modal);
     },
   },
   beforeMount(){

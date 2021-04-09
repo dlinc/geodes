@@ -2,14 +2,15 @@
  <ion-page>
     <ion-header>
         <ion-toolbar>
-        <ion-title>Geode</ion-title>
+        <ion-title class="ion-float-left ion-padding">Geode</ion-title>
+        <ion-icon :src="`${iconClose}`" size="large" class="ion-float-right ion-padding" @click.stop="closeModal()" ></ion-icon>
         </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
+    <ion-content>
         <ion-card>
                 <ion-card-header>
                     <ion-img :src="`${image}`" v-if = hasImage></ion-img>
-                    <ion-icon name="water-outline"></ion-icon>
+                    <ion-icon ></ion-icon>
                     <ion-card-subtitle>{{ proximity }} on {{ timestamp }}</ion-card-subtitle>
                     <ion-card-title>{{ title }}</ion-card-title>
                 </ion-card-header>
@@ -21,7 +22,7 @@
 </ion-page>
 </template>
 <script>
-import { IonContent, IonImg, IonIcon, IonHeader, IonTitle, IonToolbar, IonPage,IonCard, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader } from '@ionic/vue';
+import { IonContent, IonImg, IonIcon, IonHeader, IonTitle, IonToolbar, IonPage,IonCard, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader,modalController } from '@ionic/vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -38,9 +39,22 @@ export default defineComponent({
     hasImage: { type: Boolean, default: false },
   },
   data(data) {
+      console.log("running modal wi data ",data)
     return {
-      content: data.content,
+        data
     }
+  },
+  setup(){
+      const iconClose = '/assets/'+'icon/icon-close-outline.svg';
+      console.log("running modal ", iconClose)
+      return { iconClose }
+  },
+  methods: {
+
+      async closeModal(){
+          console.log("Close modal", this)
+          await modalController.dismiss();
+      }
   }
 });
 </script>
