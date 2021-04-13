@@ -43,7 +43,10 @@ function normalizeOde(list){
         } else {
               s.lDistance= null
           }
-        
+        s.position = {
+            lat: Number(s.lat),
+            lng: Number(s.lon)
+        }
         return s
     })
     return list

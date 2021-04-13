@@ -3,7 +3,7 @@
 A multi-user Geo located blogging app for accessing, listing, editing, adding, and traveling in the geosphere, otherwise known as the psychogeography.
 
 
-V 0.0.1 - The first test version. Non functional, only for R & A uses.
+V 0.0.1 - The first test version. Non functional, only for R & D uses.
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ V 0.0.1 - The first test version. Non functional, only for R & A uses.
 #### Database
 
 ### setup ENV files
-- add your Google 
+- add your Google API key ```VUE_APP_MAPS_API_KEY```
 ### run
 
 start developing at the project root - 

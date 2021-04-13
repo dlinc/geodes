@@ -8,12 +8,12 @@ import odes from "./odeFactory"
 
 //const logger = Logger("services:onecount")
 
-
 let geo = {
     browser: { localStorage: false },
     options: {
         center: { lat: 0, lng: 0 },
         zoom: 16,
+        mapTypeId: "satellite",
         zone: {
             strokeColor: "#FF0000",
             strokeOpacity: 0.8,
@@ -22,7 +22,7 @@ let geo = {
             fillOpacity: 0.35,
             },
         },
-    here: null,
+    here: {},
     timings: { init: utils.getTimeStamp() },
     markers: {
         center: "./iconHere.jpg",

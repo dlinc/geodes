@@ -13,6 +13,6 @@ export default {
 
 getTimeStamp() {
     return new Date().getTime();
-},
+}
 
 } // end
