@@ -39,20 +39,20 @@ export default defineComponent({
     hasImage: { type: Boolean, default: false },
   },
   data(data) {
-      console.log("running modal wi data ",data)
+    //if (this.dbug) { console.log("running modal wi data ",data) }
     return {
         data
     }
   },
   setup(){
       const iconClose = '/assets/'+'icon/icon-close-outline.svg';
-      console.log("running modal ", iconClose)
+      //if (this.dbug) { console.log("running modal ", iconClose) }
       return { iconClose }
   },
   methods: {
 
       async closeModal(){
-          console.log("Close modal", this)
+          //if (this.dbug) { console.log("Close modal", this) }
           await modalController.dismiss();
       }
   }

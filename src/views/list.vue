@@ -24,8 +24,7 @@
 </template>
 <script>
 import { defineComponent, ref} from 'vue';
-import Odes from "../factories/odeFactory"
-import ShowCard from "./components/showCard"
+import Odes from "../factories/odeFactory";
 
 import {
   IonContent,
@@ -36,12 +35,9 @@ import {
   IonListHeader,
   IonItemDivider,
   IonThumbnail,
-  IonImg,
-  modalController
+  IonImg
 } from '@ionic/vue';
 
-// eslint-disable-next-line no-unused-vars
-//const defaultGeodeImage = "/assets/master1.jpg";
 
 export default defineComponent({
   components: { 
@@ -55,7 +51,7 @@ export default defineComponent({
     IonThumbnail,
     IonImg
     },
-//  inject:['assetsDirectory'],
+
   setup() {
     const isOpenRef = ref(false);
     const setOpen = (state) => isOpenRef.value = state;
@@ -65,51 +61,34 @@ export default defineComponent({
   data () {
     let odes=Odes.getOdes().stack
     
-    console.log("roll LIST view ",odes); //, defaultGeodeImage)
+    if (this.dbug) { console.log("roll LIST view ",odes); }
     return {
       odes, 
       hitCount:odes.length
     }
   },
   methods: {
+
       clickView(ode) {
         //this.setOpen(true)
-        this.openModal(ode)
-        console.log("clicked test ",ode.title); //,defaultGeodeImage)
+        if (this.dbug) { console.log("Show - ",ode.title); } 
+        Odes.odeModal(ode)
       },
-      async openModal(ode) {
-        const modal = await modalController
-          .create({
-            component: ShowCard,
-            cssClass: 'my-custom-class',
-            swipeToClose: true,
-            componentProps: {
-              title: ode.title,
-              body: ode.stroke,
-              proximity: ode.lDistance,
-              timestamp: ode.dt,
-              byline: ode.byline,
-              icon: ode.userIcon,
-              image: (ode.image ? ode.image : null),
-              hasImage: (ode.image ? true : false)
-            },
-          })
-        return modal.present(modal);
-    },
   },
+
   beforeMount(){
-   console.log("LIST before mount",this.odes)
+   if (this.dbug) {console.log("LIST before mount",this.odes) }
   },
+
   beforeUpdate(){
-    //this.odes==Odes.getOdes().stack
-    console.log("LIST before update",this.odes)
+    if (this.dbug) { console.log("LIST before update",this.odes) }
     return this.odes
   },
+
   updated () {
-    console.log("LIST updated event",this.odes)
-    //this.loading.dismiss()
+    if (this.dbug) { console.log("LIST updated event",this.odes) }
   }
-  //, Loaders }
+
 });
 
 </script>

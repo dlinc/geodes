@@ -3,11 +3,15 @@
 /* eslint-disable camelcase */
 require('fetch-jsonp')
 import utils from "./utilsFactory"
-//import geo from "./geoFactory"
 import fetchJsonp from "fetch-jsonp"
 import User from "./userFactory"
+import { modalController } from '@ionic/vue';
+import ShowCard from "../views/components/showCard";
 
-console.log("Mounting Odes Factory")
+// eslint-disable-next-line no-unused-vars
+const dbug = process.env.VUE_APP_DEBUG || false;
+
+if (dbug) { console.log("Mounting Odes Factory", this) }
 
 const url = { 
     base:'https://www.scripter.net/stroke/',
@@ -71,23 +75,21 @@ function getOdes(here) {
         odes.here = here
         let substr = '?location_lat='+here.latitude+'&location_lon='+here.longitude+'&location_accuracy='+here.accuracy
         const callUrl=url.base+url.scan+substr;
-        console.log("url+substr:"+callUrl,here);
+        if (dbug) { console.log("url+substr:"+callUrl,here); }
         fetchJsonp(callUrl)
         .then(function(response) {
             if (response.ok){ // if HTTP-status is 200-299
-                // return response.json()  
-                console.log("first then - ok", response)  
+ 
+                if (dbug) { console.log("first then - ok", response)  }
              } else{
                  alert("ERROR: Server returned unexpected codes - " + response);
              }  
             return response.json()
         }).then(function(json) {
-            console.log("2nd then", json)
-            //
-            //this.result = response.body; 
-            //this.responseAvailable = true;
+            if (dbug) { console.log("2nd then", json) }
+
             odes.stack=normalizeOde(json.items);
-            // add temp/work defaults
+
         }).catch(function(err) {
             console.log("response ERROR2 ************ ")
             console.log("Error in Feed!", err);
@@ -97,7 +99,7 @@ function getOdes(here) {
 
 async function initOdes(here) {
    
-    console.log("INIT Odes Factory -", odes)
+    if (dbug) { console.log("INIT Odes Factory -", odes) }
 
     // check conditions
     //if (!geo.here.latitude || !geo.here.longitude) { alert("Indistinct Location. Please retrieve Location ..."); return false;}
@@ -129,5 +131,26 @@ export default {
         //console.log("ODES STACK IN FACtORY -", odes)
         return odes;
     },
+    
+    async odeModal(ode) {
+        if (dbug) { console.log("Opening - ",ode.title); } 
+        const modal = await modalController
+            .create({
+            component: ShowCard,
+            cssClass: 'my-custom-class',
+            swipeToClose: true,
+            componentProps: {
+                title: ode.title,
+                body: ode.stroke,
+                proximity: ode.lDistance,
+                timestamp: ode.dt,
+                byline: ode.byline,
+                icon: ode.userIcon,
+                image: (ode.image ? ode.image : null),
+                hasImage: (ode.image ? true : false)
+            },
+            })
+        return modal.present(modal);
+    }
 
 } // end

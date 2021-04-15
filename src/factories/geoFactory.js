@@ -47,30 +47,6 @@ let geo = {
 // @ts-ignore
 //this.mapIds = mapIds;
 
-/*
-
-function getDT (tm){ // date wi milliseconds
-    var dt = new Date();
-    if (tm) { dt = dt +" "+dt.getMilliseconds()+" ms"; }
-    return dt; 
-}
-
-function getFDT() { // dt formatted for mysql
-     var nowdt = new Date();
-     var fdt = nowdt.getFullYear() + "-" + ((nowdt.getMonth()+1)<=9 ? '0' : '')+(nowdt.getMonth()+1) + "-" + ((nowdt.getDate())<=9 ? '0' : '')+nowdt.getDate() + " " +  ((nowdt.getHours())<=9 ? '0' : '')+nowdt.getHours() + ":" + ((nowdt.getMinutes())<=9 ? '0' : '')+ nowdt.getMinutes() + ":" + ((nowdt.getSeconds())<=9 ? '0' : '') + nowdt.getSeconds();
-     console.log("getDT="+fdt);
-     return fdt;
-}
-
-function nVal (v){ // normalize numeric, and string values
-    //do nothing to the string if it starts with a numeric character
-    if (parseFloat(v)==v) {
-        v=(isNaN(parseFloat(v)) ? v : parseFloat(v));
-    }
-    return v;
-}
-*/
-
 
 function backupGeo(timestamp){
  if (geo.browser.localStorage === true) { 

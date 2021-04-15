@@ -48,7 +48,6 @@ import { defineComponent } from 'vue';
 import Geo from "../factories/geoFactory";
 import Odes from "../factories/odeFactory";
 
-
 export default defineComponent({
   name: 'Map',
   components: {
@@ -58,7 +57,9 @@ export default defineComponent({
   data() {
    let geo =  Geo.getGeo()
    let odes = Odes.getOdes()
-   console.log("Data MAP run", geo)
+
+   if (this.dbug) { console.log("Data MAP run", geo) }
+
    let home = [
     {
       position: {
@@ -82,10 +83,12 @@ export default defineComponent({
  },
   methods: {
     showLocation(pos){
-      console.log("Show location ",pos)
+      if (this.dbug) { console.log("Show location ",pos) }
     },
+    
     showOde(ode){
-      console.log("Show ode ",ode)
+      if (this.dbug) { console.log("Show ode ",ode) }
+      Odes.odeModal(ode);
     }
   }
 });

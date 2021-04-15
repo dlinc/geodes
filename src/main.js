@@ -1,7 +1,6 @@
-import { createApp} from 'vue' //,defineAsyncComponent } from 'vue'
+import { createApp} from 'vue'
 import App from './App.vue'
 import router from './router';
-//import { config } from '../vue.config';
 
 import { IonicVue } from '@ionic/vue';
 import VueGoogleMaps from '@fawmi/vue-google-maps'
@@ -29,10 +28,7 @@ import './theme/variables.css';
 import './theme/site.css';
 
 /* start up */
-/*const AsyncComp = defineAsyncComponent(() =>
-   import('./views/components/spinner.vue')
-  )
-*/
+
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
@@ -41,8 +37,6 @@ const app = createApp(App)
         key: process.env.VUE_APP_MAPS_API_KEY,
     },
     })
-
-//app.component('async-component', AsyncComp); 
 
 app.config.globalProperties.dbug = (process.env.VUE_APP_DEBUG && process.env.NODE_ENV !=="production" ? Boolean(process.env.VUE_APP_DEBUG) : false);
 app.config.globalProperties.assetsDirectory = process.env.BASE_URL+"assets/"
@@ -60,7 +54,5 @@ if (app.config.globalProperties.dbug===true){
 }
 
 router.isReady().then(() => {
-  //console.log("All vars =",process.env)
-  //console.log("All options =", publicPath, outputDir)
   app.mount('#app');
 });
