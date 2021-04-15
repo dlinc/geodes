@@ -13,21 +13,21 @@
         <GMapCluster :zoomOnClick="true">
           <GMapMarker
             :key="index"
-            v-for="(m, index) in markers"
-              :position="m.position"
+            v-for="(ode, index) in markers"
+              :position="ode.position"
               :draggable="false"
               :icon="`${publicPath}assets/icon/iconThere.png`"
               :clickable="true"
-              @click="add(m)" 
+              @click="showOde(ode)" 
             ></GMapMarker>
           <GMapMarker
-            :key="marker.id"
+            :key="loc.id"
             :clickable="true"
-            @click="add(marker)"
+            @click="showLocation(loc.here)"
             :draggable="true"
             :icon="`${publicPath}assets/icon/iconHere.png`"
-            v-for="marker in home"
-              :position="marker.position"
+            v-for="loc in home"
+              :position="loc.position"
             > 
             <GMapCircle
                   :center="geo.options.center"
@@ -48,7 +48,7 @@ import { defineComponent } from 'vue';
 import Geo from "../factories/geoFactory";
 import Odes from "../factories/odeFactory";
 
-let done = false;
+
 export default defineComponent({
   name: 'Map',
   components: {
@@ -56,20 +56,17 @@ export default defineComponent({
     IonPage
   },
   data() {
-    // eslint-disable-next-line no-undef
-   if (done===true){
-     //return {}
-   }
-   done = true;
    let geo =  Geo.getGeo()
    let odes = Odes.getOdes()
-   console.log("SETUP MAP run", geo)
+   console.log("Data MAP run", geo)
    let home = [
     {
       position: {
         lat:geo.here.latitude,
-        lng: geo.here.longitude
+        lng: geo.here.longitude,
+        id:0
       },
+      here:geo.here
     }
   ]
    let markers = odes.stack.map( (p) => {
@@ -84,15 +81,12 @@ export default defineComponent({
     return {geo, markers, home, publicPath: process.env.BASE_URL};
  },
   methods: {
-    add(o){
-      console.log("method ADD ",o)
+    showLocation(pos){
+      console.log("Show location ",pos)
+    },
+    showOde(ode){
+      console.log("Show ode ",ode)
     }
-  },
-  beforeRouteEnter () {
-     console.log("MAPS: beforeRouteEnter ")
-  }, 
-  updated () {
-    console.log("MAP rendered event")
   }
 });
 </script>
