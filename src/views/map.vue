@@ -10,6 +10,7 @@
           style="width: 100%; height: 100%"
           setTilt="75"
         >
+        <GMapCluster :zoomOnClick="true">
           <GMapMarker
             :key="index"
             v-for="(m, index) in markers"
@@ -17,12 +18,12 @@
               :draggable="false"
               :icon="`${publicPath}assets/icon/iconThere.png`"
               :clickable="true"
-              @click="add($event)" 
+              @click="add(m)" 
             ></GMapMarker>
           <GMapMarker
             :key="marker.id"
             :clickable="true"
-            @click="add($event)"
+            @click="add(marker)"
             :draggable="true"
             :icon="`${publicPath}assets/icon/iconHere.png`"
             v-for="marker in home"
@@ -34,6 +35,7 @@
                   :options="geo.options.zone"
               />
           </GMapMarker>
+          </GMapCluster>
       </GMapMap>
 
     </ion-content>
@@ -46,6 +48,7 @@ import { defineComponent } from 'vue';
 import Geo from "../factories/geoFactory";
 import Odes from "../factories/odeFactory";
 
+let done = false;
 export default defineComponent({
   name: 'Map',
   components: {
@@ -53,6 +56,11 @@ export default defineComponent({
     IonPage
   },
   data() {
+    // eslint-disable-next-line no-undef
+   if (done===true){
+     //return {}
+   }
+   done = true;
    let geo =  Geo.getGeo()
    let odes = Odes.getOdes()
    console.log("SETUP MAP run", geo)
@@ -67,17 +75,17 @@ export default defineComponent({
    let markers = odes.stack.map( (p) => {
      p.position = {
       lat: Number(p.lat),
-      lng: Number(p.lon)
+      lng: Number(p.lon),
+      id: p.sid
      }
      return p
    })
-    let counter = 0
-    return {geo, markers, home, publicPath: process.env.BASE_URL,counter};
+    
+    return {geo, markers, home, publicPath: process.env.BASE_URL};
  },
   methods: {
-    add(e){
-      console.log("method ADD ", this.counter, e)
-      this.counter += 1 
+    add(o){
+      console.log("method ADD ",o)
     }
   },
   beforeRouteEnter () {

@@ -31,7 +31,21 @@ let geo = {
     status: "init"
 }
 // eslint-disable-next-line no-unused-vars
-let map;
+//let map;
+// eslint-disable-next-line no-unused-vars
+//let callbacks = [];
+// eslint-disable-next-line no-unused-vars
+//let CALLBACK = "__googleMapsCallback";
+//version = version;
+//this.apiKey = apiKey;
+//this.libraries = libraries;
+// @ts-ignore
+////this.language = language;
+// @ts-ignore
+//this.region = region;
+//this.URL = 'https://maps.googleapis.com/maps/api/js';
+// @ts-ignore
+//this.mapIds = mapIds;
 
 /*
 
@@ -148,34 +162,81 @@ function onLocateFailed(position) {
     console.log("Geoloation fail final Geo -", geo, position)
 }
 
+/* map load functions */
+/*//
+// eslint-disable-next-line no-unused-vars
+function loadPromise() {
+    return new Promise((resolve, reject) => {
+        loadCallback((err) => {
+            if (!err) {
+                resolve();
+            } else {
+                reject(err);
+            }
+        });
+    });
+}
+// eslint-disable-next-line no-unused-vars
+function loadCallback(fn) {
+    callbacks.push(fn);
+    executeGeoInit();
+}
+/*
+setScript() {
+    const url = this.createUrl();
+    const script = document.createElement("script");
 
-/* function plotPoint (point){
- 
-    // setup map and pos based on point.coordinates
-      session.env.here.latitude = point.item.lat;
-      session.env.here.latitude1 = point.item.lat;
-      session.env.here.longitude = point.item.lon;
-      session.env.here.longitude1 = point.item.lon;
-      //session.env.here.altitude=point.item.lon;
-      session.env.here.accuracy=(point.item.accuracy> 0 ? point.item.accuracy : null);
-      initLocationReferences();
+    script.type = "text/javascript";
+    script.src = url;
+    // @ts-ignore
+    script.onerror = this.loadErrorCallback.bind(this);
+    script.defer = true;
+    script.async = true;
+    document.head.appendChild(script);
+}
+*//*
+// eslint-disable-next-line no-unused-vars
+function loadErrorCallback(e) {
+    this.onerrorEvent = e;
+    callback();
+}
+// eslint-disable-next-line no-unused-vars
+function setCallback() {
+    window.__googleMapsCallback = callback.bind(this);
+}
+// eslint-disable-next-line no-unused-vars
+function callback() {
+    // eslint-disable-next-line no-undef
+    done = true;
+    // eslint-disable-next-line no-undef
+    loading = false;
 
-       // refresh POIs
-      place.deleteMarkers(); 							
-      place.initMap();			           
-      strokes.getStrokes(); 
-      scripter.setMode("map");
+    callbacks.forEach(cb => {
+        cb(this.onerrorEvent);
+    });
 
-      // show shared point on top
-     setTimeout(function () { 
-          var sstack = strokes.showStack();    
-          console.log("Stack is ",sstack);
-          strokes.prepStroke(0); //always the first in the stack?
-         }, 1000); // set small delay to permit map init to happen before placing markers
+    callbacks = [];
+}
+// eslint-disable-next-line no-unused-vars
+function executeGeoInit() {
+    console.log("Execute GeoInit -", global)
+    // eslint-disable-next-line no-undef
+    if (done) {
+        callback();
+    } else {
+        // eslint-disable-next-line no-undef
+        if (loading) {
+            // do nothing but wait
+        } else {
+            // eslint-disable-next-line no-undef
+            loading = true;
+            setCallback();
+            //this.setScript();
+        }
+    }
+}
 
-    }*/
-
-
+*/
 
 initGeo()
 
@@ -194,10 +255,51 @@ export default {
       //  <ion-icon ios="ios-flash" md="md-flash"></ion-icon>
     },
 
-    initMap() {
+    initMap1(mapDiv) {
 
-        console.log("running Initmap...");
+            console.log("running Initmap...");
 
+            // The location of Uluru
+            //const uluru = { lat: -25.344, lng: 131.036 };
+            // The map, centered at Uluru
+            //const map = new google.maps.Map(document.getElementById("mapDiv"), geo.options);
+
+           //const mapDiv = document.getElementById("mapDiv");
+           // eslint-disable-next-line no-undef
+           const map = new google.maps.Map(mapDiv.value, geo.options);
+            // The marker, positioned at Uluru
+           // const marker = new google.maps.Marker({
+           //   position: uluru,
+            //  map: map,
+           // });
+           return map;
+          },
+
+    initMap2(mapDiv) {
+
+            console.log("running Initmap.. temp MapDiv ", mapDiv);
+
+            // The location of Uluru
+            //const uluru = { lat: -25.344, lng: 131.036 };
+            // The map, centered at Uluru
+            //const map = new google.maps.Map(document.getElementById("mapDiv"), geo.options);
+
+           //const mapDiv = document.getElementById("mapDiv");
+           // eslint-disable-next-line no-undef
+           const map = "who is afraid of virginia wollf?"
+           //new google.maps.Map(mapDiv.value, geo.options);
+            // The marker, positioned at Uluru
+           // const marker = new google.maps.Marker({
+           //   position: uluru,
+            //  map: map,
+           // });
+           return map;
+          },
+
+          // eslint-disable-next-line no-unused-vars
+       // loadMap() {
+       //     return loadPromise();
+       // }
 
        // map = new google.maps.Map(document.getElementById("map"), geo.);
 
@@ -218,6 +320,6 @@ export default {
         //xplace.addMarker(session.env.here.latitude, session.env.here.longitude, "Here You Are", hereicon, -1);
         
         //google.maps.event.trigger(map, 'resize');
-    },
+   // }
 
 } // end
