@@ -41,16 +41,17 @@ export default defineComponent({
     image: { type: String, default: null },
     hasImage: { type: Boolean, default: false },
   },
-  
-  data(data) {
-    //if (this.dbug) { console.log("running modal wi data ",data) }
+
+  /*data(data) {
+    const baseUrl = process.env.BASE_URL;
+    if (this.dbug) { console.log("DATA location modal wi data ",data, baseUrl, global) }
     return {
         data
     }
-  },
+  },*/
   setup(){
-      const iconClose = '/assets/'+'icon/icon-close-outline.svg';
-      //if (this.dbug) { console.log("running modal ", iconClose) }
+      const iconClose = process.env.BASE_URL +'assets/icon/icon-close-outline.svg';
+      if (process.env.dbug) { console.log("SETUP modal ", iconClose) }
       return { iconClose }
   },
   methods: {

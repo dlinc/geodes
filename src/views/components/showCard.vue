@@ -38,14 +38,14 @@ export default defineComponent({
     image: { type: String, default: null },
     hasImage: { type: Boolean, default: false },
   },
-  data(data) {
+  //data(data) {
     //if (this.dbug) { console.log("running modal wi data ",data) }
-    return {
-        data
-    }
-  },
+   // return {
+    //    data
+    //}
+  //},
   setup(){
-      const iconClose = '/assets/'+'icon/icon-close-outline.svg';
+      const iconClose = process.env.BASE_URL +'assets/'+'icon/icon-close-outline.svg';
       //if (this.dbug) { console.log("running modal ", iconClose) }
       return { iconClose }
   },
