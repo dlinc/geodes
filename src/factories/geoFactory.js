@@ -5,8 +5,11 @@
 
 import utils from "./utilsFactory"
 import odes from "./odeFactory"
+import { modalController } from '@ionic/vue';
+import ShowLocation from "../views/components/showLocation";
 
-//const logger = Logger("services:onecount")
+// eslint-disable-next-line no-unused-vars
+const dbug = process.env.VUE_APP_DEBUG || false;
 
 let geo = {
     browser: { localStorage: false },
@@ -28,25 +31,9 @@ let geo = {
         center: "./iconHere.jpg",
         anybody: "./person.jpg"
     },
-    status: "init"
+    status: "init",
+    modal: { open: false }
 }
-// eslint-disable-next-line no-unused-vars
-//let map;
-// eslint-disable-next-line no-unused-vars
-//let callbacks = [];
-// eslint-disable-next-line no-unused-vars
-//let CALLBACK = "__googleMapsCallback";
-//version = version;
-//this.apiKey = apiKey;
-//this.libraries = libraries;
-// @ts-ignore
-////this.language = language;
-// @ts-ignore
-//this.region = region;
-//this.URL = 'https://maps.googleapis.com/maps/api/js';
-// @ts-ignore
-//this.mapIds = mapIds;
-
 
 function backupGeo(timestamp){
  if (geo.browser.localStorage === true) { 
@@ -58,7 +45,7 @@ function backupGeo(timestamp){
 
 function restoreGeo(){
     if (geo.browser.localStorage) {
-        console.log("resetpre Geo is ",localStorage.here)
+        if (dbug) { console.log("resetpre Geo is ",localStorage.here) }
         geo.here = JSON.parse(localStorage.getItem("here"));
         //geo.here = JSON.parse(JSON.stringify(localStorage.here))
         geo.timings.located = JSON.parse(localStorage.getItem("geoTimestamp"))
@@ -77,7 +64,8 @@ function initGeo() {
 
     // show map and get location
     //place.viewMap();
-    console.log("INIT Geo Factory")
+    if (dbug) { console.log("Init Geo Factory", this) }
+
 
     geo.browser.userAgent = navigator.userAgent;
     if (typeof(Storage)!=="undefined") {
@@ -93,10 +81,9 @@ function initGeo() {
 
 
 function onLocateSuccess(position) {
-    //alert("success!");
+
     // set coordinate values
-    console.log("onLocationSuccess -", position)
-    //geo.here =  JSON.parse(position.coords);
+    if (dbug) { console.log("onLocationSuccess -", position) }
     geo.here =  position.coords;
     geo.timings.located=position.timestamp;
 
@@ -109,7 +96,7 @@ function onLocateSuccess(position) {
     geo.here.longitude0=geo.here.longitude;
     geo.status = "found"
 
-    console.log('locate success. Final Geo -', geo);
+    if (dbug) {  console.log('locate success. Final Geo -', geo); }
 
     // init hits
     //initLocationReferences();
@@ -138,164 +125,56 @@ function onLocateFailed(position) {
     console.log("Geoloation fail final Geo -", geo, position)
 }
 
-/* map load functions */
-/*//
-// eslint-disable-next-line no-unused-vars
-function loadPromise() {
-    return new Promise((resolve, reject) => {
-        loadCallback((err) => {
-            if (!err) {
-                resolve();
-            } else {
-                reject(err);
-            }
-        });
-    });
-}
-// eslint-disable-next-line no-unused-vars
-function loadCallback(fn) {
-    callbacks.push(fn);
-    executeGeoInit();
-}
-/*
-setScript() {
-    const url = this.createUrl();
-    const script = document.createElement("script");
-
-    script.type = "text/javascript";
-    script.src = url;
-    // @ts-ignore
-    script.onerror = this.loadErrorCallback.bind(this);
-    script.defer = true;
-    script.async = true;
-    document.head.appendChild(script);
-}
-*//*
-// eslint-disable-next-line no-unused-vars
-function loadErrorCallback(e) {
-    this.onerrorEvent = e;
-    callback();
-}
-// eslint-disable-next-line no-unused-vars
-function setCallback() {
-    window.__googleMapsCallback = callback.bind(this);
-}
-// eslint-disable-next-line no-unused-vars
-function callback() {
-    // eslint-disable-next-line no-undef
-    done = true;
-    // eslint-disable-next-line no-undef
-    loading = false;
-
-    callbacks.forEach(cb => {
-        cb(this.onerrorEvent);
-    });
-
-    callbacks = [];
-}
-// eslint-disable-next-line no-unused-vars
-function executeGeoInit() {
-    console.log("Execute GeoInit -", global)
-    // eslint-disable-next-line no-undef
-    if (done) {
-        callback();
-    } else {
-        // eslint-disable-next-line no-undef
-        if (loading) {
-            // do nothing but wait
-        } else {
-            // eslint-disable-next-line no-undef
-            loading = true;
-            setCallback();
-            //this.setScript();
-        }
-    }
+function normalizeSetting(it) {
+    if (it === null) { return ' -  n/a -'}
+    return ""+it // force convert to string
 }
 
-*/
+function normalizeUTCToLocal(ts) {
+    const local = new Date(ts)
+    return local
+}
 
 initGeo()
 
 export default {
 
-    helloGeo (invara) {
-        console.log("Hello Geo", invara)
-        return "Geo says hi!"
-    },
-
     getGeo(){
         return geo;
     },
 
-    setHomeMarker(){
+    XsetHomeMarker(){
       //  <ion-icon ios="ios-flash" md="md-flash"></ion-icon>
     },
 
-    initMap1(mapDiv) {
 
-            console.log("running Initmap...");
+    async locationModal() {
+        if (dbug) {  console.log("Opening location Modal" ) }
+        //if (geo.modal.open === true) { return }
+        //this.toggleModal() 
+        const ts = normalizeUTCToLocal(geo.timings.located)
+        const modal = await modalController
+            .create({
+            component: ShowLocation,
+            cssClass: 'my-custom-class',
+            swipeToClose: true,
+            componentProps: {
+                latitude: normalizeSetting(geo.here.latitude),
+                longitude: normalizeSetting(geo.here.longitude),
+                timestamp: normalizeSetting(ts),
+                accuracy: normalizeSetting(geo.here.accuracy),
+                altitude: normalizeSetting(geo.here.altitude),
+                heading: normalizeSetting(geo.here.heading),
+                speed: normalizeSetting(geo.here.speed),
+                hasImage:  false 
+            },
+            })
+        return modal.present(modal);
+    },
 
-            // The location of Uluru
-            //const uluru = { lat: -25.344, lng: 131.036 };
-            // The map, centered at Uluru
-            //const map = new google.maps.Map(document.getElementById("mapDiv"), geo.options);
-
-           //const mapDiv = document.getElementById("mapDiv");
-           // eslint-disable-next-line no-undef
-           const map = new google.maps.Map(mapDiv.value, geo.options);
-            // The marker, positioned at Uluru
-           // const marker = new google.maps.Marker({
-           //   position: uluru,
-            //  map: map,
-           // });
-           return map;
-          },
-
-    initMap2(mapDiv) {
-
-            console.log("running Initmap.. temp MapDiv ", mapDiv);
-
-            // The location of Uluru
-            //const uluru = { lat: -25.344, lng: 131.036 };
-            // The map, centered at Uluru
-            //const map = new google.maps.Map(document.getElementById("mapDiv"), geo.options);
-
-           //const mapDiv = document.getElementById("mapDiv");
-           // eslint-disable-next-line no-undef
-           const map = "who is afraid of virginia wollf?"
-           //new google.maps.Map(mapDiv.value, geo.options);
-            // The marker, positioned at Uluru
-           // const marker = new google.maps.Marker({
-           //   position: uluru,
-            //  map: map,
-           // });
-           return map;
-          },
-
-          // eslint-disable-next-line no-unused-vars
-       // loadMap() {
-       //     return loadPromise();
-       // }
-
-       // map = new google.maps.Map(document.getElementById("map"), geo.);
-
-        // draw map object and set center
-        /* eslint-disable no-undef */
-       
-       // let cpoint=new google.maps.LatLng(where.here.latitude,where.here.longitude);
-       //if (google!==null){
-        // eslint-disable-next-line no-unused-vars
-           // map = new google.maps.Map(document.getElementById("mapDiv"),geo.options);
-       // } else {
-        //    console.log("Google is not yet defined! Try again...")
-       // }
-        //map.setCenter(cpoint) 
-        // add self marker
-        //let hereicon=geo.markers.center;
-
-        //xplace.addMarker(session.env.here.latitude, session.env.here.longitude, "Here You Are", hereicon, -1);
-        
-        //google.maps.event.trigger(map, 'resize');
-   // }
+    XtoggleModal(){ // combat double fires
+        geo.modal.open = !geo.modal.open;
+        return
+    }
 
 } // end
