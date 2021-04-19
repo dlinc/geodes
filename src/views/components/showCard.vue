@@ -16,12 +16,17 @@
                     <ion-card-title>{{ title }}</ion-card-title>
                 </ion-card-header>
             <ion-card-content>
+                    <div v-if = hasVideo> {{ video }}
+                        <video controls xautoplay crossorigin = "use-credentials" width="100%" autoPictureInPicture>
+                            <source :src="`${video}`">
+                               This browser does not support inline video. Try the original link <a href=" {{video}} " target=_blank >{{ video}} </a>.
+                            </video></div>
                     <pre v-if = hasBody>{{ body }}</pre>
                     <div v-if = hasAudio>
                         <audio controls autoplay loop>
-                        <source :src="`${audio}`" type='audio/mp3'>
-                            Please upgrade your browser &mdash; this one does not support audio.
-                        </audio></div>
+                            <source :src="`${audio}`" type='audio/mp3'>
+                                Please upgrade your browser &mdash; this one does not support inline audio.
+                            </audio></div>
             </ion-card-content>
         </ion-card>
     </ion-content>
@@ -43,6 +48,7 @@ export default defineComponent({
     icon: { type: String, default: null },
     image: { type: String, default: null },
     audio: { type: String, default: null },
+    video: { type: String, default: null },
     hasImage: { type: Boolean, default: false },
     hasBody: { type: Boolean, default: false },
     hasAudio: { type: Boolean, default: false },

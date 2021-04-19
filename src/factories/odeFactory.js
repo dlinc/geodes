@@ -32,6 +32,7 @@ let odes = {
         icon: process.env.BASE_URL+'assets/icon/user-default.jpg',
         image: process.env.BASE_URL+'assets/master1.jpg',
         audio: "https://archive.storycorps.org/interviews/americo-rodrigues-vociferar-contra-voice-against-sound-poem/audio/",
+        video: "https://youtu.be/MTk6RMbWt10"
     },
     status: 'init',
 }
@@ -118,8 +119,9 @@ function addTestData(){
         radius: "0.000",
         readonce: null,
         sid: "1544",
-        stroke: "And so test 4, ↵the yellow hills, increasing thrills,↵the river music even down to a bare trickle,  ↵that stick that looked like a snake   ↵slipping along the ground, the veritude ↵of solid objects is not enough, they also ↵find a place inside you like you are what ↵they came for, or the only thing of true matter. ↵Then this oblong machine works as designed, ↵then this stretch out sphere loves a bond in you  ↵to keep for always. The change retires of late,↵you remember the sun that lit other best days. Even ↵small glades of grass feel it, something out there ↵having a turn, delighted again for this.",
-        title: "Test 4 ::",
+        xstroke: "And so test 4, ↵the yellow hills, increasing thrills,↵the river music even down to a bare trickle,  ↵that stick that looked like a snake   ↵slipping along the ground, the veritude ↵of solid objects is not enough, they also ↵find a place inside you like you are what ↵they came for, or the only thing of true matter. ↵Then this oblong machine works as designed, ↵then this stretch out sphere loves a bond in you  ↵to keep for always. The change retires of late,↵you remember the sun that lit other best days. Even ↵small glades of grass feel it, something out there ↵having a turn, delighted again for this.",
+        title: "Test 4 :: Video",
+        video: odes.default.video,
         uid: "1",
         uimage: "u1image.png",
         userIcon: "/assets/icon/user-1.png",
@@ -224,9 +226,11 @@ export default {
                 icon: ode.userIcon,
                 image: (ode.image ? ode.image : null),
                 audio: (ode.audio ? ode.audio : null),
+                video: (ode.video ? ode.video : null),
                 hasImage: (ode.image ? true : false),
                 hasBody: (ode.stroke ? true : false),
-                hasAudio: (ode.audio ? true : false)
+                hasAudio: (ode.audio ? true : false),
+                hasVideo: (ode.video ? true : false),
             },
             })
         return modal.present(modal);
