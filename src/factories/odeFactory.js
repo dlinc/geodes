@@ -21,7 +21,8 @@ const url = {
     scan: 'lib/pscan5.php',
     add: 'lib/ssave4.php',
     update: 'lib/upsave.php',
-    lookup:'lib/slookup.php'
+    lookup:'lib/slookup.php',
+    addTestData : true,
 };
 
 let odes = {
@@ -32,9 +33,102 @@ let odes = {
     status: 'init',
 }
 
+function addTestData(){
+    let td = []
+    td.push({
+        audience: "test",
+        byline: "testy",
+        distance: "-1",
+        dt: "Apr 18, 2021 4:00 PM",
+        icon: "u1drl.png", 
+        lDistance: "-1 km",
+        lat: "35.64104608",
+        local: "0",
+        lon: "-105.96100580",
+        position: {lat: 35.64124608, lng: -105.96100580, id: "1544"},
+        private: "0",
+        radius: "0.000",
+        readonce: null,
+        sid: "1544",
+        stroke: "And so test testo, ↵the yellow hills, increasing thrills,↵the river music even down to a bare trickle,  ↵that stick that looked like a snake   ↵slipping along the ground, the veritude ↵of solid objects is not enough, they also ↵find a place inside you like you are what ↵they came for, or the only thing of true matter. ↵Then this oblong machine works as designed, ↵then this stretch out sphere loves a bond in you  ↵to keep for always. The change retires of late,↵you remember the sun that lit other best days. Even ↵small glades of grass feel it, something out there ↵having a turn, delighted again for this.",
+        title: "Test 1:: ",
+        uid: "1",
+        uimage: "u1image.png",
+        userIcon: "/assets/icon/user-1.png",
+    })
+    td.push({
+        audience: "test",
+        byline: "testy",
+        distance: "-3",
+        dt: "Apr 18, 2021 4:00 PM",
+        icon: "u1drl.png", 
+        lDistance: "-3 km",
+        lat: "35.64124608",
+        local: "0",
+        lon: "-105.98100580",
+        position: {lat: 35.64124608, lng: -105.98100580, id: "1544"},
+        private: "0",
+        radius: "0.000",
+        readonce: null,
+        sid: "1544",
+        stroke: "And so test testo, ↵the yellow hills, increasing thrills,↵the river music even down to a bare trickle,  ↵that stick that looked like a snake   ↵slipping along the ground, the veritude ↵of solid objects is not enough, they also ↵find a place inside you like you are what ↵they came for, or the only thing of true matter. ↵Then this oblong machine works as designed, ↵then this stretch out sphere loves a bond in you  ↵to keep for always. The change retires of late,↵you remember the sun that lit other best days. Even ↵small glades of grass feel it, something out there ↵having a turn, delighted again for this.",
+        title: "Test 2 ::",
+        uid: "1",
+        uimage: "u1image.png",
+        userIcon: "/assets/icon/user-1.png",
+    })
+    td.push({
+        audience: "test",
+        byline: "testy",
+        distance: "-4",
+        dt: "Apr 18, 2021 4:00 PM",
+        icon: "u1drl.png", 
+        lDistance: "-5 km",
+        lat: "35.63124608",
+        local: "0",
+        lon: "-105.97100580",
+        position: {lat: 35.63124608, lng: -105.97100580, id: "1544"},
+        private: "0",
+        radius: "0.000",
+        readonce: null,
+        sid: "1544",
+        stroke: "And so test 3, ↵the yellow hills, increasing thrills,↵the river music even down to a bare trickle,  ↵that stick that looked like a snake   ↵slipping along the ground, the veritude ↵of solid objects is not enough, they also ↵find a place inside you like you are what ↵they came for, or the only thing of true matter. ↵Then this oblong machine works as designed, ↵then this stretch out sphere loves a bond in you  ↵to keep for always. The change retires of late,↵you remember the sun that lit other best days. Even ↵small glades of grass feel it, something out there ↵having a turn, delighted again for this.",
+        title: "Test 3 ::",
+        uid: "1",
+        uimage: "u1image.png",
+        userIcon: "/assets/icon/user-1.png",
+    })
+    td.push({
+        audience: "test",
+        byline: "testy",
+        distance: "-6",
+        dt: "Apr 18, 2021 4:00 PM",
+        icon: "u1drl.png", 
+        lDistance: "-6 km",
+        lat: "35.65124608",
+        local: "0",
+        lon: "-105.97100580",
+        position: {lat: 35.65124608, lng: -105.97100580, id: "1544"},
+        private: "0",
+        radius: "0.000",
+        readonce: null,
+        sid: "1544",
+        stroke: "And so test 4, ↵the yellow hills, increasing thrills,↵the river music even down to a bare trickle,  ↵that stick that looked like a snake   ↵slipping along the ground, the veritude ↵of solid objects is not enough, they also ↵find a place inside you like you are what ↵they came for, or the only thing of true matter. ↵Then this oblong machine works as designed, ↵then this stretch out sphere loves a bond in you  ↵to keep for always. The change retires of late,↵you remember the sun that lit other best days. Even ↵small glades of grass feel it, something out there ↵having a turn, delighted again for this.",
+        title: "Test 4 ::",
+        uid: "1",
+        uimage: "u1image.png",
+        userIcon: "/assets/icon/user-1.png",
+    })
+    return td
+}
+
 function normalizeOde(list){
     let user = User.getUser()
     let num = null
+    if (url.addTestData === true ) {
+        console.log("Add test data!!")
+        list.push(...addTestData());
+    }
     list = list.map( (s) => {
         s.userIcon=user.icon // odes.iconDefault
         if (s.sid=="543") { s.image = odes.imageDefault;} // delete this line pre-prod! a test case!
