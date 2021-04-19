@@ -1,3 +1,4 @@
+/* eslint-disable  no-mixed-spaces-and-tabs */
 <template>
  <ion-page>
     <ion-header>
@@ -15,7 +16,12 @@
                     <ion-card-title>{{ title }}</ion-card-title>
                 </ion-card-header>
             <ion-card-content>
-            <pre>{{ body }}</pre>
+                    <pre v-if = hasBody>{{ body }}</pre>
+                    <div v-if = hasAudio>
+                        <audio controls autoplay loop>
+                        <source :src="`${audio}`" type='audio/mp3'>
+                            Please upgrade your browser &mdash; this one does not support audio.
+                        </audio></div>
             </ion-card-content>
         </ion-card>
     </ion-content>
@@ -36,7 +42,11 @@ export default defineComponent({
     byline: { type: String, default: 'Default byline' },
     icon: { type: String, default: null },
     image: { type: String, default: null },
+    audio: { type: String, default: null },
     hasImage: { type: Boolean, default: false },
+    hasBody: { type: Boolean, default: false },
+    hasAudio: { type: Boolean, default: false },
+    hasVideo: { type: Boolean, default: false },
   },
   //data(data) {
     //if (this.dbug) { console.log("running modal wi data ",data) }

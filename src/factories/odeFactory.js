@@ -28,8 +28,11 @@ const url = {
 let odes = {
     stack: [],
     timings: { init: utils.getTimeStamp() },
-    iconDefault: process.env.BASE_URL+'assets/icon/user-default.jpg',
-    imageDefault: process.env.BASE_URL+'assets/master1.jpg',
+    default: {
+        icon: process.env.BASE_URL+'assets/icon/user-default.jpg',
+        image: process.env.BASE_URL+'assets/master1.jpg',
+        audio: "https://archive.storycorps.org/interviews/americo-rodrigues-vociferar-contra-voice-against-sound-poem/audio/",
+    },
     status: 'init',
 }
 
@@ -71,9 +74,10 @@ function addTestData(){
         radius: "0.000",
         readonce: null,
         sid: "1544",
-        stroke: "And so test testo, ↵the yellow hills, increasing thrills,↵the river music even down to a bare trickle,  ↵that stick that looked like a snake   ↵slipping along the ground, the veritude ↵of solid objects is not enough, they also ↵find a place inside you like you are what ↵they came for, or the only thing of true matter. ↵Then this oblong machine works as designed, ↵then this stretch out sphere loves a bond in you  ↵to keep for always. The change retires of late,↵you remember the sun that lit other best days. Even ↵small glades of grass feel it, something out there ↵having a turn, delighted again for this.",
-        title: "Test 2 ::",
+        xstroke: "And so test testo, ↵the yellow hills, increasing thrills,↵the river music even down to a bare trickle,  ↵that stick that looked like a snake   ↵slipping along the ground, the veritude ↵of solid objects is not enough, they also ↵find a place inside you like you are what ↵they came for, or the only thing of true matter. ↵Then this oblong machine works as designed, ↵then this stretch out sphere loves a bond in you  ↵to keep for always. The change retires of late,↵you remember the sun that lit other best days. Even ↵small glades of grass feel it, something out there ↵having a turn, delighted again for this.",
+        title: "Test 2 :: Audio",
         uid: "1",
+        audio: odes.default.audio,
         uimage: "u1image.png",
         userIcon: "/assets/icon/user-1.png",
     })
@@ -94,6 +98,7 @@ function addTestData(){
         sid: "1544",
         stroke: "And so test 3, ↵the yellow hills, increasing thrills,↵the river music even down to a bare trickle,  ↵that stick that looked like a snake   ↵slipping along the ground, the veritude ↵of solid objects is not enough, they also ↵find a place inside you like you are what ↵they came for, or the only thing of true matter. ↵Then this oblong machine works as designed, ↵then this stretch out sphere loves a bond in you  ↵to keep for always. The change retires of late,↵you remember the sun that lit other best days. Even ↵small glades of grass feel it, something out there ↵having a turn, delighted again for this.",
         title: "Test 3 ::",
+        image: odes.default.image,
         uid: "1",
         uimage: "u1image.png",
         userIcon: "/assets/icon/user-1.png",
@@ -130,8 +135,8 @@ function normalizeOde(list){
         list.push(...addTestData());
     }
     list = list.map( (s) => {
-        s.userIcon=user.icon // odes.iconDefault
-        if (s.sid=="543") { s.image = odes.imageDefault;} // delete this line pre-prod! a test case!
+        s.userIcon=user.icon // odes.default.icon
+        if (s.sid=="543") { s.image = odes.default.image;} // delete this line pre-prod! a test case!
         num = Number(s.distance)
         if (num > 999) {
               s.lDistance= (num/1000).toFixed(1) + " km"
@@ -151,21 +156,6 @@ function normalizeOde(list){
 }
 function getOdes(here) {
  
-        /* prep scan form
-        var fdt=scripter.getFDT();
-        $('#scanFormLat').val(session.env.here.latitude);
-        $('#scanFormLon').val(session.env.here.longitude);
-        $('#scanFormLat1').val(session.env.here.latitude1);
-        $('#scanFormLon1').val(session.env.here.longitude1);
-        $('#scanFormAlt').val(session.env.here.altitude);
-        $('#scanFormAccuracy').val(session.env.here.accuracy);
-        $('#scanFormRad').val(session.env.here.accuracy);
-        $('#scanFormToken').val(user.login.token);
-        $('#scanFormScope').val(session.settings.scope);
-        $('#scanFormHits').val(session.settings.hits);
-        $('#scanFormRadius').val(session.settings.radius);
-        $('#scanFormDT').val(scripter.getFDT(fdt));*/
-
         odes.here = here
         let substr = '?location_lat='+here.latitude+'&location_lon='+here.longitude+'&location_accuracy='+here.accuracy
         const callUrl=url.base+url.scan+substr;
@@ -195,16 +185,8 @@ async function initOdes(here) {
    
     if (dbug) { console.log("INIT Odes Factory -", odes) }
 
-    // check conditions
-    //if (!geo.here.latitude || !geo.here.longitude) { alert("Indistinct Location. Please retrieve Location ..."); return false;}
-    //console.log("mking geo as ",geo)
-
     await getOdes(here)
-
-    // show map and get location
-    //place.viewMap();
     return true;
-
 }
 
 
@@ -235,13 +217,16 @@ export default {
             swipeToClose: true,
             componentProps: {
                 title: ode.title,
-                body: ode.stroke,
+                body: (ode.stroke ? ode.stroke : null),
                 proximity: ode.lDistance,
                 timestamp: ode.dt,
                 byline: ode.byline,
                 icon: ode.userIcon,
                 image: (ode.image ? ode.image : null),
-                hasImage: (ode.image ? true : false)
+                audio: (ode.audio ? ode.audio : null),
+                hasImage: (ode.image ? true : false),
+                hasBody: (ode.stroke ? true : false),
+                hasAudio: (ode.audio ? true : false)
             },
             })
         return modal.present(modal);
