@@ -6,7 +6,8 @@ import utils from "./utilsFactory"
 import fetchJsonp from "fetch-jsonp"
 import User from "./userFactory"
 import { modalController } from '@ionic/vue';
-import ShowCard from "../views/components/showCard";
+import ShowOde from "../views/components/showOde";
+import ShowStreet from "../views/components/showStreet"
 
 // eslint-disable-next-line no-unused-vars
 const dbug = process.env.VUE_APP_DEBUG || false;
@@ -192,7 +193,11 @@ async function initOdes(here) {
 }
 
 
-
+function searchOdes(id){
+   const ode = odes.stack.find(it => it.sid === id); // es6 way
+   if (dbug) { console.log("Search Odes for id -", id, ode) }
+   return ode
+}
 export default {
 
     helloOdes (invara) {
@@ -209,12 +214,17 @@ export default {
         //console.log("ODES STACK IN FACtORY -", odes)
         return odes;
     },
+
+    getOneOde(id){
+        let thisOde = searchOdes(id)
+        return thisOde;
+    },
     
     async odeModal(ode) {
-        if (dbug) { console.log("Opening - ",ode.title); } 
+        if (dbug) { console.log("Opening Ode Show - ",ode.title); } 
         const modal = await modalController
             .create({
-            component: ShowCard,
+            component: ShowOde,
             cssClass: 'my-custom-class',
             swipeToClose: true,
             componentProps: {
@@ -223,6 +233,7 @@ export default {
                 proximity: ode.lDistance,
                 timestamp: ode.dt,
                 byline: ode.byline,
+                id: ode.sid,
                 icon: ode.userIcon,
                 image: (ode.image ? ode.image : null),
                 audio: (ode.audio ? ode.audio : null),
@@ -231,6 +242,34 @@ export default {
                 hasBody: (ode.stroke ? true : false),
                 hasAudio: (ode.audio ? true : false),
                 hasVideo: (ode.video ? true : false),
+            },
+            })
+        return modal.present(modal);
+    },
+
+    async streetModal(id) {
+        if (dbug) { console.log("Opening Street show- ",id); }
+        let thisOde = searchOdes(id)
+        const modal = await modalController
+            .create({
+            component: ShowStreet,
+            cssClass: 'my-custom-class',
+            swipeToClose: true,
+            componentProps: {
+                title: thisOde.title,
+                body: (thisOde.stroke ? thisOde.stroke : null),
+                proximity: thisOde.lDistance,
+                timestamp: thisOde.dt,
+                byline: thisOde.byline,
+                id: id,
+                icon: thisOde.userIcon,
+                image: (thisOde.image ? thisOde.image : null),
+                audio: (thisOde.audio ? thisOde.audio : null),
+                video: (thisOde.video ? thisOde.video : null),
+                hasImage: (thisOde.image ? true : false),
+                hasBody: (thisOde.stroke ? true : false),
+                hasAudio: (thisOde.audio ? true : false),
+                hasVideo: (thisOde.video ? true : false),
             },
             })
         return modal.present(modal);

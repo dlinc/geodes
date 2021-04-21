@@ -86,7 +86,6 @@ export default defineComponent({
       if (this.dbug) { console.log("Show location ",pos) }
       Geo.locationModal(pos);
     },
-    
     showOde(ode){
       if (this.dbug) { console.log("Show ode ",ode) }
       Odes.odeModal(ode);
