@@ -5,7 +5,7 @@
         <ion-toolbar>
         <ion-title class="ion-float-left ion-padding">Geode</ion-title>
         <ion-icon :src="`${iconClose}`" size="large" class="ion-float-right ion-padding" @click.stop="closeModal()" ></ion-icon>
-        <ion-icon :src="`${iconStreet}`" size="large" class="ion-float-right ion-padding" @click.stop="showStreet(id)" ></ion-icon>
+        <ion-icon :src="`${iconStreet}`" size="large" class="ion-float-right ion-padding" @click.stop="showStreet( id )" ></ion-icon>
          </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -18,13 +18,13 @@
                 </ion-card-header>
             <ion-card-content>
                     <div v-if = hasVideo> {{ video }}
-                        <video controls xautoplay crossorigin = "use-credentials" width="100%" autoPictureInPicture>
+                        <video controls xautoplay crossorigin = "use-credentials" width="100%" xautoPictureInPicture>
                             <source :src="`${video}`">
                                This browser does not support inline video. Try the original link <a href=" {{video}} " target=_blank >{{ video}} </a>.
                             </video></div>
                     <pre v-if = hasBody>{{ body }}</pre>
                     <div v-if = hasAudio>
-                        <audio controls autoplay loop>
+                        <audio controls autoplay xloop>
                             <source :src="`${audio}`" type='audio/mp3'>
                                 Please upgrade your browser &mdash; this one does not support inline audio.
                             </audio></div>

@@ -75,7 +75,7 @@ function addTestData(){
         private: "0",
         radius: "0.000",
         readonce: null,
-        sid: "1544",
+        sid: "1545",
         xstroke: "And so test testo, ↵the yellow hills, increasing thrills,↵the river music even down to a bare trickle,  ↵that stick that looked like a snake   ↵slipping along the ground, the veritude ↵of solid objects is not enough, they also ↵find a place inside you like you are what ↵they came for, or the only thing of true matter. ↵Then this oblong machine works as designed, ↵then this stretch out sphere loves a bond in you  ↵to keep for always. The change retires of late,↵you remember the sun that lit other best days. Even ↵small glades of grass feel it, something out there ↵having a turn, delighted again for this.",
         title: "Test 2 :: Audio",
         uid: "1",
@@ -97,7 +97,7 @@ function addTestData(){
         private: "0",
         radius: "0.000",
         readonce: null,
-        sid: "1544",
+        sid: "1546",
         stroke: "And so test 3, ↵the yellow hills, increasing thrills,↵the river music even down to a bare trickle,  ↵that stick that looked like a snake   ↵slipping along the ground, the veritude ↵of solid objects is not enough, they also ↵find a place inside you like you are what ↵they came for, or the only thing of true matter. ↵Then this oblong machine works as designed, ↵then this stretch out sphere loves a bond in you  ↵to keep for always. The change retires of late,↵you remember the sun that lit other best days. Even ↵small glades of grass feel it, something out there ↵having a turn, delighted again for this.",
         title: "Test 3 ::",
         image: odes.default.image,
@@ -119,7 +119,7 @@ function addTestData(){
         private: "0",
         radius: "0.000",
         readonce: null,
-        sid: "1544",
+        sid: "1547",
         xstroke: "And so test 4, ↵the yellow hills, increasing thrills,↵the river music even down to a bare trickle,  ↵that stick that looked like a snake   ↵slipping along the ground, the veritude ↵of solid objects is not enough, they also ↵find a place inside you like you are what ↵they came for, or the only thing of true matter. ↵Then this oblong machine works as designed, ↵then this stretch out sphere loves a bond in you  ↵to keep for always. The change retires of late,↵you remember the sun that lit other best days. Even ↵small glades of grass feel it, something out there ↵having a turn, delighted again for this.",
         title: "Test 4 :: Video",
         video: odes.default.video,
@@ -247,8 +247,8 @@ export default {
         return modal.present(modal);
     },
 
-    async streetModal(id) {
-        if (dbug) { console.log("Opening Street show- ",id); }
+    async streetModal(id, map) {
+        if (dbug) { console.log("Opening Street show- ",id,map); }
         let thisOde = searchOdes(id)
         const modal = await modalController
             .create({

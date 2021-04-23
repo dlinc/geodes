@@ -9,8 +9,6 @@
     <ion-content>
         <ion-card>
                 <ion-card-header>
-                    <ion-img :src="`${image}`" v-if = hasImage></ion-img>
-                    <ion-icon ></ion-icon>
                     <ion-card-subtitle>Accurate to {{ geo.here.accuracy }} m</ion-card-subtitle>
                     <ion-card-title>{{ title }}</ion-card-title>
                 </ion-card-header>
@@ -22,15 +20,22 @@
 </ion-page>
 </template>
 <script>
-import { IonContent, IonImg, IonIcon, IonHeader, IonTitle, IonToolbar, IonPage,IonCard, IonCardTitle, IonCardSubtitle, IonCardHeader, IonCardContent, modalController } from '@ionic/vue';
+import { IonContent, IonIcon, IonHeader, IonTitle, IonToolbar, IonPage,IonCard, IonCardTitle, IonCardSubtitle, IonCardHeader, IonCardContent, modalController } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import Geo from "../../factories/geoFactory"
 import Odes from "../../factories/odeFactory"
+//import { myMap } from "../map"
 
 const dbug = process.env.VUE_APP_DEBUG;
+// eslint-disable-next-line no-unused-vars
+let publicPath = process.env.BASE_URL;
+// eslint-disable-next-line no-unused-vars
+let panorama;
+// eslint-disable-next-line no-unused-vars
+let smarker;
 
 export default defineComponent({
-  components: { IonContent, IonImg,  IonIcon,  IonHeader, IonTitle, IonToolbar, IonPage,IonCard, IonCardTitle, IonCardHeader, IonCardSubtitle,IonCardContent },
+  components: { IonContent, IonIcon,  IonHeader, IonTitle, IonToolbar, IonPage,IonCard, IonCardTitle, IonCardHeader, IonCardSubtitle,IonCardContent },
   name: 'showStreet',
   props: {
     title: { type: String, default: 'Default Title' },
@@ -58,7 +63,10 @@ export default defineComponent({
   },*/
   setup(id){
       const iconClose = process.env.BASE_URL +'assets/icon/icon-close-outline.svg';
+
       const geo = Geo.getGeo();
+
+
 
       if (dbug) { console.log("SETUP street modal ", id) }
       //this.initView()
@@ -72,34 +80,54 @@ export default defineComponent({
   methods: {
 
       async closeModal(){
-          //if (this.dbug) { console.log("Close modal", this) }
+          if (this.dbug) { console.log("before Close modal", panorama, smarker) }
           //Geo.toggleModal()
+          //document.getElementById("street-view").innerHTML="Oops, the street view is not defined yet."
+          //mod.value = "Oops, the street view is not defined yet."
+          panorama = null;
+          smarker = null;
+          if (this.dbug) { console.log("Close modal", panorama, smarker) }
           await modalController.dismiss();
       },
 
       initView(id){
-          if (dbug) { console.log("Running init View on ", id) }
+          if (dbug) { console.log("Running init View on ", id, publicPath) }
           // eslint-disable-next-line no-unused-vars
           const thisOde = Odes.getOneOde(id)
           const pos = { lat: Number(thisOde.lat), lng: Number(thisOde.lon) }
-          let panorama;
+          //let panorama;
           
           // eslint-disable-next-line no-undef
           panorama = new google.maps.StreetViewPanorama(
                 document.getElementById("street-view"),
                 {
                 position: pos ,
-                pov: { heading: 45, pitch: 0 },
+                pov: { heading: 0, pitch: 0 },
                 zoom: 1,
+                addressControl: false,
+                visible:false,
                 }
             );
              // eslint-disable-next-line no-undef
-            new google.maps.Marker({
-            position: pos,
-            panorama,
-            title: "Hello World!",
+            smarker = new google.maps.Marker({
+              position: thisOde.position,
+              label: thisOde.title,
+              title: thisOde.title,
+              icon: thisOde.userIcon,
+              visible: false,
+              });
+            smarker.addListener("click", () => {
+              console.log("Clicked smarker")
             });
-            return panorama;
+            panorama.setVisible(true)
+            smarker.setMap(panorama)
+            //smarker.setZIndex(10000)
+            setTimeout(() => {  smarker.setVisible(true) }, 500);
+            
+            let gind = smarker.getZIndex();
+            console.log("pre parker gindex =", gind, smarker.MAX_ZINDEX)
+
+           //return this.panorama;
      }
   }
 });

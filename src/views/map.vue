@@ -3,7 +3,7 @@
     <ion-content class="ion-padding" :fullscreen="true">
 
         <GMapMap 
-          ref="myMarker"
+          ref="myMap"
           :center="geo.options.center"
           :zoom="geo.options.zoom"
           map-type-id="terrain"
@@ -44,7 +44,7 @@
 
 <script>
 import { IonContent, IonPage} from '@ionic/vue'; //, loadingController } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import Geo from "../factories/geoFactory";
 import Odes from "../factories/odeFactory";
 
@@ -54,6 +54,12 @@ export default defineComponent({
     IonContent,
     IonPage
   },
+  setup(){
+    // eslint-disable-next-line no-unused-vars
+    const myMap = ref(null)
+    return { myMap }
+  },
+
   data() {
    let geo =  Geo.getGeo()
    let odes = Odes.getOdes()
@@ -89,7 +95,14 @@ export default defineComponent({
     showOde(ode){
       if (this.dbug) { console.log("Show ode ",ode) }
       Odes.odeModal(ode);
-    }
+    },
+    showStreet(id){
+        if (this.dbug) { console.log("Show street on MAP ",id) }
+        Odes.streetModal(id);
+      }
+  },
+  mounted() {
+    if (this.dbug) { console.log("My Map here -",this.$refs.myMap) }
   }
 });
 </script>
