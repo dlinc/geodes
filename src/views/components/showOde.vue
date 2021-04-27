@@ -18,11 +18,14 @@
                     <ion-card-title>{{ title }}</ion-card-title>
                 </ion-card-header>
             <ion-card-content>
-                    <div v-if = hasVideo> {{ video }}
-                        <video controls xautoplay crossorigin = "use-credentials" width="100%" xautoPictureInPicture>
-                            <source :src="`${video}`">
-                               This browser does not support inline video. Try the original link <a href=" {{video}} " target=_blank >{{ video}} </a>.
-                            </video></div>
+                    <div v-if = hasVideo class="show-video">
+                        <video controls autoplay crossorigin = "use-credentials" autoPictureInPicture :poster="`${videoPoster}`">
+                            <source :src="`${video}`" type="video/mp4">
+                            <source :src="`${video}`" type="video/webm">
+                            <source :src="`${video}`" type="video/ogg">
+                            <track kind="subtitles" :src="`${videoSubtitles}`" :srclang="`${videoLang}`" :label="`${ videoLangLabel}`">
+                               This browser does not support inline video. Try the original <a href="{{ video }}" target=_blank >link </a>.
+                        </video></div>
                     <pre v-if = hasBody>{{ body }}</pre>
                     <div v-if = hasAudio>
                         <audio controls autoplay xloop>
@@ -56,6 +59,10 @@ export default defineComponent({
     image: { type: String, default: null },
     audio: { type: String, default: null },
     video: { type: String, default: null },
+    videoPoster: { type: String, default: null },
+    videoSubtitles: { type: String, default: null },
+    videoLang: { type: String, default: 'en' },
+    videoLangLabel: { type: String, default: 'English' },
     hasImage: { type: Boolean, default: false },
     hasBody: { type: Boolean, default: false },
     hasAudio: { type: Boolean, default: false },
@@ -94,3 +101,11 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+.show-video{
+  width:100%;
+  height:auto;
+  color:royalblue;
+}
+</style>

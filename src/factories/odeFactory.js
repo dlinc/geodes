@@ -145,7 +145,8 @@ function normalizeOde(list){
         if (s.sid=="543") { s.image = odes.default.image;} // delete this line pre-prod! a test case!
         if (s.sid=="547") { s.audio = '/assets/dlinc/makingIt.mp3';}
         if (s.sid=="547") { s.image = '/assets/dlinc/saraInALQ.jpg';}
-    
+        if (s.sid=="542") { s.video = '/assets/dlinc/ravine360.mp4';}   
+        
         s.uid = uuidv4() // don't need
         s.uuid = s.sid // temp for dev on share
 
