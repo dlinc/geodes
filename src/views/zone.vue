@@ -45,17 +45,9 @@ import User from "../factories/userFactory";
 
 let allLocation = {}
 function getLocData(){
-  /*const defaultGeo = {
-            accuracy: -1,
-            altitude: null,
-            altitudeAccuracy: null,
-            heading: null,
-            latitude: null,
-            latitude0: 35.6411562,
-            longitude: null,
-            longitude0: -105.9715909
-          }*/
+
    let geo = Geo.getGeo()
+
    //let (geo.status!=="found" ? defaultGeo : geo.here )
 
 
@@ -86,7 +78,9 @@ export default defineComponent({
     });*/
 
     const route = useRoute();
-    console.log("Params in -", route.query );
+    // eslint-disable-next-line no-unused-vars
+    const { x1,x2,y1,y2, uid } = route.query;
+    console.log("Params in -", route.query,x1,x2,y1,y2, uid );
     allLocation = getLocData()
     //let geo = Geo.getGeo();
 },

@@ -3,10 +3,11 @@
  <ion-page>
     <ion-header>
         <ion-toolbar>
-        <ion-title class="ion-float-left ion-padding">Geode</ion-title>
-        <ion-icon :src="`${iconClose}`" size="large" class="ion-float-right ion-padding" @click.stop="closeModal()" ></ion-icon>
-        <ion-icon :src="`${iconStreet}`" size="large" class="ion-float-right ion-padding" @click.stop="showStreet( id )" ></ion-icon>
-         </ion-toolbar>
+            <ion-title class="ion-float-left ion-padding">Geode</ion-title>
+            <ion-icon :src="`${iconClose}`" size="large" class="ion-float-right ion-padding" @click.stop="closeModal()" ></ion-icon>
+            <ion-icon :src="`${iconStreet}`" size="large" class="ion-float-right ion-padding" @click.stop="showStreet( id )" ></ion-icon>
+            <ion-icon :src="`${iconShare}`" size="large" class="ion-float-right ion-padding" @click.stop="shareOde( uid )" ></ion-icon>
+            </ion-toolbar>
     </ion-header>
     <ion-content>
         <ion-card>
@@ -50,6 +51,7 @@ export default defineComponent({
     timestamp: { type: String, default: 'No timestamp' },
     byline: { type: String, default: 'Default byline' },
     id: { type: String, default: null },
+    uid: { type: String, default: null },
     icon: { type: String, default: null },
     image: { type: String, default: null },
     audio: { type: String, default: null },
@@ -69,8 +71,10 @@ export default defineComponent({
 
       const iconClose = process.env.BASE_URL +'assets/icon/icon-close-outline.svg';
       const iconStreet = process.env.BASE_URL +'assets/icon/icon-walk-outline.svg';
+      const iconShare = process.env.BASE_URL +'assets/icon/icon-share-outline.svg';
+
       if (dbug) { console.log("running showOde modal ") }
-      return { iconClose, iconStreet }
+      return { iconClose, iconStreet, iconShare }
   },
   methods: {
 
@@ -81,6 +85,11 @@ export default defineComponent({
       showStreet(id){
         if (this.dbug) { console.log("Show street ",id) }
         Odes.streetModal(id);
+        },
+      shareOde(uid){
+        if (this.dbug) { console.log("Share ode ",uid) }
+        window.location=process.env.BASE_URL+'?uid='+uid;
+        //Odes.streetModal(id);
         }
   }
 });

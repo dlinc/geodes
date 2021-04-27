@@ -148,7 +148,7 @@ function normalizeOde(list){
     
         s.uid = uuidv4() // don't need
         s.uuid = s.sid // temp for dev on share
-        
+
         num = Number(s.distance)
         if (num > 999) {
               s.lDistance= (num/1000).toFixed(1) + " km"
@@ -243,6 +243,7 @@ export default {
                 timestamp: ode.dt,
                 byline: ode.byline,
                 id: ode.sid,
+                uid: ode.uid,
                 icon: ode.userIcon,
                 image: (ode.image ? ode.image : null),
                 audio: (ode.audio ? ode.audio : null),

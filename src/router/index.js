@@ -16,7 +16,8 @@ const routes = [
       lat1: route.query.x1,
       lat2: route.query.x2,
       lon1: route.query.y1,
-      lon2: route.query.y2
+      lon2: route.query.y2,
+      uid: route.query.uid,
      })
   },
   {
