@@ -60,7 +60,7 @@ function addTestData(){
         title: "Test 1:: ",
         uid: "1",
         uimage: "u1image.png",
-        userIcon: "/assets/icon/user-1.png",
+        userIcon: process.env.BASE_URL +"assets/icon/user-1.png",
     })
     td.push({
         audience: "test",
@@ -82,7 +82,7 @@ function addTestData(){
         uid: "1",
         audio: odes.default.audio,
         uimage: "u1image.png",
-        userIcon: "/assets/icon/user-1.png",
+        userIcon: process.env.BASE_URL +"assets/icon/user-1.png",
     })
     td.push({
         audience: "test",
@@ -104,7 +104,7 @@ function addTestData(){
         image: odes.default.image,
         uid: "1",
         uimage: "u1image.png",
-        userIcon: "/assets/icon/user-1.png",
+        userIcon: process.env.BASE_URL +"assets/icon/user-1.png",
     })
     td.push({
         audience: "test",
@@ -126,7 +126,7 @@ function addTestData(){
         video: odes.default.video,
         uid: "1",
         uimage: "u1image.png",
-        userIcon: "/assets/icon/user-1.png",
+        userIcon: process.env.BASE_URL +"assets/icon/user-1.png",
     })
     return td
 }
@@ -143,9 +143,9 @@ function normalizeOde(list){
 
         /* dev data hacks - remove for prod! */
         if (s.sid=="543") { s.image = odes.default.image;} // delete this line pre-prod! a test case!
-        if (s.sid=="547") { s.audio = '/assets/dlinc/makingIt.mp3';}
-        if (s.sid=="547") { s.image = '/assets/dlinc/saraInALQ.jpg';}
-        if (s.sid=="542") { s.video = '/assets/dlinc/ravine360.mp4';}   
+        if (s.sid=="547") { s.audio = process.env.BASE_URL +'assets/dlinc/makingIt.mp3';}
+        if (s.sid=="547") { s.image = process.env.BASE_URL +'assets/dlinc/saraInALQ.jpg';}
+        if (s.sid=="542") { s.video = process.env.BASE_URL +'assets/dlinc/ravine360.mp4';}   
         
         s.uid = uuidv4() // don't need
         s.uuid = s.sid // temp for dev on share
