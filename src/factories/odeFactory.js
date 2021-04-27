@@ -8,6 +8,7 @@ import User from "./userFactory"
 import { modalController } from '@ionic/vue';
 import ShowOde from "../views/components/showOde";
 import ShowStreet from "../views/components/showStreet"
+import { v4 as  uuidv4 } from 'uuid';
 
 // eslint-disable-next-line no-unused-vars
 const dbug = process.env.VUE_APP_DEBUG || false;
@@ -139,7 +140,15 @@ function normalizeOde(list){
     }
     list = list.map( (s) => {
         s.userIcon=user.icon // odes.default.icon
+
+        /* dev data hacks - remove for prod! */
         if (s.sid=="543") { s.image = odes.default.image;} // delete this line pre-prod! a test case!
+        if (s.sid=="547") { s.audio = '/assets/dlinc/makingIt.mp3';}
+        if (s.sid=="547") { s.image = '/assets/dlinc/saraInALQ.jpg';}
+    
+        s.uid = uuidv4() // don't need
+        s.uuid = s.sid // temp for dev on share
+        
         num = Number(s.distance)
         if (num > 999) {
               s.lDistance= (num/1000).toFixed(1) + " km"

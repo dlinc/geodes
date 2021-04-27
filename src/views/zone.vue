@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { IonContent, IonPage, onIonViewWillEnter } from '@ionic/vue';
+import { IonContent, IonPage } from '@ionic/vue'; //, onIonViewWillEnter } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
 import Geo from "../factories/geoFactory";
@@ -78,12 +78,12 @@ export default defineComponent({
     IonPage,
   },
   setup() {
-
+/*
      onIonViewWillEnter(() => {
       allLocation = getLocData()
       console.log('page did enter', allLocation);
       return allLocation
-    });
+    });*/
 
     const route = useRoute();
     console.log("Params in -", route.query );
