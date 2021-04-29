@@ -43,17 +43,12 @@ import { useRoute } from 'vue-router';
 import Geo from "../factories/geoFactory";
 import User from "../factories/userFactory";
 
+const dbug = process.env.VUE_APP_DEBUG;
 let allLocation = {}
 function getLocData(){
 
    let geo = Geo.getGeo()
 
-   //let (geo.status!=="found" ? defaultGeo : geo.here )
-
-
-    //const { x1,x2,y1,y2 } = route.query; - pass this in for coordinates in url case
-    //console.log("Params in -", route.query );
-    //console.log("Geo status 1", geo.status)
     if (geo.status === "found") {
         geo.ready= true
       } else {
@@ -70,18 +65,11 @@ export default defineComponent({
     IonPage,
   },
   setup() {
-/*
-     onIonViewWillEnter(() => {
-      allLocation = getLocData()
-      console.log('page did enter', allLocation);
-      return allLocation
-    });*/
 
     const route = useRoute();
-    // eslint-disable-next-line no-unused-vars
-    const { x1,x2,y1,y2, uid } = route.query;
-    console.log("Params in -", route.query,x1,x2,y1,y2, uid );
+ 
     allLocation = getLocData()
+    if (dbug) { console.log("Welcome data - ", allLocation) }
     //let geo = Geo.getGeo();
 },
 data(){

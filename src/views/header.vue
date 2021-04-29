@@ -2,7 +2,6 @@
     <ion-header :translucent="true">
       <ion-toolbar>
         <ion-label class="ion-padding">GEODES</ion-label>
-        <router-link :to="{name: 'Zone'}">Location</router-link>
         <ion-chip class="ion-float-right">
           <ion-avatar border-radius="15">
             <ion-img :src="`${user.icon}`"></ion-img>

@@ -5,20 +5,28 @@ import Map from '../views/map.vue'
 import List from '../views/list.vue'
 import Add from '../views/add.vue'
 import Geode from "../views/geode.vue"
-import Zone from "../views/zone.vue"
+import Show from "../views/components/showLink"
 import Geo from "../factories/geoFactory"
 
 const routes = [
   {
     path: '/',
-    component: Zone,
+    component: Show,
     props: route => ({ 
       lat1: route.query.x1,
       lat2: route.query.x2,
       lon1: route.query.y1,
       lon2: route.query.y2,
-      uid: route.query.uid,
-     })
+      gleo: route.query.gleo,
+     }),
+     beforeEnter: (url, from) => {
+      // check before navigating
+      let status= (url.query.gleo ? true : false)
+      if (!status){
+        console.log("Gleo not found: ",url,from)
+        return { path: '/welcome' }
+      }
+    },
   },
   {
     path: '/refresh',
@@ -43,17 +51,12 @@ const routes = [
       // check before navigating
       let status=Geo.getGeo().status 
       if (status!== "found"){
-        console.log("map not ready route: ",to,from)
+        console.log("map not ready: ",to,from)
         //redirect: '/',
         console.log("Geo not ready. Try in a second")
-        return { path: '/' } //,false
+        return { path: '/welcome' } //,false
       }
     },
-  },
-  {
-    path: '/zone',
-    name: 'Zone',
-    component: Zone
   },
   {
     path: '/:id',
