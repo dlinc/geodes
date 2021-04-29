@@ -47,6 +47,7 @@ function addTestData(){
         distance: "-1",
         dt: "Apr 18, 2021 4:00 PM",
         icon: "u1drl.png", 
+        image: "https://drive.google.com/file/d/1vTck782_q-wVHPrMkP6xoLiXbtQd9BFl/view?usp=sharing",
         lDistance: "-1 km",
         lat: "35.64104608",
         local: "0",

@@ -14,8 +14,13 @@
                 <ion-card-header>
                     <ion-img :src="`${image}`" v-if = hasImage></ion-img>
                     <ion-icon ></ion-icon>
-                    <ion-card-subtitle>{{ proximity }} on {{ timestamp }}</ion-card-subtitle>
-                    <ion-card-title>{{ title }}</ion-card-title>
+                    <ion-card-subtitle>
+                      {{ proximity }} on {{ timestamp }}
+                      <ion-label class="ion-float-right ode-byline">&mdash; {{ byline }}</ion-label>
+                    </ion-card-subtitle>
+                    <ion-card-title>
+                      {{ title }}
+                      </ion-card-title>
                 </ion-card-header>
             <ion-card-content>
                     <div v-if = hasVideo class="show-video">
@@ -23,7 +28,7 @@
                             <source :src="`${video}`" type="video/mp4">
                             <source :src="`${video}`" type="video/webm">
                             <source :src="`${video}`" type="video/ogg">
-                            <track kind="subtitles" :src="`${videoSubtitles}`" :srclang="`${videoLang}`" :label="`${ videoLangLabel}`">
+                            <track v-if = hasVideoCaptions kind="subtitles" :src="`${videoSubtitles}`" :srclang="`${videoLang}`" :label="`${ videoLangLabel}`">
                                This browser does not support inline video. Try the original <a href="{{ video }}" target=_blank >link </a>.
                         </video></div>
                     <pre v-if = hasBody>{{ body }}</pre>
@@ -38,14 +43,14 @@
 </ion-page>
 </template>
 <script>
-import { IonContent, IonImg, IonIcon, IonHeader, IonTitle, IonToolbar, IonPage,IonCard, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader,modalController } from '@ionic/vue';
+import { IonContent, IonImg, IonIcon, IonHeader, IonTitle, IonLabel, IonToolbar, IonPage,IonCard, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader,modalController } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import Odes from "../../factories/odeFactory"
 
 const dbug = process.env.VUE_APP_DEBUG;
 
 export default defineComponent({
-  components: { IonContent, IonImg, IonIcon, IonHeader, IonTitle, IonToolbar, IonPage,IonCard, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader },
+  components: { IonContent, IonImg, IonIcon, IonHeader, IonTitle, IonLabel, IonToolbar, IonPage,IonCard, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader },
   name: 'showOde',
   props: {
     title: { type: String, default: 'Default Title' },
@@ -67,6 +72,7 @@ export default defineComponent({
     hasBody: { type: Boolean, default: false },
     hasAudio: { type: Boolean, default: false },
     hasVideo: { type: Boolean, default: false },
+    hasVideoCaptions: { type: Boolean, default: false },
   },
   //data(data) {
     //if (this.dbug) { console.log("running modal wi data ",data) }
@@ -107,5 +113,8 @@ export default defineComponent({
   width:100%;
   height:auto;
   color:royalblue;
+}
+.ode-byline {
+  font-size: normal;
 }
 </style>
