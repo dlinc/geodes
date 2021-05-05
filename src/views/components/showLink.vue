@@ -1,6 +1,5 @@
 <template>
-  <ion-page>
-    <ion-content class="ion-padding" :fullscreen="true">
+    <ion-content class="ion-padding">
         <ion-header>
         <ion-title class="ion-float-left ion-padding">Title here</ion-title>
         </ion-header>
@@ -10,11 +9,10 @@
                 :src="`${webGlPage}`">
             </iframe>
     </ion-content>
-  </ion-page>
 </template>
 
 <script>
-import { IonContent, IonPage, IonHeader,  IonTitle } from '@ionic/vue'; //, onIonViewWillEnter } from '@ionic/vue';
+import { IonContent, IonHeader,  IonTitle } from '@ionic/vue'; //, onIonViewWillEnter } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
 //import Geo from "../factories/geoFactory";
@@ -26,7 +24,7 @@ import { useRoute } from 'vue-router';
 export default defineComponent({
   name: 'showLink',
   components: {
-    IonContent,IonPage,IonHeader, IonTitle
+    IonContent,IonHeader, IonTitle
   },
   setup() {
 
@@ -55,7 +53,6 @@ data(){
 
 <style scoped>
 .webgl {
-  xborder:1px red solid;
   width:100%;
   height:90%;
 }

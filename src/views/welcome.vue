@@ -3,7 +3,7 @@
     <ion-content class="ion-padding" :fullscreen="true">
  
            <div id="container">
-          <h2>Welcome to Geodes {{ ready }} </h2>
+          <h2>Welcome to Geodes </h2>
           <div v-if = !ready >
             <div class="plainText">You may be seeing this because your location is not available. Check the location indicator on the top left &mdash; and enable geolocation, if necessary, and refresh.
             </div>

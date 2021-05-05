@@ -1,45 +1,33 @@
 <template>
-  <ion-page>
-    <ion-content :fullscreen="true">
-      <div id="container">
-        <h2>Yo Geode {{ id }}!</h2>
+    <ion-content class="ion-padding">
+        <h2>Welcome to Geodes</h2>
         <strong>Ready to Experience?</strong>
         <p>
             Proceed to <router-link :to="{name: 'Map'}">Map</router-link>
         </p>
-      </div>
-      <div class="post">
-        <div v-if="loading" class="loading">
-          Loading...
-        </div>
 
         <div v-if="error" class="error">
           {{ error }}
         </div>
-
-        <div v-if="post" class="content">
-          <h2>{{ post.title }}</h2>
-          <p>{{ post.body }}</p>
-        </div>
-      </div>
     </ion-content>
-  </ion-page>
 </template>
 
 <script>
-import { IonContent, IonPage } from '@ionic/vue';
+import { IonContent} from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
+
+const dbug = process.env.VUE_APP_DEBUG;
 
 export default defineComponent({
   name: 'Geode',
   components: {
     IonContent,
-    IonPage
   },
   setup() {
     const route = useRoute();
     const { id } = route.params;
+    if (dbug) { console.log("setup Geodes.vue for id =", id)}
     return { id };
   },
   data () {
@@ -49,7 +37,7 @@ export default defineComponent({
       error: null
     }
   },
-  created () {
+  /*created () {
     // fetch the data when the view is created and the data is
     // already being observed
     this.fetchData()
@@ -64,7 +52,7 @@ export default defineComponent({
       this.loading = true
       //const fetchedId = this.$route.params.id
       // replace `getPost` with your data fetching util / API wrapper
-      /*getPost(fetchedId, (err, post) => {
+      getPost(fetchedId, (err, post) => {
         // make sure this request is the last one we did, discard otherwise
         if (this.$route.params.id !== fetchedId) return
         this.loading = false
@@ -73,10 +61,10 @@ export default defineComponent({
         } else {
           this.post = post
         }
-      })*/
+      })
       this.post = []
     }
-  }
+  }*/
 });
 </script>
 
