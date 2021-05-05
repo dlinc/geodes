@@ -19,7 +19,7 @@ import { useRoute } from 'vue-router';
 // import User from "../factories/userFactory";
 
 //let allLocation = {}
-
+console.log("GLOBAL Obj ", global,process.env.NODE_ENV)
 
 export default defineComponent({
   name: 'showLink',
@@ -32,9 +32,16 @@ export default defineComponent({
     // eslint-disable-next-line no-unused-vars
     const { x1,x2,y1,y2, gleo } = route.query;
     let webGlPage;
+
+    // dev kludge::
     if (gleo) {
-      if (gleo==="1") { webGlPage = "http://localhost:8081/showPanorama.html?img=20191117_231638(0).jpg"; }
-      if (gleo==="2") { webGlPage = "http://localhost:8081/showPanorama.html?img=20171013_220258.jpeg"; }
+      if (global,process.env.NODE_ENV ==="development") {
+          if (gleo==="1") { webGlPage = "http://localhost:8081/showPanorama.html?img=20191117_231638(0).jpg"; }
+          if (gleo==="2") { webGlPage = "http://localhost:8081/showPanorama.html?img=20171013_220258.jpeg"; }
+      } else {
+          if (gleo==="1") { webGlPage = "https://scripter.net/lab/alib/showPanorama.html?img=20191117_231638(0).jpg"; }
+          if (gleo==="2") { webGlPage = "https://scripter.net/lab/alib/showPanorama.html?img=20171013_220258.jpeg"; }
+      }
     }
     //const webGlPage = "http://localhost:8081/firstAframe.html";
     //const webGlPage = "http://localhost:8081/firstGl.html";

@@ -59,7 +59,7 @@ function getLocData(){
 }
 
 export default defineComponent({
-  name: 'Zone',
+  name: 'Welcome',
   components: {
     IonContent,
     IonPage,
@@ -69,7 +69,7 @@ export default defineComponent({
     const route = useRoute();
  
     allLocation = getLocData()
-    if (dbug) { console.log("Welcome data - ", allLocation) }
+    if (dbug) { console.log("Welcome data - ",route) }
     //let geo = Geo.getGeo();
 },
 data(){

@@ -8,7 +8,7 @@
           </ion-avatar>
           <ion-label>{{ user.name }}</ion-label>
         </ion-chip>
-        <ion-label class="ion-xpadding ion-float-right signInLink" v-if = !loggedIn @click.stop="showLogin()">Sign In</ion-label>
+        <ion-label class="ion-float-right signInLink" v-if = !loggedIn @click.stop="showLogin()">Sign In</ion-label>
       </ion-toolbar>
     </ion-header>
 </template>
