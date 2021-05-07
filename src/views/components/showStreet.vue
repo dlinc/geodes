@@ -95,26 +95,28 @@ export default defineComponent({
           // eslint-disable-next-line no-unused-vars
           const thisOde = Odes.getOneOde(id)
           const pos = { lat: Number(thisOde.lat), lng: Number(thisOde.lon) }
+          const povDefault = { heading: 0, pitch: 0 }
           //let panorama;
           
           // eslint-disable-next-line no-undef
-          panorama = new google.maps.StreetViewPanorama(
+          const panorama = new google.maps.StreetViewPanorama(
                 document.getElementById("street-view"),
                 {
                 position: pos ,
-                pov: { heading: 0, pitch: 0 },
+                pov: povDefault,
                 zoom: 1,
                 addressControl: false,
-                visible:false,
+                visible:true,
                 }
             );
              // eslint-disable-next-line no-undef
-            smarker = new google.maps.Marker({
+            const smarker = new google.maps.Marker({
               position: thisOde.position,
               label: thisOde.title,
               title: thisOde.title,
               icon: thisOde.userIcon,
-              visible: false,
+              pov: povDefault,
+              visible: true,
               });
             smarker.addListener("click", () => {
               console.log("Clicked smarker")
@@ -122,7 +124,9 @@ export default defineComponent({
             panorama.setVisible(true)
             smarker.setMap(panorama)
             //smarker.setZIndex(10000)
-            setTimeout(() => {  smarker.setVisible(true) }, 500);
+            setTimeout(() => {  
+              console.log("setting marker to visible")
+              smarker.setVisible(true) }, 500);
             
             let gind = smarker.getZIndex();
             console.log("pre parker gindex =", gind, smarker.MAX_ZINDEX)

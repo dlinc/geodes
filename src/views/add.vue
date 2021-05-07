@@ -64,11 +64,21 @@
               ></ion-input>
           </ion-item>
 
+          <ion-item>
+              <ion-label>360 degree image</ion-label>
+              <ion-input
+                  name="360image" 
+                  value=""
+                  color="secondary"
+                  type="text"
+              ></ion-input>
+          </ion-item>
+
         </ion-label>
       </ion-item>
 
       <ion-item>
-          <ion-label>Restrict
+          <ion-label>Privacy
           <ion-item>
             <ion-label>Private</ion-label>
             <ion-checkbox 
@@ -120,3 +130,9 @@ export default defineComponent({
   }
 });
 </script>
+
+<style scoped>
+h2 {
+  padding-top:2em;
+}
+</style>

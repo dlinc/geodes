@@ -36,8 +36,10 @@ export default defineComponent({
     // dev kludge::
     if (gleo) {
       if (global,process.env.NODE_ENV ==="development") {
-          if (gleo==="1") { webGlPage = "http://localhost:8081/showPanorama.html?img=20191117_231638(0).jpg"; }
-          if (gleo==="2") { webGlPage = "http://localhost:8081/showPanorama.html?img=20171013_220258.jpeg"; }
+          if (gleo==="1") { webGlPage = "https://scripter.net/lab/alib/showPanorama.html?img=20191117_231638(0).jpg"; }
+// webGlPage = "http://localhost:5000/showPanorama.html?img=20191117_231638(0).jpg"; }
+          if (gleo==="2") { webGlPage = "https://scripter.net/lab/alib/showPanorama.html?img=20171013_220258.jpeg"; }
+         // if (gleo==="2") { webGlPage = "http://localhost:5000/showPanorama.html?img=20171013_220258.jpeg"; }
       } else {
           if (gleo==="1") { webGlPage = "https://scripter.net/lab/alib/showPanorama.html?img=20191117_231638(0).jpg"; }
           if (gleo==="2") { webGlPage = "https://scripter.net/lab/alib/showPanorama.html?img=20171013_220258.jpeg"; }
