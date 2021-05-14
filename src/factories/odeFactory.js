@@ -147,6 +147,9 @@ function normalizeOde(list){
         if (s.sid=="547") { s.audio = process.env.BASE_URL +'assets/dlinc/makingIt.mp3';}
         if (s.sid=="547") { s.image = process.env.BASE_URL +'assets/dlinc/saraInALQ.jpg';}
         if (s.sid=="542") { s.video = process.env.BASE_URL +'assets/dlinc/ravine360.mp4';}   
+        if (s.sid=="550") { 
+            s.audio = 'https://drive.google.com/file/d/18rYpQpzT_6LPFqAiAUvD8JHr1aXx4ZqT/view?usp=sharing';
+        }   
         
         s.uid = uuidv4() // don't need
         s.uuid = s.sid // temp for dev on share
@@ -230,7 +233,26 @@ export default {
         let thisOde = searchOdes(id)
         return thisOde;
     },
-    
+    getOdeProps(ode) {
+       let callProps = {
+            title: ode.title,
+            body: (ode.stroke ? ode.stroke : null),
+            proximity: ode.lDistance,
+            timestamp: ode.dt,
+            byline: ode.byline,
+            id: ode.sid,
+            uid: ode.uid,
+            icon: ode.userIcon,
+            image: (ode.image ? ode.image : null),
+            audio: (ode.audio ? ode.audio : null),
+            video: (ode.video ? ode.video : null),
+            hasImage: (ode.image ? true : false),
+            hasBody: (ode.stroke ? true : false),
+            hasAudio: (ode.audio ? true : false),
+            hasVideo: (ode.video ? true : false),
+        }
+        return callProps;
+    },
     async odeModal(ode) {
         if (dbug) { console.log("Opening Ode Show - ",ode.title); } 
         const modal = await modalController
@@ -238,23 +260,7 @@ export default {
             component: ShowOde,
             cssClass: 'my-custom-class',
             swipeToClose: true,
-            componentProps: {
-                title: ode.title,
-                body: (ode.stroke ? ode.stroke : null),
-                proximity: ode.lDistance,
-                timestamp: ode.dt,
-                byline: ode.byline,
-                id: ode.sid,
-                uid: ode.uid,
-                icon: ode.userIcon,
-                image: (ode.image ? ode.image : null),
-                audio: (ode.audio ? ode.audio : null),
-                video: (ode.video ? ode.video : null),
-                hasImage: (ode.image ? true : false),
-                hasBody: (ode.stroke ? true : false),
-                hasAudio: (ode.audio ? true : false),
-                hasVideo: (ode.video ? true : false),
-            },
+            componentProps:this.getOdeProps(ode),
             })
         return modal.present(modal);
     },

@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 //import { RouteRecordRaw } from 'vue-router';
 import Map from '../views/map.vue'
-//import Tabs from '../views/tabs.vue'
 import List from '../views/list.vue'
 import Add from '../views/add.vue'
 import Geode from "../views/geode.vue"
@@ -12,6 +11,7 @@ import Welcome from "../views/welcome"
 const routes = [
   {
     path: '/',
+    name: 'show',
     component: Show,
     props: route => ({ 
       lat1: route.query.x1,
@@ -19,17 +19,19 @@ const routes = [
       lon1: route.query.y1,
       lon2: route.query.y2,
       gleo: route.query.gleo,
+      id: route.query.id,
      }),
      beforeEnter: (url, from) => {
       // check before navigating
-      let status= (url.query.gleo ? true : false)
+      console.log("Routing base /  ",url,from)
+      let status= (url.query.id || url.query.gleo ? true : false)
       if (!status){
-        console.log("Gleo not found: ",url,from)
         return { path: '/welcome' }
       }
     },
   },
   {
+    name: 'refresh',
     path: '/refresh',
     redirect: '/',
     comment: 'for legacy only?'
@@ -68,12 +70,40 @@ const routes = [
     path: '/:id',
     name: 'Geode',
     component: Geode
+  },
+  {
+    path: '/?id=550',
+    name: 'test',
+    component: Show,
+    props: route => ({ 
+      id: route.query.id,
+     }),
+     beforeEnter: (url, from) => {
+      // check before navigating
+      console.log("Routing base /  ",url,from)
+     },
   }
 ]
+
+
+
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+/* 
+something like this to set the headers:
+if (process.env.NODE_ENV === "development") {
+  router.options("*", function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Credentials", true)
+    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS")
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token")
+    return res.send({})
+  })
+}
+*/
 
 export default router

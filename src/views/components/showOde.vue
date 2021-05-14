@@ -33,7 +33,7 @@
                         </video></div>
                     <pre v-if = hasBody>{{ body }}</pre>
                     <div v-if = hasAudio>
-                        <audio controls autoplay xloop>
+                        <audio controls autoplay crossorigin xloop>
                             <source :src="`${audio}`" type='audio/mp3'>
                                 Please upgrade your browser &mdash; this one does not support inline audio.
                             </audio></div>
