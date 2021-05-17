@@ -8,7 +8,7 @@ import User from "./userFactory"
 import { modalController } from '@ionic/vue';
 import ShowOde from "../views/components/showOde";
 import ShowStreet from "../views/components/showStreet"
-import { v4 as  uuidv4 } from 'uuid';
+//import { v4 as  uuidv4 } from 'uuid';
 
 // eslint-disable-next-line no-unused-vars
 const dbug = process.env.VUE_APP_DEBUG || false;
@@ -20,10 +20,10 @@ const url = {
     share:'https://www.scripter.net/stroke/?sid=',
     loginCheck:'lib/ilogin_token4.php',
     login:'lib/ilogin4.php',
-    scan: 'lib/pscan5.php',
+    scan: 'lib/pscan6.php',
     add: 'lib/ssave4.php',
     update: 'lib/upsave.php',
-    lookup:'lib/slookup.php',
+    lookup:'lib/slookup2.php',
     addTestData : true,
 };
 
@@ -148,11 +148,12 @@ function normalizeOde(list){
         if (s.sid=="547") { s.image = process.env.BASE_URL +'assets/dlinc/saraInALQ.jpg';}
         if (s.sid=="542") { s.video = process.env.BASE_URL +'assets/dlinc/ravine360.mp4';}   
         if (s.sid=="550") { 
-            s.audio = 'https://drive.google.com/file/d/18rYpQpzT_6LPFqAiAUvD8JHr1aXx4ZqT/view?usp=sharing';
+            //s.audio = 'https://drive.google.com/file/d/18rYpQpzT_6LPFqAiAUvD8JHr1aXx4ZqT/view?usp=sharing';
         }   
-        
-        s.uid = uuidv4() // don't need
-        s.uuid = s.sid // temp for dev on share
+        if (s.sid=="555") { s.image = 'https://drive.google.com/file/d/1A9wSfZC37g-tiv_KL3vnczwcFxBaeOv7/view?usp=sharing'; }
+
+       // s.uid = uuidv4() // don't need
+       // s.uuid = s.sid // temp for dev on share
 
         num = Number(s.distance)
         if (num > 999) {
