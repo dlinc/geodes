@@ -6,7 +6,7 @@
             <ion-title class="ion-float-left ion-padding">Geode</ion-title>
             <ion-icon :src="`${iconClose}`" size="large" class="ion-float-right ion-padding" @click.stop="closeModal()" ></ion-icon>
             <ion-icon :src="`${iconStreet}`" size="large" class="ion-float-right ion-padding" @click.stop="showStreet( id )" ></ion-icon>
-            <ion-icon :src="`${iconShare}`" size="large" class="ion-float-right ion-padding" @click.stop="shareOde( uid )" ></ion-icon>
+            <ion-icon :src="`${iconShare}`" size="large" class="ion-float-right ion-padding" @click.stop="shareOde( uuid )" ></ion-icon>
             </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -60,6 +60,7 @@ export default defineComponent({
     byline: { type: String, default: 'Default byline' },
     id: { type: String, default: null },
     uid: { type: String, default: null },
+    uuid: { type: String, default: null },
     icon: { type: String, default: null },
     image: { type: String, default: null },
     audio: { type: String, default: null },
@@ -101,7 +102,7 @@ export default defineComponent({
         },
       shareOde(uid){
         if (this.dbug) { console.log("Share ode ",uid) }
-        window.location=process.env.BASE_URL+'?uid='+uid;
+        //window.location=process.env.BASE_URL+'?uid='+uid;
         //Odes.streetModal(id);
         }
   }
