@@ -205,9 +205,11 @@ function getOdes(here) {
 
 async function initOdes(here) {
    
+    await getOdes(here)
+    
     if (dbug) { console.log("INIT Odes Factory -", odes) }
 
-    await getOdes(here)
+ 
     return true;
 }
 

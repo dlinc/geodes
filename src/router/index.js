@@ -44,7 +44,17 @@ const routes = [
   {
     path: '/list',
     name: 'List',
-    component: List
+    component: List,
+    beforeEnter: (to, from) => {
+      // check before navigating
+      let status=Geo.getGeo().status 
+      if (status!== "found"){
+        console.log("list not ready: ",to,from)
+        //redirect: '/',
+        console.log("Geo not ready. List later.")
+        return { path: '/welcome' } //,false
+      }
+    }
   },
   {
     path: '/welcome',
@@ -92,7 +102,7 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
-
+//console.log("HERE IS THEE ROUTER obj ", router, global)
 /* 
 something like this to set the headers:
 if (process.env.NODE_ENV === "development") {

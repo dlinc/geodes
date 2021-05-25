@@ -5,15 +5,14 @@
         <ion-toolbar>
             <ion-title class="ion-float-left ion-padding">Geode</ion-title>
             <ion-icon :src="`${iconClose}`" size="large" class="ion-float-right ion-padding" @click.stop="closeModal()" ></ion-icon>
-            <ion-icon :src="`${iconStreet}`" size="large" class="ion-float-right ion-padding" @click.stop="showStreet( id )" ></ion-icon>
-            <ion-icon :src="`${iconShare}`" size="large" class="ion-float-right ion-padding" @click.stop="shareOde( uuid )" ></ion-icon>
+             <ion-icon :src="`${iconShare}`" size="large" class="ion-float-right ion-padding" @click.stop="shareOde( uuid )" ></ion-icon>
             </ion-toolbar>
     </ion-header>
     <ion-content>
         <ion-card>
                 <ion-card-header>
-                    <ion-img :src="`${image}`" v-if = hasImage></ion-img>
-                    <ion-icon ></ion-icon>
+                    <ion-img :src="`${image}`" v-if = hasImage>
+                    </ion-img>
                     <ion-card-subtitle>
                       {{ proximity }} on {{ timestamp }}
                       <ion-label class="ion-float-right ode-byline">&mdash; {{ byline }}</ion-label>
@@ -36,7 +35,8 @@
                         <audio controls autoplay crossorigin xloop>
                             <source :src="`${audio}`" type='audio/mp3'>
                                 Please upgrade your browser &mdash; this one does not support inline audio.
-                            </audio></div>
+                            </audio>
+                    </div>
             </ion-card-content>
         </ion-card>
     </ion-content>
@@ -75,12 +75,6 @@ export default defineComponent({
     hasVideo: { type: Boolean, default: false },
     hasVideoCaptions: { type: Boolean, default: false },
   },
-  //data(data) {
-    //if (this.dbug) { console.log("running modal wi data ",data) }
-   // return {
-    //    data
-    //}
-  //},
   setup(){
 
       const iconClose = process.env.BASE_URL +'assets/icon/icon-close-outline.svg';
@@ -96,7 +90,8 @@ export default defineComponent({
           //if (this.dbug) { console.log("Close modal", this) }
           await modalController.dismiss();
       },
-      showStreet(id){
+      XshowStreet(id){
+        /* this function is retired */
         if (this.dbug) { console.log("Show street ",id) }
         Odes.streetModal(id);
         },
@@ -104,8 +99,8 @@ export default defineComponent({
         if (this.dbug) { console.log("Share ode ",uid) }
         //window.location=process.env.BASE_URL+'?uid='+uid;
         //Odes.streetModal(id);
-        }
-  }
+        },
+  },
 });
 </script>
 
