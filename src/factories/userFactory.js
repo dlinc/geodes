@@ -29,14 +29,16 @@ let user = {
     icon: 'user-default.jpg',
     status: 'init',
     loggedIn: false,
+    directory: '/'
 }
 
 
 function initUser() {
- 
+       /* test datat below, for now */
        user.name= 'Dlinc' 
        user.icon= user.iconUrl+'user-1.png'
        user.loggedIn = true
+       user.directory = '/dlinc/'
        console.log("Init User ", user)
        return
 }

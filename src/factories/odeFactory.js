@@ -13,6 +13,8 @@ import ShowStreet from "../views/components/showStreet"
 // eslint-disable-next-line no-unused-vars
 const dbug = process.env.VUE_APP_DEBUG || false;
 
+let user = User.getUser();
+
 if (dbug) { console.log("Mounting Odes Factory", this) }
 
 const url = { 
@@ -24,6 +26,7 @@ const url = {
     add: 'lib/ssave4.php',
     update: 'lib/upsave.php',
     lookup:'lib/slookup2.php',
+    assets: (process.env.NODE_ENV === 'development' ? process.env.BASE_URL+'gleodes/wake' : 'https://www.scripter.net/gleodes/wake'),
     addTestData : true,
 };
 
@@ -34,7 +37,8 @@ let odes = {
         icon: process.env.BASE_URL+'assets/icon/user-default.jpg',
         image: process.env.BASE_URL+'assets/master1.jpg',
         audio: "https://archive.storycorps.org/interviews/americo-rodrigues-vociferar-contra-voice-against-sound-poem/audio/",
-        video: "https://youtu.be/MTk6RMbWt10"
+        video: "https://youtu.be/MTk6RMbWt10",
+        directory: url.assets+user.directory,
     },
     status: 'init',
 }
@@ -137,7 +141,7 @@ function addTestData(){
 }
 
 function normalizeOde(list){
-    let user = User.getUser()
+
     let num = null
     if (url.addTestData === true ) {
         console.log("Add test data!!")
@@ -148,9 +152,9 @@ function normalizeOde(list){
 
         /* dev data hacks - remove for prod! */
         if (s.sid=="543") { s.image = odes.default.image;} // delete this line pre-prod! a test case!
-        if (s.sid=="547") { s.audio = process.env.BASE_URL +'assets/dlinc/makingIt.mp3';}
-        if (s.sid=="547") { s.image = process.env.BASE_URL +'assets/dlinc/saraInALQ.jpg';}
-        if (s.sid=="542") { s.video = process.env.BASE_URL +'assets/dlinc/ravine360.mp4';}   
+        if (s.sid=="547") { s.audio = odes.default.directory +'makingIt.mp3';}
+        if (s.sid=="547") { s.image = odes.default.directory + 'saraInALQ.jpg';}
+        if (s.sid=="542") { s.video = odes.default.directory + 'ravine360.mp4';}   
         if (s.sid=="550") { 
             //s.audio = 'https://drive.google.com/file/d/18rYpQpzT_6LPFqAiAUvD8JHr1aXx4ZqT/view?usp=sharing';
         }   
