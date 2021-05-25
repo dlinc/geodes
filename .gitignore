@@ -36,4 +36,4 @@ package-lock.json
 .env
 /geodes
 /public/gleodes
-
+/gleodes

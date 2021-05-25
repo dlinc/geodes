@@ -26,8 +26,8 @@ const url = {
     add: 'lib/ssave4.php',
     update: 'lib/upsave.php',
     lookup:'lib/slookup2.php',
-    assets: (process.env.NODE_ENV === 'development' ? process.env.BASE_URL+'gleodes/wake' : 'https://www.scripter.net/gleodes/wake'),
-    addTestData : true,
+    assets: utils.getAssetsDirectory(),
+    addTestData : false,
 };
 
 let odes = {
@@ -35,7 +35,7 @@ let odes = {
     timings: { init: utils.getTimeStamp() },
     default: {
         icon: process.env.BASE_URL+'assets/icon/user-default.jpg',
-        image: process.env.BASE_URL+'assets/master1.jpg',
+        image: process.env.BASE_URL+'assets/default1.jpg',
         audio: "https://archive.storycorps.org/interviews/americo-rodrigues-vociferar-contra-voice-against-sound-poem/audio/",
         video: "https://youtu.be/MTk6RMbWt10",
         directory: url.assets+user.directory,
@@ -139,6 +139,27 @@ function addTestData(){
     })
     return td
 }
+function splitMedia(media){
+     //let allMedia = []
+     let allMedia = null; //JSON.parse(media)
+     if (allMedia===2){
+     //if (typeof mjson === "object" ) { //|| typeof media === 'function'))
+     /*if (Array.isArray(mjson)) {
+        let allMedia = []
+        mjson.forEach((item) => {
+            console.log("push media ",item)
+            allMedia.push(item.track)
+            });
+        return allMedia */
+       /* for (const key in media) {
+            console.log(`${key}: ${media[key]}`);
+            allMedia.push(key)
+        }*/
+        return allMedia
+        
+    }
+    return odes.default.directory+media
+}
 
 function normalizeOde(list){
 
@@ -146,23 +167,12 @@ function normalizeOde(list){
     if (url.addTestData === true ) {
         console.log("Add test data!!")
         list.push(...addTestData());
-    }
+    } 
     list = list.map( (s) => {
         s.userIcon=user.icon // odes.default.icon
-
-        /* dev data hacks - remove for prod! */
-        if (s.sid=="543") { s.image = odes.default.image;} // delete this line pre-prod! a test case!
-        if (s.sid=="547") { s.audio = odes.default.directory +'makingIt.mp3';}
-        if (s.sid=="547") { s.image = odes.default.directory + 'saraInALQ.jpg';}
-        if (s.sid=="542") { s.video = odes.default.directory + 'ravine360.mp4';}   
-        if (s.sid=="550") { 
-            //s.audio = 'https://drive.google.com/file/d/18rYpQpzT_6LPFqAiAUvD8JHr1aXx4ZqT/view?usp=sharing';
-        }   
-        if (s.sid=="555") { s.image = 'https://drive.google.com/file/d/1A9wSfZC37g-tiv_KL3vnczwcFxBaeOv7/view?usp=sharing'; }
-
-       // s.uid = uuidv4() // don't need
-       // s.uuid = s.sid // temp for dev on share
-
+        s.image=(s.image ? odes.default.directory+s.image : null)
+        s.audio=(s.audio ? splitMedia(s.audio) : null)
+        s.video=(s.video ? odes.default.directory+s.video : null)
         num = Number(s.distance)
         if (num > 999) {
               s.lDistance= (num/1000).toFixed(1) + " km"

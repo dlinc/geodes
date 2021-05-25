@@ -9,7 +9,7 @@
     </ion-content>
   </ion-page>
 </template>
-
+ 
 <script>
 import { IonContent} from '@ionic/vue'; //, onIonViewWillEnter } from '@ionic/vue';
 import { defineComponent } from 'vue';
@@ -21,7 +21,7 @@ import Ode from "../../factories/odeFactory";
 // import User from "../factories/userFactory";
 
 //let allLocation = {}
-console.log("GLOBAL Obj ", global,process.env.NODE_ENV)
+//console.log("GLOBAL Obj ", global,process.env.NODE_ENV)
 
 export default defineComponent({
   name: 'showLink',

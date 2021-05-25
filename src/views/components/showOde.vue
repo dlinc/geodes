@@ -76,26 +76,30 @@ export default defineComponent({
     hasVideoCaptions: { type: Boolean, default: false },
   },
   setup(){
-
+ 
       const iconClose = process.env.BASE_URL +'assets/icon/icon-close-outline.svg';
       const iconStreet = process.env.BASE_URL +'assets/icon/icon-walk-outline.svg';
       const iconShare = process.env.BASE_URL +'assets/icon/icon-share-outline.svg';
 
+      /* eslint-disable  no-console */
       if (dbug) { console.log("running showOde modal ") }
       return { iconClose, iconStreet, iconShare }
   },
   methods: {
 
       async closeModal(){
+        /* eslint-disable  no-console */
           //if (this.dbug) { console.log("Close modal", this) }
           await modalController.dismiss();
       },
       XshowStreet(id){
         /* this function is retired */
+        /* eslint-disable  no-console */
         if (this.dbug) { console.log("Show street ",id) }
         Odes.streetModal(id);
         },
       shareOde(uid){
+        /* eslint-disable  no-console */
         if (this.dbug) { console.log("Share ode ",uid) }
         //window.location=process.env.BASE_URL+'?uid='+uid;
         //Odes.streetModal(id);
