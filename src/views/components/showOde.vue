@@ -32,10 +32,11 @@
                         </video></div>
                     <pre v-if = hasBody>{{ body }}</pre>
                     <div v-if = hasAudio>
-                        <audio controls autoplay crossorigin xloop>
-                            <source :src="`${audio}`" type='audio/mp3'>
-                                Please upgrade your browser &mdash; this one does not support inline audio.
-                            </audio>
+                        <audio controls autoplay crossorigin>
+                            <source :src="`${audio}`" type='audio/mp3' />
+                            <source :src="`${audio}`" type="audio/ogg" />
+                                Please upgrade your browser &mdash; this does not support inline audio.
+                        </audio>
                     </div>
             </ion-card-content>
         </ion-card>

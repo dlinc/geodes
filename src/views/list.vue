@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-content class="ion-padding" :fullscreen="true">
+    <ion-content :fullscreen="true">
           <ion-list-header class="offset-top">
             <ion-label>{{ hitCount }} Proximate Hits</ion-label>
         </ion-list-header>
@@ -10,13 +10,11 @@
               v-bind:key="ode.sid"
               @click.stop="clickView(ode)"
               >
-              <ion-item-divider class="ion-padding">
-                      <ion-thumbnail slot="start">
-                          <ion-img :src="ode.userIcon"></ion-img>
-                      </ion-thumbnail>
-                <ion-label class="ion-padding">{{ ode.title }}</ion-label>
-                <ion-label class="ion-padding">{{ ode.lDistance }}</ion-label>
-              </ion-item-divider>   
+              <ion-item-divider>
+                <ion-img :src="ode.userIcon"></ion-img>
+                <ion-label class="ion-padding ion-text-left ion-text-wrap">{{ ode.title }}</ion-label>
+                <ion-label class="ion-text-right ion-text-wrap">{{ ode.lDistance }}</ion-label>
+               </ion-item-divider> 
             </ion-item> 
         </ion-list>
     </ion-content>
@@ -34,7 +32,6 @@ import {
   IonItem,
   IonListHeader,
   IonItemDivider,
-  IonThumbnail,
   IonImg
 } from '@ionic/vue';
 
@@ -48,7 +45,6 @@ export default defineComponent({
     IonItem, 
     IonListHeader,
     IonItemDivider,
-    IonThumbnail,
     IonImg
     },
 
@@ -92,3 +88,5 @@ export default defineComponent({
 });
 
 </script>
+<style scoped>
+</style>
