@@ -270,11 +270,13 @@ export default {
             audio: (ode.audio ? ode.audio : null),
             audioBackground: (ode.audioBackground ? ode.audioBackground : null),
             video: (ode.video ? ode.video : null),
+            iframe: (ode.iframe ? ode.iframe : null),
             hasImage: (ode.image ? true : false),
             hasBody: (ode.stroke ? true : false),
             hasAudio: (ode.audio ? true : false),
             hasVideo: (ode.video ? true : false),
             hasAudioBackground: (ode.audioBackground ? true : false),
+            hasiframe: (ode.iframe ? true : false),
         }
         return callProps;
     },
@@ -283,7 +285,7 @@ export default {
         const modal = await modalController
             .create({
             component: ShowOde,
-            cssClass: 'my-custom-class',
+            cssClass: 'showOdeFrame',
             swipeToClose: true,
             componentProps:this.getOdeProps(ode),
             })

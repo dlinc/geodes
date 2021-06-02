@@ -78,12 +78,14 @@ export default defineComponent({
     videoSubtitles: { type: String, default: null },
     videoLang: { type: String, default: 'en' },
     videoLangLabel: { type: String, default: 'English' },
+    iframe: { type: String, default: null },
     hasImage: { type: Boolean, default: false },
     hasBody: { type: Boolean, default: false },
     hasAudio: { type: Boolean, default: false },
     hasVideo: { type: Boolean, default: false },
     hasVideoCaptions: { type: Boolean, default: false },
     hasAudioBackground: { type: Boolean, default: false },
+    hasIframe: { type: Boolean, default: false },
   },
   setup(){
  
@@ -126,5 +128,8 @@ export default defineComponent({
 }
 .ode-byline {
   font-size: normal;
+}
+.showOdeFrame {
+  border: red 1px solid;
 }
 </style>
