@@ -23,7 +23,7 @@
                 </ion-card-header>
             <ion-card-content>
                     <div v-if = hasVideo class="show-video">
-                        <video controls autoplay crossorigin = "use-credentials" autoPictureInPicture :poster="`${videoPoster}`">
+                        <video controls autoplay crossorigin="use-credentials" autoPictureInPicture :poster="`${videoPoster}`">
                             <source :src="`${video}`" type="video/mp4">
                             <source :src="`${video}`" type="video/webm">
                             <source :src="`${video}`" type="video/ogg">
@@ -32,9 +32,16 @@
                         </video></div>
                     <pre v-if = hasBody>{{ body }}</pre>
                     <div v-if = hasAudio>
-                        <audio controls autoplay crossorigin>
+                        <audio controls autoplay crossorigin="use-credentials">
                             <source :src="`${audio}`" type='audio/mp3' />
                             <source :src="`${audio}`" type="audio/ogg" />
+                                Please upgrade your browser &mdash; this does not support inline audio.
+                        </audio>
+                    </div>
+                    <div v-if = hasAudioBackground>
+                        <audio controls autoplay crossorigin="use-credentials" loop>
+                            <source :src="`${audioBackground}`" type='audio/mp3' />
+                            <source :src="`${audioBackground}`" type="audio/ogg" />
                                 Please upgrade your browser &mdash; this does not support inline audio.
                         </audio>
                     </div>
@@ -65,6 +72,7 @@ export default defineComponent({
     icon: { type: String, default: null },
     image: { type: String, default: null },
     audio: { type: String, default: null },
+    audioBackground: { type: String, default: null },
     video: { type: String, default: null },
     videoPoster: { type: String, default: null },
     videoSubtitles: { type: String, default: null },
@@ -75,6 +83,7 @@ export default defineComponent({
     hasAudio: { type: Boolean, default: false },
     hasVideo: { type: Boolean, default: false },
     hasVideoCaptions: { type: Boolean, default: false },
+    hasAudioBackground: { type: Boolean, default: false },
   },
   setup(){
  

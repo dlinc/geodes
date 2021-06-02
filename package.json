@@ -1,6 +1,6 @@
 {
   "name": "geodes",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -10,7 +10,6 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@capacitor/core": "2.4.5",
     "@fawmi/vue-google-maps": "^0.7.11",
     "@ionic/vue": "^5.4.0",
     "@ionic/vue-router": "^5.4.0",
@@ -21,7 +20,6 @@
     "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
-    "@capacitor/cli": "2.4.5",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-e2e-cypress": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
@@ -34,5 +32,5 @@
     "eslint-plugin-vue": "^7.0.0-0",
     "vue-jest": "^5.0.0-0"
   },
-  "description": "An Ionic project"
+  "description": "Geodes for psychogeographers"
 }

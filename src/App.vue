@@ -18,7 +18,7 @@ import User from "./factories/userFactory"
 const dbug = process.env.VUE_APP_DEBUG;
 let loggedIn = User.loggedIn()
 export default defineComponent({
-  name: 'App',
+ name: 'App',
  props: {
     loggedIn: { type: Boolean, default: false },
   },

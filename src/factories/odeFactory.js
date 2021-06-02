@@ -139,27 +139,27 @@ function addTestData(){
     })
     return td
 }
-function splitMedia(media){
+/*function XsplitMedia(media){
      //let allMedia = []
      let allMedia = null; //JSON.parse(media)
      if (allMedia===2){
      //if (typeof mjson === "object" ) { //|| typeof media === 'function'))
-     /*if (Array.isArray(mjson)) {
+     if (Array.isArray(mjson)) {
         let allMedia = []
         mjson.forEach((item) => {
             console.log("push media ",item)
             allMedia.push(item.track)
             });
-        return allMedia */
-       /* for (const key in media) {
+        return allMedia 
+        for (const key in media) {
             console.log(`${key}: ${media[key]}`);
             allMedia.push(key)
-        }*/
+        }
         return allMedia
         
     }
     return odes.default.directory+media
-}
+}*/
 
 function normalizeOde(list){
 
@@ -171,7 +171,8 @@ function normalizeOde(list){
     list = list.map( (s) => {
         s.userIcon=user.icon // odes.default.icon
         s.image=(s.image ? odes.default.directory+s.image : null)
-        s.audio=(s.audio ? splitMedia(s.audio) : null)
+        s.audio=(s.audio ? odes.default.directory+s.audio : null)
+        s.audioBackground=(s.audioBackground ? odes.default.directory+s.audioBackground : null)
         s.video=(s.video ? odes.default.directory+s.video : null)
         num = Number(s.distance)
         if (num > 999) {
@@ -267,11 +268,13 @@ export default {
             icon: ode.userIcon,
             image: (ode.image ? ode.image : null),
             audio: (ode.audio ? ode.audio : null),
+            audioBackground: (ode.audioBackground ? ode.audioBackground : null),
             video: (ode.video ? ode.video : null),
             hasImage: (ode.image ? true : false),
             hasBody: (ode.stroke ? true : false),
             hasAudio: (ode.audio ? true : false),
             hasVideo: (ode.video ? true : false),
+            hasAudioBackground: (ode.audioBackground ? true : false),
         }
         return callProps;
     },

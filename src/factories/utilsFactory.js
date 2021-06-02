@@ -16,7 +16,8 @@ getTimeStamp() {
 },
 
 getAssetsDirectory(){
-    return (process.env.NODE_ENV === 'development' ? process.env.BASE_URL+'gleodes/wake' : 'https://www.scripter.net/gleodes/wake')
+    return 'https://www.scripter.net/gleodes/wake'
+    //return (process.env.NODE_ENV === 'development' ? process.env.BASE_URL+'gleodes/wake' : 'https://www.scripter.net/gleodes/wake')
 }
 
 } // end
