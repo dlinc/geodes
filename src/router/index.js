@@ -7,8 +7,9 @@ import Geode from "../views/geode.vue"
 import Show from "../views/components/showLink"
 import Geo from "../factories/geoFactory"
 import Welcome from "../views/welcome"
-
+import Page404 from "../views/components/404"
 const routes = [
+
   {
     path: '/',
     name: 'show',
@@ -23,7 +24,7 @@ const routes = [
      }),
      beforeEnter: (url, from) => {
       // check before navigating
-      console.log("Routing base /  ",url,from)
+      console.log("Routing base url/ from ",url,from)
       let status= (url.query.id || url.query.gleo ? true : false)
       if (!status){
         return { path: '/welcome' }
@@ -91,10 +92,14 @@ const routes = [
      beforeEnter: (url, from) => {
       // check before navigating
       console.log("Routing base /  ",url,from)
-     },
-  }
+     }
+    },
+    { 
+      path: '/:catchAll(.*)', 
+      component: Page404,
+      name: '404'
+    }
 ]
-
 
 
 
